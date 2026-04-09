@@ -1,0 +1,12 @@
+{
+  "model": "bert-base-cased",
+  "roc_auc": 0.9999,
+  "accuracy": 0.9941,
+  "total_params": 108311810,
+  "trainable_params": 108311810,
+  "training_time_minutes": 8.3,
+  "epochs": 3,
+  "batch_size": 32,
+  "max_length": 512,
+  "learning_rate": 2e-05
+}

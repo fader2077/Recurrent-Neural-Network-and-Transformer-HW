@@ -1,0 +1,18 @@
+# Large model files
+saved_model_*/
+checkpoint-*/
+
+# Dataset
+DAIGT V2 Train Dataset/
+llm-detect-ai-generated-text/
+
+# Large data files
+*.pkl
+
+# Python cache
+__pycache__/
+*.pyc
+
+# Training logs
+*.log
+bert_*_log*.txt
