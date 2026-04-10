@@ -335,5 +335,142 @@
         }
       ]
     }
-  ]
+  ],
+  "iterative_attack": {
+    "num_samples": 5,
+    "max_iterations": 3,
+    "fooled": 0,
+    "results": [
+      {
+        "essay_index": 8927,
+        "original_ai_prob": 1.2193374459457118e-05,
+        "iterations": [
+          {
+            "iteration": 1,
+            "ai_prob": 0.9999921321868896,
+            "fooled": false,
+            "text_preview": "I mean, who doesn’t love having their phone handy? It’s basically your go-to for everything—communication, entertainment, and, let’s be honest, a distraction from homework. But when it comes to school"
+          },
+          {
+            "iteration": 2,
+            "ai_prob": 0.9999895095825195,
+            "fooled": false,
+            "text_preview": "**The Great Phone Debate: To Bring or Not to Bring**\n\nYou know, phones are like the Swiss Army knife of today's world—useful for everything from a quick chat to a last-minute homework reminder. But wh"
+          },
+          {
+            "iteration": 3,
+            "ai_prob": 0.9999872446060181,
+            "fooled": false,
+            "text_preview": "**The Great Phone Debate: To Bring or Not to Bring**\n\nYou know, phones are like the Swiss Army knife of today's world—super useful for everything from a quick chat to a last-minute homework reminder. "
+          }
+        ],
+        "final_fooled": false,
+        "final_ai_prob": 0.9999872446060181
+      },
+      {
+        "essay_index": 7166,
+        "original_ai_prob": 1.838792195485439e-05,
+        "iterations": [
+          {
+            "iteration": 1,
+            "ai_prob": 0.9999929666519165,
+            "fooled": false,
+            "text_preview": "**A Friend's Changing Dynamics: The Struggle to Cut Ties**\n\nIt's been a rough few months. I thought I had a friend I could rely on, someone who always made me laugh and was there for me through thick "
+          },
+          {
+            "iteration": 2,
+            "ai_prob": 0.999993085861206,
+            "fooled": false,
+            "text_preview": "**A Friend's Changing Dynamics: The Struggle to Cut Ties**\n\nMan, these past few months have been a rollercoaster. I thought I had a friend I could rely on, someone who always made me laugh and was the"
+          },
+          {
+            "iteration": 3,
+            "ai_prob": 0.9999936819076538,
+            "fooled": false,
+            "text_preview": "I’ve been going back and forth on this decision, trying to figure out whether cutting ties with this friend is the right move. It’s been a long time since we started hanging out, and I thought we had "
+          }
+        ],
+        "final_fooled": false,
+        "final_ai_prob": 0.9999936819076538
+      },
+      {
+        "essay_index": 1744,
+        "original_ai_prob": 1.1458009794296231e-05,
+        "iterations": [
+          {
+            "iteration": 1,
+            "ai_prob": 0.9999946355819702,
+            "fooled": false,
+            "text_preview": "**To Principal:**\n\nHey, so I just wanted to talk about this new rule where students with C averages can't play sports. I think it's not fair, and I feel strongly about this. Let me explain why.\n\nI've "
+          },
+          {
+            "iteration": 2,
+            "ai_prob": 0.9999923706054688,
+            "fooled": false,
+            "text_preview": "**To Principal [Name]:**\n\nHey, so I just wanted to chat with you about this new rule where students with C averages can't play sports. I think it's not fair, and honestly, it bugs me a lot. Let me try"
+          },
+          {
+            "iteration": 3,
+            "ai_prob": 0.9999912977218628,
+            "fooled": false,
+            "text_preview": "**To Principal [Name]:**\n\nHey, so I just wanted to chat with you about this new rule where students with C averages can't play sports. I think it's not fair, and honestly, it bugs me a lot. I mean, I "
+          }
+        ],
+        "final_fooled": false,
+        "final_ai_prob": 0.9999912977218628
+      },
+      {
+        "essay_index": 1448,
+        "original_ai_prob": 1.1325558261887636e-05,
+        "iterations": [
+          {
+            "iteration": 1,
+            "ai_prob": 0.9999938011169434,
+            "fooled": false,
+            "text_preview": "The essay discusses NASA's ambitious plan to explore Venus despite the numerous challenges it presents. The determination of NASA to venture to this mysterious planet is driven by a mix of scientific "
+          },
+          {
+            "iteration": 2,
+            "ai_prob": 0.9999946355819702,
+            "fooled": false,
+            "text_preview": "Exploring Venus: A Trip to Our Sister Planet\n\nThe idea of NASA venturing to Venus is super exciting to me. I mean, we're talking about a planet that's sort of like Earth but with way more harsh condit"
+          },
+          {
+            "iteration": 3,
+            "ai_prob": 0.9999923706054688,
+            "fooled": false,
+            "text_preview": "Exploring Venus: A Trip to Our Sister Planet  \n\nThe idea of NASA heading to Venus is super exciting to me. I mean, it's our sister planet, right? But instead of the serene landscapes we usually imagin"
+          }
+        ],
+        "final_fooled": false,
+        "final_ai_prob": 0.9999923706054688
+      },
+      {
+        "essay_index": 5258,
+        "original_ai_prob": 1.4632709280704148e-05,
+        "iterations": [
+          {
+            "iteration": 1,
+            "ai_prob": 0.9999945163726807,
+            "fooled": false,
+            "text_preview": "**Extracurricular Activities: A Path to Success and Friendship**\n\nImagine hearing that your principal has decided all students must participate in at least one extracurricular activity. I wholehearted"
+          },
+          {
+            "iteration": 2,
+            "ai_prob": 0.9999932050704956,
+            "fooled": false,
+            "text_preview": "**Extracurricular Activities: A Path to Success and Friendship**\n\nImagine if your principal suddenly announced that every student must join at least one extracurricular activity. I remember when our s"
+          },
+          {
+            "iteration": 3,
+            "ai_prob": 0.9999932050704956,
+            "fooled": false,
+            "text_preview": "**Extracurricular Activities: A Path to Success and Friendship**\n\nImagine if your principal suddenly announced that every student must join at least one extracurricular activity. I remember when our s"
+          }
+        ],
+        "final_fooled": false,
+        "final_ai_prob": 0.9999932050704956
+      }
+    ]
+  }
 }
