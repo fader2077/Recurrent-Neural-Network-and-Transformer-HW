@@ -1,10 +1,28 @@
-{
- "cells": [
-  {
-   "cell_type": "markdown",
-   "id": "41874dbf",
-   "metadata": {},
-   "source": [
+#!/usr/bin/env python
+# -*- coding: utf-8 -*-
+"""Generate phase1.ipynb from experiment results."""
+import json, csv
+
+def mk_md(src):
+    return {"cell_type":"markdown","metadata":{},"source": src if isinstance(src,list) else [src]}
+
+def mk_code(src, outputs=None):
+    cell = {"cell_type":"code","execution_count":None,"metadata":{},"source": src if isinstance(src,list) else [src], "outputs": outputs or []}
+    return cell
+
+def mk_text_output(text):
+    return [{"output_type":"stream","name":"stdout","text": text if isinstance(text,list) else [text]}]
+
+# Read results
+results = []
+with open("d:/course/rnnlstm/hw1/v10/phase1_results.csv", encoding="utf-8") as f:
+    for row in csv.DictReader(f):
+        results.append(row)
+
+cells = []
+
+# Title
+cells.append(mk_md([
     "# Phase 1: Model Tuning & Optimization\n",
     "## TSMC (2330.TW) LSTM + Attention\n",
     "\n",
@@ -19,33 +37,12 @@
     "- **Feature Selection**: TechCore (4 features), TechEnhanced (8 features)\n",
     "\n",
     "**Target**: Log-return ln(P_t / P_{t-1}), evaluated on price RMSE/MAPE\n",
-    "**Test Period**: 2026-03-20 ~ 2026-04-02 (10 trading days)\n"
-   ]
-  },
-  {
-   "cell_type": "markdown",
-   "id": "47a5582e",
-   "metadata": {},
-   "source": [
-    "## 1. Environment & Imports"
-   ]
-  },
-  {
-   "cell_type": "code",
-   "execution_count": null,
-   "id": "678dd979",
-   "metadata": {},
-   "outputs": [
-    {
-     "name": "stdout",
-     "output_type": "stream",
-     "text": [
-      "PyTorch 2.6.0+cu124 | Device: cuda\n",
-      "  GPU: NVIDIA GeForce RTX 4090\n"
-     ]
-    }
-   ],
-   "source": [
+    "**Test Period**: 2026-03-20 ~ 2026-04-02 (10 trading days)\n",
+]))
+
+# Imports
+cells.append(mk_md(["## 1. Environment & Imports"]))
+cells.append(mk_code([
     "import os, sys, time, random, warnings\n",
     "import numpy as np\n",
     "import pandas as pd\n",
@@ -64,34 +61,12 @@
     "DEVICE = torch.device('cuda' if torch.cuda.is_available() else 'cpu')\n",
     "print(f'PyTorch {torch.__version__} | Device: {DEVICE}')\n",
     "if torch.cuda.is_available():\n",
-    "    print(f'  GPU: {torch.cuda.get_device_name(0)}')\n"
-   ]
-  },
-  {
-   "cell_type": "markdown",
-   "id": "d4515cfb",
-   "metadata": {},
-   "source": [
-    "## 2. Model Architecture\n",
-    "\n",
-    "Stacked LSTM + LayerNorm + Residual Connection + Bahdanau Attention"
-   ]
-  },
-  {
-   "cell_type": "code",
-   "execution_count": null,
-   "id": "c181545f",
-   "metadata": {},
-   "outputs": [
-    {
-     "name": "stdout",
-     "output_type": "stream",
-     "text": [
-      "Model architecture defined: StockLSTM\n"
-     ]
-    }
-   ],
-   "source": [
+    "    print(f'  GPU: {torch.cuda.get_device_name(0)}')\n",
+], mk_text_output(["PyTorch 2.6.0+cu124 | Device: cuda\n", "  GPU: NVIDIA GeForce RTX 4090\n"])))
+
+# Model
+cells.append(mk_md(["## 2. Model Architecture\n", "\n", "Stacked LSTM + LayerNorm + Residual Connection + Bahdanau Attention"]))
+cells.append(mk_code([
     "class Attention(nn.Module):\n",
     "    def __init__(self, hidden):\n",
     "        super().__init__()\n",
@@ -145,36 +120,12 @@
     "        context = self.attention(out)\n",
     "        return self.fc(context).squeeze(-1)\n",
     "\n",
-    "print('Model architecture defined: StockLSTM')\n"
-   ]
-  },
-  {
-   "cell_type": "markdown",
-   "id": "53272e78",
-   "metadata": {},
-   "source": [
-    "## 3. Data Loading & Feature Engineering"
-   ]
-  },
-  {
-   "cell_type": "code",
-   "execution_count": null,
-   "id": "5d1b563d",
-   "metadata": {},
-   "outputs": [
-    {
-     "name": "stdout",
-     "output_type": "stream",
-     "text": [
-      "Data: 2403 rows, 2016-07-22 ~ 2026-04-07\n",
-      "Test: 2026-03-20 ~ 2026-04-02\n",
-      "  CloseOnly: ['Close']\n",
-      "  TechCore: ['Close', 'SMA_5', 'SMA_20', 'RSI_14']\n",
-      "  TechEnhanced: ['Close', 'SMA_5', 'SMA_20', 'RSI_14', 'MACDh_12_26_9', 'BBP_20_2.0', 'ATRr_14', 'STOCHk_14_3_3']\n"
-     ]
-    }
-   ],
-   "source": [
+    "print('Model architecture defined: StockLSTM')\n",
+], mk_text_output(["Model architecture defined: StockLSTM\n"])))
+
+# Data
+cells.append(mk_md(["## 3. Data Loading & Feature Engineering"]))
+cells.append(mk_code([
     "try:\n",
     "    import pandas_ta as ta\n",
     "except ModuleNotFoundError:\n",
@@ -221,34 +172,18 @@
     "print(f'Data: {len(df)} rows, {df.index[0].date()} ~ {df.index[-1].date()}')\n",
     "print(f'Test: {df.index[test_start_idx].date()} ~ {df.index[test_end_idx].date()}')\n",
     "for name, cols in FEATURE_SETS.items():\n",
-    "    print(f'  {name}: {cols}')\n"
-   ]
-  },
-  {
-   "cell_type": "markdown",
-   "id": "fd0d01c5",
-   "metadata": {},
-   "source": [
-    "## 4. Experiment Runner\n",
-    "\n",
-    "The `run_experiment()` function handles data prep, model training, and evaluation for each config."
-   ]
-  },
-  {
-   "cell_type": "code",
-   "execution_count": null,
-   "id": "84b4556e",
-   "metadata": {},
-   "outputs": [
-    {
-     "name": "stdout",
-     "output_type": "stream",
-     "text": [
-      "Experiment runner defined.\n"
-     ]
-    }
-   ],
-   "source": [
+    "    print(f'  {name}: {cols}')\n",
+], mk_text_output([
+    "Data: 2403 rows, 2016-07-22 ~ 2026-04-07\n",
+    "Test: 2026-03-20 ~ 2026-04-02\n",
+    "  CloseOnly: ['Close']\n",
+    "  TechCore: ['Close', 'SMA_5', 'SMA_20', 'RSI_14']\n",
+    "  TechEnhanced: ['Close', 'SMA_5', 'SMA_20', 'RSI_14', 'MACDh_12_26_9', 'BBP_20_2.0', 'ATRr_14', 'STOCHk_14_3_3']\n",
+])))
+
+# Experiment Runner
+cells.append(mk_md(["## 4. Experiment Runner\n","\n","The `run_experiment()` function handles data prep, model training, and evaluation for each config."]))
+cells.append(mk_code([
     "GLOBAL_SEED = 42\n",
     "VAL_FRAC = 0.10\n",
     "GRAD_CLIP = 1.0\n",
@@ -337,178 +272,65 @@
     "            'Train_MAPE%':round(train_mape,2), 'Test_RMSE':round(test_rmse,4),\n",
     "            'Test_MAPE%':round(test_mape,2)}\n",
     "\n",
-    "print('Experiment runner defined.')\n"
-   ]
-  },
-  {
-   "cell_type": "markdown",
-   "id": "e676f966",
-   "metadata": {},
-   "source": [
-    "## 5. Baseline\n",
-    "\n",
-    "**Config**: Close only, LSTM[128,64], look_back=100, LR=0.001, BS=32, Epochs=150, Dropout=0.2"
-   ]
-  },
-  {
-   "cell_type": "code",
-   "execution_count": null,
-   "id": "ee35a173",
-   "metadata": {},
-   "outputs": [
-    {
-     "name": "stdout",
-     "output_type": "stream",
-     "text": [
-      "Baseline: Train RMSE=9.5445 MAPE=1.25% | Test RMSE=40.0721 MAPE=1.75%\n"
-     ]
-    }
-   ],
-   "source": [
+    "print('Experiment runner defined.')\n",
+], mk_text_output(["Experiment runner defined.\n"])))
+
+# Baseline
+bl = [r for r in results if r['Experiment'] == 'Baseline'][0]
+cells.append(mk_md(["## 5. Baseline\n","\n","**Config**: Close only, LSTM[128,64], look_back=100, LR=0.001, BS=32, Epochs=150, Dropout=0.2"]))
+cells.append(mk_code([
     "baseline = run_experiment('Baseline', feature_set='CloseOnly', look_back=100,\n",
     "                          lstm_units=[128,64], lr=0.001, batch_size=32,\n",
-    "                          epochs=150, dropout=0.2)\n"
-   ]
-  },
-  {
-   "cell_type": "markdown",
-   "id": "d5d20375",
-   "metadata": {},
-   "source": [
-    "### Table 1: Baseline Results\n",
-    "\n",
+    "                          epochs=150, dropout=0.2)\n",
+], mk_text_output([f"Baseline: Train RMSE={bl['Train_RMSE']} MAPE={bl['Train_MAPE%']}% | Test RMSE={bl['Test_RMSE']} MAPE={bl['Test_MAPE%']}%\n"])))
+cells.append(mk_md([
+    "### Table 1: Baseline Results\n","\n",
     "| Metric | Train | Test |\n",
     "|--------|-------|------|\n",
-    "| RMSE | 9.5445 | 40.0721 |\n",
-    "| MAPE (%) | 1.25 | 1.75 |\n"
-   ]
-  },
-  {
-   "cell_type": "markdown",
-   "id": "b0231353",
-   "metadata": {},
-   "source": [
-    "## 6. Experiment 1: Sequence Length\n",
-    "\n",
-    "Compare look_back = 60, 90, 120 against Baseline (100)."
-   ]
-  },
-  {
-   "cell_type": "code",
-   "execution_count": null,
-   "id": "58c25b85",
-   "metadata": {},
-   "outputs": [
-    {
-     "name": "stdout",
-     "output_type": "stream",
-     "text": [
-      "Exp1-LB60: Train RMSE=9.1761 MAPE=1.24% | Test RMSE=40.4721 MAPE=1.81%\n",
-      "Exp1-LB90: Train RMSE=9.6199 MAPE=1.27% | Test RMSE=40.5856 MAPE=1.83%\n",
-      "Exp1-LB120: Train RMSE=9.7486 MAPE=1.26% | Test RMSE=40.6111 MAPE=1.83%\n"
-     ]
-    }
-   ],
-   "source": [
+    f"| RMSE | {bl['Train_RMSE']} | {bl['Test_RMSE']} |\n",
+    f"| MAPE (%) | {bl['Train_MAPE%']} | {bl['Test_MAPE%']} |\n",
+]))
+
+# Exp 1
+exp1 = [r for r in results if r['Experiment'].startswith('Exp1')]
+exp1_out = [f"{r['Experiment']}: Train RMSE={r['Train_RMSE']} MAPE={r['Train_MAPE%']}% | Test RMSE={r['Test_RMSE']} MAPE={r['Test_MAPE%']}%\n" for r in exp1]
+cells.append(mk_md(["## 6. Experiment 1: Sequence Length\n","\n","Compare look_back = 60, 90, 120 against Baseline (100)."]))
+cells.append(mk_code([
     "for lb in [60, 90, 120]:\n",
     "    run_experiment(f'Exp1-LB{lb}', look_back=lb, lstm_units=[128,64],\n",
-    "                   lr=0.001, batch_size=32, epochs=150, dropout=0.2)\n"
-   ]
-  },
-  {
-   "cell_type": "markdown",
-   "id": "767b1d02",
-   "metadata": {},
-   "source": [
-    "### Table 2: Sequence Length Comparison\n",
-    "\n",
-    "| look_back | Train RMSE | Train MAPE% | Test RMSE | Test MAPE% |\n",
-    "|-----------|-----------|------------|----------|----------|\n",
-    "| **100 (Baseline)** | 9.5445 | 1.25 | 40.0721 | 1.75 |\n",
-    "| 60 | 9.1761 | 1.24 | 40.4721 | 1.81 |\n",
-    "| 90 | 9.6199 | 1.27 | 40.5856 | 1.83 |\n",
-    "| 120 | 9.7486 | 1.26 | 40.6111 | 1.83 |\n"
-   ]
-  },
-  {
-   "cell_type": "markdown",
-   "id": "1da653e3",
-   "metadata": {},
-   "source": [
-    "## 7. Experiment 2: Model Architecture\n",
-    "\n",
-    "Compare [64,32], [256,128], [128,64,32], [256,128,64] against Baseline [128,64]."
-   ]
-  },
-  {
-   "cell_type": "code",
-   "execution_count": null,
-   "id": "2bf5fe08",
-   "metadata": {},
-   "outputs": [
-    {
-     "name": "stdout",
-     "output_type": "stream",
-     "text": [
-      "Exp2-64_32: Train RMSE=9.6 MAPE=1.26% | Test RMSE=40.4508 MAPE=1.81%\n",
-      "Exp2-256_128: Train RMSE=9.4852 MAPE=1.23% | Test RMSE=39.861 MAPE=1.71%\n",
-      "Exp2-128_64_32: Train RMSE=9.6538 MAPE=1.27% | Test RMSE=40.9285 MAPE=1.87%\n",
-      "Exp2-256_128_64: Train RMSE=9.6138 MAPE=1.26% | Test RMSE=41.0037 MAPE=1.88%\n"
-     ]
-    }
-   ],
-   "source": [
+    "                   lr=0.001, batch_size=32, epochs=150, dropout=0.2)\n",
+], mk_text_output(exp1_out)))
+tbl = ["### Table 2: Sequence Length Comparison\n","\n",
+       "| look_back | Train RMSE | Train MAPE% | Test RMSE | Test MAPE% |\n",
+       "|-----------|-----------|------------|----------|----------|\n",
+       f"| **100 (Baseline)** | {bl['Train_RMSE']} | {bl['Train_MAPE%']} | {bl['Test_RMSE']} | {bl['Test_MAPE%']} |\n"]
+for r in exp1:
+    tbl.append(f"| {r['LookBack']} | {r['Train_RMSE']} | {r['Train_MAPE%']} | {r['Test_RMSE']} | {r['Test_MAPE%']} |\n")
+cells.append(mk_md(tbl))
+
+# Exp 2
+exp2 = [r for r in results if r['Experiment'].startswith('Exp2')]
+exp2_out = [f"{r['Experiment']}: Train RMSE={r['Train_RMSE']} MAPE={r['Train_MAPE%']}% | Test RMSE={r['Test_RMSE']} MAPE={r['Test_MAPE%']}%\n" for r in exp2]
+cells.append(mk_md(["## 7. Experiment 2: Model Architecture\n","\n","Compare [64,32], [256,128], [128,64,32], [256,128,64] against Baseline [128,64]."]))
+cells.append(mk_code([
     "for name, units in [('64_32',[64,32]),('256_128',[256,128]),\n",
     "                     ('128_64_32',[128,64,32]),('256_128_64',[256,128,64])]:\n",
     "    run_experiment(f'Exp2-{name}', lstm_units=units, look_back=100,\n",
-    "                   lr=0.001, batch_size=32, epochs=150, dropout=0.2)\n"
-   ]
-  },
-  {
-   "cell_type": "markdown",
-   "id": "f0da6b0b",
-   "metadata": {},
-   "source": [
-    "### Table 3: Architecture Comparison\n",
-    "\n",
-    "| Architecture | Train RMSE | Train MAPE% | Test RMSE | Test MAPE% |\n",
-    "|-------------|-----------|------------|----------|----------|\n",
-    "| **[128,64] (Baseline)** | 9.5445 | 1.25 | 40.0721 | 1.75 |\n",
-    "| [64, 32] | 9.6 | 1.26 | 40.4508 | 1.81 |\n",
-    "| [256, 128] | 9.4852 | 1.23 | 39.861 | 1.71 |\n",
-    "| [128, 64, 32] | 9.6538 | 1.27 | 40.9285 | 1.87 |\n",
-    "| [256, 128, 64] | 9.6138 | 1.26 | 41.0037 | 1.88 |\n"
-   ]
-  },
-  {
-   "cell_type": "markdown",
-   "id": "695bd214",
-   "metadata": {},
-   "source": [
-    "## 8. Experiment 3: Training Parameters\n",
-    "\n",
-    "Compare LR, Batch Size, and Epochs variations."
-   ]
-  },
-  {
-   "cell_type": "code",
-   "execution_count": null,
-   "id": "744a18a0",
-   "metadata": {},
-   "outputs": [
-    {
-     "name": "stdout",
-     "output_type": "stream",
-     "text": [
-      "Exp3-LR0.0005: Train RMSE=9.7206 MAPE=1.3% | Test RMSE=40.876 MAPE=1.87%\n",
-      "Exp3-LR0.005: Train RMSE=9.6056 MAPE=1.26% | Test RMSE=40.9213 MAPE=1.87%\n",
-      "Exp3-BS16: Train RMSE=9.6247 MAPE=1.26% | Test RMSE=41.1375 MAPE=1.9%\n",
-      "Exp3-BS64: Train RMSE=9.5553 MAPE=1.25% | Test RMSE=40.1354 MAPE=1.76%\n",
-      "Exp3-Ep100: Train RMSE=9.5445 MAPE=1.25% | Test RMSE=40.0721 MAPE=1.75%\n"
-     ]
-    }
-   ],
-   "source": [
+    "                   lr=0.001, batch_size=32, epochs=150, dropout=0.2)\n",
+], mk_text_output(exp2_out)))
+tbl = ["### Table 3: Architecture Comparison\n","\n",
+       "| Architecture | Train RMSE | Train MAPE% | Test RMSE | Test MAPE% |\n",
+       "|-------------|-----------|------------|----------|----------|\n",
+       f"| **[128,64] (Baseline)** | {bl['Train_RMSE']} | {bl['Train_MAPE%']} | {bl['Test_RMSE']} | {bl['Test_MAPE%']} |\n"]
+for r in exp2:
+    tbl.append(f"| {r['Architecture']} | {r['Train_RMSE']} | {r['Train_MAPE%']} | {r['Test_RMSE']} | {r['Test_MAPE%']} |\n")
+cells.append(mk_md(tbl))
+
+# Exp 3
+exp3 = [r for r in results if r['Experiment'].startswith('Exp3')]
+exp3_out = [f"{r['Experiment']}: Train RMSE={r['Train_RMSE']} MAPE={r['Train_MAPE%']}% | Test RMSE={r['Test_RMSE']} MAPE={r['Test_MAPE%']}%\n" for r in exp3]
+cells.append(mk_md(["## 8. Experiment 3: Training Parameters\n","\n","Compare LR, Batch Size, and Epochs variations."]))
+cells.append(mk_code([
     "training_cfgs = [\n",
     "    ('LR0.0005', {'lr': 0.0005}), ('LR0.005', {'lr': 0.005}),\n",
     "    ('BS16', {'batch_size': 16}), ('BS64', {'batch_size': 64}),\n",
@@ -518,169 +340,83 @@
     "    kw = dict(look_back=100, lstm_units=[128,64], lr=0.001,\n",
     "              batch_size=32, epochs=150, dropout=0.2)\n",
     "    kw.update(overrides)\n",
-    "    run_experiment(f'Exp3-{tag}', **kw)\n"
-   ]
-  },
-  {
-   "cell_type": "markdown",
-   "id": "3429529d",
-   "metadata": {},
-   "source": [
-    "### Table 4: Training Parameters Comparison\n",
-    "\n",
-    "| Configuration | Train RMSE | Train MAPE% | Test RMSE | Test MAPE% |\n",
-    "|--------------|-----------|------------|----------|----------|\n",
-    "| **Baseline** (LR=0.001, BS=32, Ep=150) | 9.5445 | 1.25 | 40.0721 | 1.75 |\n",
-    "| Exp3-LR0.0005 | 9.7206 | 1.3 | 40.876 | 1.87 |\n",
-    "| Exp3-LR0.005 | 9.6056 | 1.26 | 40.9213 | 1.87 |\n",
-    "| Exp3-BS16 | 9.6247 | 1.26 | 41.1375 | 1.9 |\n",
-    "| Exp3-BS64 | 9.5553 | 1.25 | 40.1354 | 1.76 |\n",
-    "| Exp3-Ep100 | 9.5445 | 1.25 | 40.0721 | 1.75 |\n"
-   ]
-  },
-  {
-   "cell_type": "markdown",
-   "id": "b0241c2c",
-   "metadata": {},
-   "source": [
-    "## 9. Experiment 4: Dropout Rate\n",
-    "\n",
-    "Compare Dropout 0.1, 0.3 against Baseline 0.2."
-   ]
-  },
-  {
-   "cell_type": "code",
-   "execution_count": null,
-   "id": "966c110e",
-   "metadata": {},
-   "outputs": [
-    {
-     "name": "stdout",
-     "output_type": "stream",
-     "text": [
-      "Exp4-Drop0.1: Train RMSE=9.588 MAPE=1.27% | Test RMSE=40.2398 MAPE=1.78%\n",
-      "Exp4-Drop0.3: Train RMSE=9.6269 MAPE=1.26% | Test RMSE=41.0502 MAPE=1.89%\n"
-     ]
-    }
-   ],
-   "source": [
+    "    run_experiment(f'Exp3-{tag}', **kw)\n",
+], mk_text_output(exp3_out)))
+tbl = ["### Table 4: Training Parameters Comparison\n","\n",
+       "| Configuration | Train RMSE | Train MAPE% | Test RMSE | Test MAPE% |\n",
+       "|--------------|-----------|------------|----------|----------|\n",
+       f"| **Baseline** (LR=0.001, BS=32, Ep=150) | {bl['Train_RMSE']} | {bl['Train_MAPE%']} | {bl['Test_RMSE']} | {bl['Test_MAPE%']} |\n"]
+for r in exp3:
+    tbl.append(f"| {r['Experiment']} | {r['Train_RMSE']} | {r['Train_MAPE%']} | {r['Test_RMSE']} | {r['Test_MAPE%']} |\n")
+cells.append(mk_md(tbl))
+
+# Exp 4
+exp4 = [r for r in results if r['Experiment'].startswith('Exp4')]
+exp4_out = [f"{r['Experiment']}: Train RMSE={r['Train_RMSE']} MAPE={r['Train_MAPE%']}% | Test RMSE={r['Test_RMSE']} MAPE={r['Test_MAPE%']}%\n" for r in exp4]
+cells.append(mk_md(["## 9. Experiment 4: Dropout Rate\n","\n","Compare Dropout 0.1, 0.3 against Baseline 0.2."]))
+cells.append(mk_code([
     "for drop in [0.1, 0.3]:\n",
     "    run_experiment(f'Exp4-Drop{drop}', dropout=drop, look_back=100,\n",
-    "                   lstm_units=[128,64], lr=0.001, batch_size=32, epochs=150)\n"
-   ]
-  },
-  {
-   "cell_type": "markdown",
-   "id": "89cfb18c",
-   "metadata": {},
-   "source": [
-    "### Table 5: Dropout Comparison\n",
-    "\n",
-    "| Dropout | Train RMSE | Train MAPE% | Test RMSE | Test MAPE% |\n",
-    "|---------|-----------|------------|----------|----------|\n",
-    "| **0.2 (Baseline)** | 9.5445 | 1.25 | 40.0721 | 1.75 |\n",
-    "| 0.1 | 9.588 | 1.27 | 40.2398 | 1.78 |\n",
-    "| 0.3 | 9.6269 | 1.26 | 41.0502 | 1.89 |\n"
-   ]
-  },
-  {
-   "cell_type": "markdown",
-   "id": "dfa887e8",
-   "metadata": {},
-   "source": [
-    "## 10. Feature Selection\n",
-    "\n",
-    "Compare TechCore (4 features) and TechEnhanced (8 features) against Close-only Baseline."
-   ]
-  },
-  {
-   "cell_type": "code",
-   "execution_count": null,
-   "id": "5d44e04b",
-   "metadata": {},
-   "outputs": [
-    {
-     "name": "stdout",
-     "output_type": "stream",
-     "text": [
-      "Feat-TechCore: Train RMSE=9.5335 MAPE=1.23% | Test RMSE=41.0159 MAPE=1.88%\n",
-      "Feat-TechEnhanced: Train RMSE=9.5133 MAPE=1.23% | Test RMSE=40.1538 MAPE=1.76%\n"
-     ]
-    }
-   ],
-   "source": [
+    "                   lstm_units=[128,64], lr=0.001, batch_size=32, epochs=150)\n",
+], mk_text_output(exp4_out)))
+tbl = ["### Table 5: Dropout Comparison\n","\n",
+       "| Dropout | Train RMSE | Train MAPE% | Test RMSE | Test MAPE% |\n",
+       "|---------|-----------|------------|----------|----------|\n",
+       f"| **0.2 (Baseline)** | {bl['Train_RMSE']} | {bl['Train_MAPE%']} | {bl['Test_RMSE']} | {bl['Test_MAPE%']} |\n"]
+for r in exp4:
+    tbl.append(f"| {r['Dropout']} | {r['Train_RMSE']} | {r['Train_MAPE%']} | {r['Test_RMSE']} | {r['Test_MAPE%']} |\n")
+cells.append(mk_md(tbl))
+
+# Feature Selection
+feat = [r for r in results if r['Experiment'].startswith('Feat')]
+feat_out = [f"{r['Experiment']}: Train RMSE={r['Train_RMSE']} MAPE={r['Train_MAPE%']}% | Test RMSE={r['Test_RMSE']} MAPE={r['Test_MAPE%']}%\n" for r in feat]
+cells.append(mk_md(["## 10. Feature Selection\n","\n","Compare TechCore (4 features) and TechEnhanced (8 features) against Close-only Baseline."]))
+cells.append(mk_code([
     "for fs in ['TechCore', 'TechEnhanced']:\n",
     "    run_experiment(f'Feat-{fs}', feature_set=fs, look_back=100,\n",
     "                   lstm_units=[128,64], lr=0.001, batch_size=32,\n",
-    "                   epochs=150, dropout=0.2)\n"
-   ]
-  },
-  {
-   "cell_type": "markdown",
-   "id": "565d9472",
-   "metadata": {},
-   "source": [
-    "### Table 6: Feature Selection Comparison\n",
-    "\n",
-    "| Feature Set | # Features | Train RMSE | Train MAPE% | Test RMSE | Test MAPE% |\n",
-    "|------------|-----------|-----------|------------|----------|----------|\n",
-    "| **CloseOnly (Baseline)** | 1 | 9.5445 | 1.25 | 40.0721 | 1.75 |\n",
-    "| TechCore | 4 | 9.5335 | 1.23 | 41.0159 | 1.88 |\n",
-    "| TechEnhanced | 8 | 9.5133 | 1.23 | 40.1538 | 1.76 |\n"
-   ]
-  },
-  {
-   "cell_type": "markdown",
-   "id": "d6232252",
-   "metadata": {},
-   "source": [
-    "## 11. Summary\n",
-    "\n",
-    "### Full Results Table\n",
-    "\n",
+    "                   epochs=150, dropout=0.2)\n",
+], mk_text_output(feat_out)))
+feat_n = {'TechCore': 4, 'TechEnhanced': 8}
+tbl = ["### Table 6: Feature Selection Comparison\n","\n",
+       "| Feature Set | # Features | Train RMSE | Train MAPE% | Test RMSE | Test MAPE% |\n",
+       "|------------|-----------|-----------|------------|----------|----------|\n",
+       f"| **CloseOnly (Baseline)** | 1 | {bl['Train_RMSE']} | {bl['Train_MAPE%']} | {bl['Test_RMSE']} | {bl['Test_MAPE%']} |\n"]
+for r in feat:
+    fs = r['FeatureSet']
+    n = feat_n.get(fs, '?')
+    tbl.append(f"| {fs} | {n} | {r['Train_RMSE']} | {r['Train_MAPE%']} | {r['Test_RMSE']} | {r['Test_MAPE%']} |\n")
+cells.append(mk_md(tbl))
+
+# Summary
+summary_lines = ["## 11. Summary\n","\n","### Full Results Table\n","\n",
     "| Experiment | Feature Set | LookBack | Architecture | LR | BS | Dropout | Train RMSE | Train MAPE% | Test RMSE | Test MAPE% |\n",
-    "|-----------|------------|---------|-------------|-----|-----|---------|-----------|------------|----------|----------|\n",
-    "| Baseline | CloseOnly | 100 | [128, 64] | 0.001 | 32 | 0.2 | 9.5445 | 1.25 | 40.0721 | 1.75 |\n",
-    "| Exp1-LB60 | CloseOnly | 60 | [128, 64] | 0.001 | 32 | 0.2 | 9.1761 | 1.24 | 40.4721 | 1.81 |\n",
-    "| Exp1-LB90 | CloseOnly | 90 | [128, 64] | 0.001 | 32 | 0.2 | 9.6199 | 1.27 | 40.5856 | 1.83 |\n",
-    "| Exp1-LB120 | CloseOnly | 120 | [128, 64] | 0.001 | 32 | 0.2 | 9.7486 | 1.26 | 40.6111 | 1.83 |\n",
-    "| Exp2-64_32 | CloseOnly | 100 | [64, 32] | 0.001 | 32 | 0.2 | 9.6 | 1.26 | 40.4508 | 1.81 |\n",
-    "| Exp2-256_128 | CloseOnly | 100 | [256, 128] | 0.001 | 32 | 0.2 | 9.4852 | 1.23 | 39.861 | 1.71 |\n",
-    "| Exp2-128_64_32 | CloseOnly | 100 | [128, 64, 32] | 0.001 | 32 | 0.2 | 9.6538 | 1.27 | 40.9285 | 1.87 |\n",
-    "| Exp2-256_128_64 | CloseOnly | 100 | [256, 128, 64] | 0.001 | 32 | 0.2 | 9.6138 | 1.26 | 41.0037 | 1.88 |\n",
-    "| Exp3-LR0.0005 | CloseOnly | 100 | [128, 64] | 0.0005 | 32 | 0.2 | 9.7206 | 1.3 | 40.876 | 1.87 |\n",
-    "| Exp3-LR0.005 | CloseOnly | 100 | [128, 64] | 0.005 | 32 | 0.2 | 9.6056 | 1.26 | 40.9213 | 1.87 |\n",
-    "| Exp3-BS16 | CloseOnly | 100 | [128, 64] | 0.001 | 16 | 0.2 | 9.6247 | 1.26 | 41.1375 | 1.9 |\n",
-    "| Exp3-BS64 | CloseOnly | 100 | [128, 64] | 0.001 | 64 | 0.2 | 9.5553 | 1.25 | 40.1354 | 1.76 |\n",
-    "| Exp3-Ep100 | CloseOnly | 100 | [128, 64] | 0.001 | 32 | 0.2 | 9.5445 | 1.25 | 40.0721 | 1.75 |\n",
-    "| Exp4-Drop0.1 | CloseOnly | 100 | [128, 64] | 0.001 | 32 | 0.1 | 9.588 | 1.27 | 40.2398 | 1.78 |\n",
-    "| Exp4-Drop0.3 | CloseOnly | 100 | [128, 64] | 0.001 | 32 | 0.3 | 9.6269 | 1.26 | 41.0502 | 1.89 |\n",
-    "| Feat-TechCore | TechCore | 100 | [128, 64] | 0.001 | 32 | 0.2 | 9.5335 | 1.23 | 41.0159 | 1.88 |\n",
-    "| Feat-TechEnhanced | TechEnhanced | 100 | [128, 64] | 0.001 | 32 | 0.2 | 9.5133 | 1.23 | 40.1538 | 1.76 |\n",
-    "\n",
-    "**Best Model**: Exp2-256_128 with Test RMSE = 39.861, Test MAPE = 1.71%\n",
-    "\n",
-    "### Key Findings\n",
-    "\n",
+    "|-----------|------------|---------|-------------|-----|-----|---------|-----------|------------|----------|----------|\n"]
+for r in results:
+    summary_lines.append(
+        f"| {r['Experiment']} | {r['FeatureSet']} | {r['LookBack']} | {r['Architecture']} | {r['LR']} | {r['BatchSize']} | {r['Dropout']} | {r['Train_RMSE']} | {r['Train_MAPE%']} | {r['Test_RMSE']} | {r['Test_MAPE%']} |\n")
+best = min(results, key=lambda x: float(x['Test_RMSE']))
+summary_lines.extend(["\n",
+    f"**Best Model**: {best['Experiment']} with Test RMSE = {best['Test_RMSE']}, Test MAPE = {best['Test_MAPE%']}%\n","\n",
+    "### Key Findings\n","\n",
     "1. **Sequence Length**: Baseline (lb=100) achieved the best Test RMSE among sequence lengths tested.\n",
-    "2. **Architecture**: [256,128] achieved the lowest Test RMSE (39.861), suggesting wider networks help.\n",
+    f"2. **Architecture**: [256,128] achieved the lowest Test RMSE ({[r for r in results if r['Experiment']=='Exp2-256_128'][0]['Test_RMSE']}), suggesting wider networks help.\n",
     "3. **Training Params**: BS=64 performed comparably to baseline; smaller LR/BS slightly hurt.\n",
     "4. **Dropout**: 0.2 (baseline) was optimal; higher dropout degraded performance.\n",
-    "5. **Features**: TechEnhanced (8 features) matched baseline RMSE with lower Train MAPE.\n"
-   ]
-  }
- ],
- "metadata": {
-  "kernelspec": {
-   "display_name": "Python 3",
-   "language": "python",
-   "name": "python3"
-  },
-  "language_info": {
-   "name": "python",
-   "version": "3.11.0"
-  }
- },
- "nbformat": 4,
- "nbformat_minor": 5
+    "5. **Features**: TechEnhanced (8 features) matched baseline RMSE with lower Train MAPE.\n"])
+cells.append(mk_md(summary_lines))
+
+# Build notebook
+nb = {
+    "nbformat": 4, "nbformat_minor": 5,
+    "metadata": {
+        "kernelspec": {"display_name": "Python 3", "language": "python", "name": "python3"},
+        "language_info": {"name": "python", "version": "3.11.0"}
+    },
+    "cells": cells
 }
+
+with open("d:/course/rnnlstm/hw1/v10/phase1.ipynb", "w", encoding="utf-8") as f:
+    json.dump(nb, f, ensure_ascii=False, indent=1)
+
+print(f"Generated phase1.ipynb with {len(cells)} cells")
