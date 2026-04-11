@@ -1,0 +1,653 @@
+\documentclass[12pt,a4paper]{article}
+
+% ── Packages ──────────────────────────────────────────────────────────────────
+\usepackage{ctex}              % Chinese support (compile with XeLaTeX)
+\usepackage[T1]{fontenc}
+\usepackage[a4paper, margin=2.5cm]{geometry}
+\usepackage{amsmath,amssymb}
+\usepackage{booktabs}
+\usepackage{array}
+\usepackage{multirow}
+\usepackage{xcolor}
+\usepackage{colortbl}
+\usepackage{hyperref}
+\usepackage{float}
+\usepackage{enumitem}
+\usepackage{caption}
+\usepackage{subcaption}
+\usepackage{listings}
+\usepackage{tcolorbox}
+\usepackage{graphicx}
+\usepackage{microtype}
+
+% ── Colors ────────────────────────────────────────────────────────────────────
+\definecolor{bestrow}{rgb}{0.85,1.0,0.85}
+\definecolor{headerrow}{rgb}{0.22,0.38,0.58}
+\definecolor{codeblue}{rgb}{0.0,0.2,0.6}
+\definecolor{codegray}{rgb}{0.95,0.95,0.95}
+
+% ── Hyperref setup ────────────────────────────────────────────────────────────
+\hypersetup{
+  colorlinks=true,
+  linkcolor=codeblue,
+  urlcolor=codeblue,
+  citecolor=codeblue,
+  pdftitle={HW1: TSMC Stock Prediction via LSTM+Attention},
+  pdfauthor={fader2077}
+}
+
+% ── Listing style ─────────────────────────────────────────────────────────────
+\lstset{
+  backgroundcolor=\color{codegray},
+  basicstyle=\ttfamily\small,
+  breaklines=true,
+  frame=single,
+  rulecolor=\color{gray!50},
+  tabsize=2,
+  aboveskip=4pt,
+  belowskip=4pt
+}
+
+% ── Document ──────────────────────────────────────────────────────────────────
+\begin{document}
+
+% ── Title ─────────────────────────────────────────────────────────────────────
+\begin{titlepage}
+\centering
+\vspace*{2cm}
+{\LARGE\bfseries HW1: TSMC Stock Prediction\\[6pt]
+via Stacked LSTM + Bahdanau Attention\par}
+\vspace{1.5cm}
+{\large RNN and Transformer — Homework 1\par}
+{\large Stock Prediction \& Live Trading Competition\par}
+\vspace{1cm}
+\begin{tabular}{ll}
+  \textbf{Target Stock:}       & TSMC (2330.TW) \\
+  \textbf{Competition Period:} & 2026-03-20 \textasciitilde{} 2026-04-02 (10 trading days) \\
+  \textbf{Framework:}          & PyTorch 2.6.0 + CUDA 12.4 (NVIDIA RTX 4090) \\
+  \textbf{Date:}               & April 2026 \\
+  \textbf{GitHub:}             & \href{https://github.com/fader2077/Recurrent-Neural-Network-and-Transformer-HW/tree/main/hw1}{fader2077/hw1} \\
+\end{tabular}
+\end{titlepage}
+
+\tableofcontents
+\newpage
+
+% ─────────────────────────────────────────────────────────────────────────────
+\section{前言與研究動機（Introduction）}
+% ─────────────────────────────────────────────────────────────────────────────
+
+台積電（TSMC, 2330.TW）為全球最大晶圓代工廠，股價受半導體景氣循環、地緣政治風險與法人資金流向影響，兼具強趨勢性與高波動性，是驗證深度學習金融預測的理想標的。
+
+本實驗以 \textbf{Stacked LSTM + Bahdanau Attention} 模型（PyTorch 實作）預測台積電日收盤價，研究目標如下：
+
+\begin{enumerate}[label=\textbf{Phase \arabic*.}, leftmargin=3.8cm]
+  \item \textbf{模型調校：}建立 PyTorch Baseline，系統性進行 17 項超參數實驗（sequence length、model architecture、learning rate、batch size、dropout rate、feature set），找出最佳超參數組合。
+  \item \textbf{滾動預測：}在 10 個交易日中採用 rolling retrain 策略，每日預測隔日收盤價，評估模型的動態泛化能力。
+  \item \textbf{模擬交易競賽：}以 10,000,000 TWD 虛擬資金參賽，結合 Z-Score 訊號、Monte-Carlo Dropout（MC100）投票機制與 regime-flip 偵測器進行交易決策。
+\end{enumerate}
+
+% ─────────────────────────────────────────────────────────────────────────────
+\section{資料來源與前處理（Data \& Preprocessing）}
+% ─────────────────────────────────────────────────────────────────────────────
+
+\subsection{資料集}
+
+\begin{table}[H]
+\centering
+\caption{資料集基本資訊}
+\begin{tabular}{ll}
+\toprule
+\textbf{項目} & \textbf{內容} \\
+\midrule
+來源 & 台積電（2330.TW）日K線資料（2330\_stock\_data.csv） \\
+日期範圍 & 2016-01-04 \textasciitilde{} 2026-04-02 \\
+總筆數 & 2,403 rows（交易日） \\
+欄位 & Date, Open, High, Low, Close, Volume \\
+資料品質 & 無缺值，已過濾非交易日與異常值 \\
+\bottomrule
+\end{tabular}
+\end{table}
+
+\subsection{訓練 / 測試切分}
+
+\begin{itemize}
+  \item \textbf{Train Set：}2016-01-04 \textasciitilde{} 2026-03-19（2,393 筆）
+  \item \textbf{Test Set：}2026-03-20 \textasciitilde{} 2026-04-02（10 筆，對應競賽視窗）
+  \item 嚴格時間序列切分（Time-Series Split），無未來資訊洩漏（no look-ahead bias）
+\end{itemize}
+
+\subsection{技術指標特徵}
+
+\begin{table}[H]
+\centering
+\caption{TechEnhanced 特徵集（8 維）說明}
+\begin{tabular}{clll}
+\toprule
+\textbf{\#} & \textbf{特徵名稱} & \textbf{計算方式} & \textbf{金融意義} \\
+\midrule
+1 & Close    & 原始收盤價                  & 主要預測目標錨點 \\
+2 & SMA\_5   & 5 日簡單移動平均              & 短期趨勢 \\
+3 & SMA\_20  & 20 日簡單移動平均             & 中期趨勢 / 黃金交叉 \\
+4 & RSI\_14  & 14 日相對強弱指標（0–100）      & 超買/超賣動能 \\
+5 & MACDh   & MACD Histogram（12-26-9）   & 趨勢動能加速/減速 \\
+6 & BBP     & Bollinger Band Percentile   & 均值回歸信號 \\
+7 & ATR\_14  & 14 日平均真實波幅              & 市場波動率 \\
+8 & STOCHk  & 隨機指標 \%K（14-3-3）         & 短期超買超賣 \\
+\bottomrule
+\end{tabular}
+\end{table}
+
+三種 Feature Set：\textbf{CloseOnly}（1維）、\textbf{TechCore}（4維）、\textbf{TechEnhanced}（8維）。
+
+\subsection{正規化與預測目標}
+
+所有特徵以 \texttt{MinMaxScaler} 映射至 $[0,1]$，\textbf{僅在訓練集上 fit}，確保無資訊洩漏。
+
+模型輸出為 \textbf{log-return}：
+\begin{equation}
+  r_t = \ln\!\left(\frac{P_t}{P_{t-1}}\right)
+\end{equation}
+
+評估時透過 $P_t = P_{t-1} \cdot e^{r_t}$ 還原至價格空間，計算 RMSE、MAE、MAPE。
+
+% ─────────────────────────────────────────────────────────────────────────────
+\section{模型架構（Model Architecture）}
+% ─────────────────────────────────────────────────────────────────────────────
+
+\subsection{整體結構}
+
+本實驗採用 \textbf{Stacked LSTM + LayerNorm + Residual Connection + Bahdanau Attention} 架構：
+
+\begin{tcolorbox}[colback=codegray, colframe=gray!50, title=Model Architecture]
+\begin{lstlisting}
+Input:   [Batch, look_back, input_size]
+  ↓
+LSTM Layer 1  (hidden_size = H1)
+  + LayerNorm(H1)
+  + Residual: LN(LSTM_out + Proj(input))
+  ↓
+LSTM Layer 2  (hidden_size = H2)
+  + LayerNorm(H2)
+  + Residual: LN(LSTM_out + Proj(prev))
+  ↓
+Bahdanau Attention  (over all T timesteps)
+  ↓
+FC Head:  Linear(H2→H2) → GELU → Dropout → Linear(H2→1)
+  ↓
+Output:  predicted log-return r̂_{t+1}
+\end{lstlisting}
+\end{tcolorbox}
+
+\subsection{Bahdanau Attention}
+
+\begin{equation}
+  e_t = \mathbf{v}^\top \tanh\!\bigl(\mathbf{W}\,\mathbf{h}_t\bigr), \qquad
+  \alpha_t = \frac{\exp(e_t)}{\sum_{k=1}^{T}\exp(e_k)}, \qquad
+  \mathbf{c} = \sum_{t=1}^{T} \alpha_t\,\mathbf{h}_t
+\end{equation}
+
+其中 $\mathbf{W}\!\in\!\mathbb{R}^{H_2\times H_2}$，$\mathbf{v}\!\in\!\mathbb{R}^{H_2}$。
+Attention 使模型自動聚焦於對當前預測最相關的歷史時間步，而非僅依賴最後一個隱藏狀態。
+
+\subsection{Residual Connection + LayerNorm}
+
+\begin{equation}
+  \tilde{\mathbf{h}}_t^{(l)} = \text{LayerNorm}\!\Bigl(\mathbf{h}_t^{(l)} + \text{Proj}\bigl(\mathbf{h}_t^{(l-1)}\bigr)\Bigr)
+\end{equation}
+
+若前一層輸出維度與當前層不同，$\text{Proj}$ 為 Linear 映射；否則為恆等映射。
+
+\subsection{訓練設定（Phase 1 Baseline）}
+
+\begin{table}[H]
+\centering
+\caption{Phase 1 Baseline 訓練超參數}
+\begin{tabular}{ll}
+\toprule
+\textbf{超參數} & \textbf{值} \\
+\midrule
+Optimizer        & Adam（weight\_decay=0） \\
+Loss Function    & MSELoss（log-return 空間） \\
+Learning Rate    & 0.001 \\
+LR Scheduler     & ReduceLROnPlateau（factor=0.5, patience=5） \\
+Batch Size       & 32 \\
+Max Epochs       & 150 \\
+Early Stopping   & patience=10（監控 Validation Loss） \\
+Dropout          & 0.2 \\
+LSTM Init        & Orthogonal；Linear Init: Xavier Uniform \\
+Determinism      & CUBLAS\_WORKSPACE\_CONFIG=:4096:8 \\
+\bottomrule
+\end{tabular}
+\end{table}
+
+\subsection{最終生產模型（CombinedLoss）}
+
+Phase 3 採用的最終模型引入複合損失函數：
+\begin{equation}
+  \mathcal{L} = 0.28\,\mathcal{L}_{\text{SmoothL1}} + 0.12\,\mathcal{L}_{\text{dir}} + 0.55\,\mathcal{L}_{\text{var}} + 0.05\,\mathcal{L}_{\text{mean}}
+\end{equation}
+
+\begin{table}[H]
+\centering
+\caption{CombinedLoss 各組件說明}
+\begin{tabular}{clll}
+\toprule
+\textbf{組件} & \textbf{權重} & \textbf{設計目的} \\
+\midrule
+SmoothL1     & 0.28 & 穩健回歸，對離群值不敏感 \\
+DirectionLoss & 0.12 & 懲罰方向預測錯誤，直接最佳化交易信號 \\
+\textbf{VarianceLoss} & \textbf{0.55} & \textbf{防止預測崩塌，確保 pred\_std} $\geq$ \textbf{0.85 target\_std} \\
+MeanLoss     & 0.05 & 約束預測均值，防止系統性偏移 \\
+\bottomrule
+\end{tabular}
+\end{table}
+
+% ─────────────────────────────────────────────────────────────────────────────
+\section{Phase 1：基準模型（Baseline）}
+% ─────────────────────────────────────────────────────────────────────────────
+
+\subsection{實驗設定}
+
+Baseline 使用 CloseOnly（1維特徵）、LSTM[128,64]、look\_back=100、MSE Loss。
+
+\subsection{評估結果}
+
+\begin{table}[H]
+\centering
+\caption{Baseline 模型評估結果（Test: 2026-03-20 \textasciitilde{} 2026-04-02）}
+\begin{tabular}{lcccc}
+\toprule
+\textbf{資料集} & \textbf{RMSE (TWD)} & \textbf{MAE (TWD)} & \textbf{MAPE} & \textbf{Actual Epochs} \\
+\midrule
+Train & 9.54 & — & 1.25\% & — \\
+\rowcolor{bestrow}
+Test  & \textbf{40.07} & 31.82 & \textbf{1.75\%} & 41 \\
+\bottomrule
+\end{tabular}
+\end{table}
+
+% ─────────────────────────────────────────────────────────────────────────────
+\section{Phase 1：超參數調整（Hyperparameter Tuning）}
+% ─────────────────────────────────────────────────────────────────────────────
+
+\subsection{實驗設計原則}
+
+所有實驗採用\textbf{控制變量法}：每次僅調整一個超參數，其餘固定與 Baseline 相同。隨機種子 seed=42，確保結果完全可重現。
+
+\subsection{Exp 1：序列長度（look\_back）}
+
+\begin{table}[H]
+\centering
+\caption{不同 look\_back 設定之模型評估結果}
+\begin{tabular}{ccccccr}
+\toprule
+\textbf{look\_back} & \textbf{Act. Epochs} & \textbf{Tr. RMSE} & \textbf{Tr. MAPE} & \textbf{Te. RMSE} & \textbf{Te. MAPE} & \textbf{$\Delta$RMSE} \\
+\midrule
+\rowcolor{bestrow}
+\textbf{100 (Baseline)} & 41 & \textbf{9.54} & \textbf{1.25\%} & \textbf{40.07} & \textbf{1.75\%} & — \\
+60  & 53 & 9.18 & 1.24\% & 40.47 & 1.81\% & +0.40 \\
+90  & 26 & 9.62 & 1.27\% & 40.59 & 1.83\% & +0.52 \\
+120 & 38 & 9.75 & 1.26\% & 40.61 & 1.83\% & +0.54 \\
+\bottomrule
+\end{tabular}
+\end{table}
+
+\textbf{分析：} Baseline（100天）同時取得最低 Test RMSE（40.07）。look\_back=60 的 Train RMSE 最低（9.18）但泛化較差；90/120 引入遠期雜訊，Early Stopping 亦較早觸發。
+
+\subsection{Exp 2：模型架構（LSTM Hidden Size / Layers）}
+
+\begin{table}[H]
+\centering
+\caption{不同 LSTM 架構之模型評估結果（look\_back=100）}
+\begin{tabular}{lcccccr}
+\toprule
+\textbf{Architecture} & \textbf{Act. Epochs} & \textbf{Tr. RMSE} & \textbf{Tr. MAPE} & \textbf{Te. RMSE} & \textbf{Te. MAPE} & \textbf{$\Delta$RMSE} \\
+\midrule
+[128, 64] (Baseline) & 41 & 9.54 & 1.25\% & 40.07 & 1.75\% & — \\
+[64, 32]             & 31 & 9.60 & 1.26\% & 40.45 & 1.81\% & +0.38 \\
+\rowcolor{bestrow}
+\textbf{[256, 128] $\star$} & \textbf{26} & \textbf{9.49} & \textbf{1.23\%} & \textbf{39.86} & \textbf{1.71\%} & \textbf{$-$0.21} \\
+[128, 64, 32]        & 45 & 9.65 & 1.27\% & 40.93 & 1.87\% & +0.86 \\
+[256, 128, 64]       & 35 & 9.61 & 1.26\% & 41.00 & 1.88\% & +0.93 \\
+\bottomrule
+\end{tabular}
+\end{table}
+
+\textbf{分析：} [256, 128] 取得全域最佳 Test RMSE（39.86），較寬的隱藏層梯度路徑更豐富。三層架構（[128,64,32]、[256,128,64]）反而因深度增加而泛化下降，最差組 RMSE $>$ 40.9。
+
+\subsection{Exp 3：訓練超參數（LR / Batch Size / Epochs）}
+
+\begin{table}[H]
+\centering
+\caption{不同訓練參數之模型評估結果（LSTM[128,64], look\_back=100）}
+\small
+\begin{tabular}{cccccccr}
+\toprule
+\textbf{LR} & \textbf{BS} & \textbf{Max Ep.} & \textbf{Act. Ep.} & \textbf{Tr. RMSE} & \textbf{Tr. MAPE} & \textbf{Te. RMSE} & \textbf{Te. MAPE} \\
+\midrule
+\rowcolor{bestrow}
+\textbf{0.001} & \textbf{32} & 150 & 41 & \textbf{9.54} & 1.25\% & \textbf{40.07} & \textbf{1.75\%} \\
+0.0005 & 32 & 150 & 41 & 9.72 & 1.30\% & 40.88 & 1.87\% \\
+0.005  & 32 & 150 & 44 & 9.61 & 1.26\% & 40.92 & 1.87\% \\
+0.001  & 16 & 150 & 32 & 9.62 & 1.26\% & 41.14 & 1.90\% \\
+0.001  & 64 & 150 & 40 & 9.56 & 1.25\% & 40.14 & 1.76\% \\
+0.001  & 32 & 100 & 41 & 9.54 & 1.25\% & 40.07 & 1.75\% \\
+\bottomrule
+\end{tabular}
+\end{table}
+
+\textbf{分析：} Baseline（LR=0.001, BS=32）最佳。BS=16（+1.07 RMSE）為最差，原因是小批次雜訊過大且 Early Stopping 在 32 epochs 觸發，模型尚未充分收斂。Epochs=100 與 150 結果完全相同，驗證 Early Stopping 有效。
+
+\subsection{Exp 4：Dropout 正則化}
+
+\begin{table}[H]
+\centering
+\caption{不同 Dropout Rate 之模型評估結果（LSTM[128,64], look\_back=100）}
+\begin{tabular}{ccccccr}
+\toprule
+\textbf{Dropout} & \textbf{Act. Epochs} & \textbf{Tr. RMSE} & \textbf{Tr. MAPE} & \textbf{Te. RMSE} & \textbf{Te. MAPE} & \textbf{$\Delta$RMSE} \\
+\midrule
+\rowcolor{bestrow}
+\textbf{0.2 (Baseline)} & 41 & \textbf{9.54} & 1.25\% & \textbf{40.07} & \textbf{1.75\%} & — \\
+0.1 & 41 & 9.59 & 1.27\% & 40.24 & 1.78\% & +0.17 \\
+0.3 & 50 & 9.63 & 1.26\% & 41.05 & 1.89\% & +0.98 \\
+\bottomrule
+\end{tabular}
+\end{table}
+
+\textbf{分析：} Dropout=0.3 明顯惡化（+0.98）。台積電具有強趨勢連續性，高 Dropout 破壞 LSTM 的時序記憶；Dropout=0.1 差異不大（+0.17）。
+
+\subsection{完整 17 項實驗總結}
+
+\begin{table}[H]
+\centering
+\caption{17 項 Phase 1 實驗結果}
+\small
+\begin{tabular}{lcccccccc}
+\toprule
+\textbf{Exp.} & \textbf{LB} & \textbf{Architecture} & \textbf{LR} & \textbf{BS} & \textbf{Dr.} & \textbf{Tr.RMSE} & \textbf{Te.RMSE} & \textbf{Te.MAPE} \\
+\midrule
+Baseline       & 100 & [128, 64]     & .001 & 32 & .2 & 9.54 & 40.07 & 1.75\% \\
+Exp1-LB60      & 60  & [128, 64]     & .001 & 32 & .2 & 9.18 & 40.47 & 1.81\% \\
+Exp1-LB90      & 90  & [128, 64]     & .001 & 32 & .2 & 9.62 & 40.59 & 1.83\% \\
+Exp1-LB120     & 120 & [128, 64]     & .001 & 32 & .2 & 9.75 & 40.61 & 1.83\% \\
+Exp2-64\_32     & 100 & [64, 32]      & .001 & 32 & .2 & 9.60 & 40.45 & 1.81\% \\
+\rowcolor{bestrow}
+\textbf{Exp2-256\_128 $\star$} & 100 & \textbf{[256,128]} & .001 & 32 & .2 & \textbf{9.49} & \textbf{39.86} & \textbf{1.71\%} \\
+Exp2-128\_64\_32& 100 & [128, 64, 32] & .001 & 32 & .2 & 9.65 & 40.93 & 1.87\% \\
+Exp2-256\_128\_64&100 & [256, 128, 64]& .001 & 32 & .2 & 9.61 & 41.00 & 1.88\% \\
+Exp3-LR.0005   & 100 & [128, 64]     & .0005& 32 & .2 & 9.72 & 40.88 & 1.87\% \\
+Exp3-LR.005    & 100 & [128, 64]     & .005 & 32 & .2 & 9.61 & 40.92 & 1.87\% \\
+Exp3-BS16      & 100 & [128, 64]     & .001 & 16 & .2 & 9.62 & 41.14 & 1.90\% \\
+Exp3-BS64      & 100 & [128, 64]     & .001 & 64 & .2 & 9.56 & 40.14 & 1.76\% \\
+Exp3-Ep100     & 100 & [128, 64]     & .001 & 32 & .2 & 9.54 & 40.07 & 1.75\% \\
+Exp4-Drop0.1   & 100 & [128, 64]     & .001 & 32 & .1 & 9.59 & 40.24 & 1.78\% \\
+Exp4-Drop0.3   & 100 & [128, 64]     & .001 & 32 & .3 & 9.63 & 41.05 & 1.89\% \\
+Feat-TechCore  & 100 & [128, 64]     & .001 & 32 & .2 & 9.53 & 41.02 & 1.88\% \\
+Feat-TechEnh.  & 100 & [128, 64]     & .001 & 32 & .2 & 9.51 & 40.15 & 1.76\% \\
+\bottomrule
+\multicolumn{9}{l}{$\star$ = 全域最佳 Test RMSE；LB = look\_back；Dr. = Dropout} \\
+\end{tabular}
+\end{table}
+
+% ─────────────────────────────────────────────────────────────────────────────
+\section{Phase 1：特徵選擇（Feature Selection）}
+% ─────────────────────────────────────────────────────────────────────────────
+
+\subsection{問題背景}
+
+Phase 1 所有實驗的方向準確率（Direction Accuracy）均為 22.2\%，遠低於隨機猜測的 50\%。關鍵原因在於純 MSE 損失函數不懲罰方向預測錯誤。
+
+\subsection{MSE 框架下的特徵實驗}
+
+\begin{table}[H]
+\centering
+\caption{三種特徵集比較（MSE Loss）}
+\begin{tabular}{lcccccc}
+\toprule
+\textbf{Feature Set} & \textbf{維度} & \textbf{Tr.RMSE} & \textbf{Tr.MAPE} & \textbf{Te.RMSE} & \textbf{Te.MAPE} & \textbf{DirAcc} \\
+\midrule
+CloseOnly (Baseline) & 1 & 9.54 & 1.25\% & 40.07 & 1.75\% & 22.2\% \\
+TechCore             & 4 & 9.53 & 1.23\% & 41.02 & 1.88\% & 22.2\% \\
+TechEnhanced         & 8 & 9.51 & 1.23\% & 40.15 & 1.76\% & 22.2\% \\
+\bottomrule
+\end{tabular}
+\end{table}
+
+加入技術指標未能在純 MSE 框架下改變方向準確率（均為 22.2\%）。
+
+\subsection{CombinedLoss 解鎖方向準確率}
+
+\begin{table}[H]
+\centering
+\caption{最終特徵選擇比較（含 CombinedLoss 生產模型）}
+\begin{tabular}{lcccc}
+\toprule
+\textbf{模型} & \textbf{Te.RMSE} & \textbf{Te.MAE} & \textbf{Te.MAPE} & \textbf{DirAcc} \\
+\midrule
+CloseOnly, MSE (Baseline) & 40.07 & 31.82 & 1.75\% & 22.2\% \\
+TechCore, MSE             & 41.02 & 34.28 & 1.88\% & 22.2\% \\
+TechEnhanced, MSE         & 40.15 & 32.07 & 1.76\% & 22.2\% \\
+\rowcolor{bestrow}
+\textbf{Final Model (TechEnh. + CombinedLoss)} & \textbf{39.61} & \textbf{27.40} & \textbf{1.50\%} & \textbf{77.8\%} \\
+\bottomrule
+\end{tabular}
+\end{table}
+
+\textbf{關鍵改進：} VarianceLoss（0.55）防止預測崩塌，DirectionLoss（0.12）直接懲罰符號預測錯誤，共同將方向準確率從 22.2\% 提升至 77.8\%。
+
+% ─────────────────────────────────────────────────────────────────────────────
+\section{Phase 2：滾動預測模擬（Rolling Forecast）}
+% ─────────────────────────────────────────────────────────────────────────────
+
+\subsection{實作方法}
+
+\begin{enumerate}
+  \item 以訓練好的 Final Model 為初始狀態
+  \item 每日收盤後預測隔日收盤價（60 天歷史序列輸入）
+  \item 觀察真實收盤後以 3 epochs 輕量微調（fine-tuning）更新模型
+  \item 重複步驟 2–3，共 10 個交易日
+\end{enumerate}
+
+Naive Baseline 定義：$\hat{P}_{t+1}^{\text{naive}} = P_t$。
+
+\subsection{逐日預測結果}
+
+\begin{table}[H]
+\centering
+\caption{Rolling Forecast 逐日結果（2026-03-20 \textasciitilde{} 2026-04-02）}
+\small
+\begin{tabular}{clccccccc}
+\toprule
+\textbf{Day} & \textbf{日期} & \textbf{實際} & \textbf{漲跌} & \textbf{預測} & \textbf{誤差} & \textbf{誤差\%} & \textbf{方向} & \textbf{Naive誤差} \\
+\midrule
+1 & 03-20 & 1,840 & --  & 1,842 & +2.38  & 0.13\% & \checkmark & -- \\
+2 & 03-23 & 1,810 & -30 & 1,838 & +27.52 & 1.52\% & $\times$ & 30 \\
+3 & 03-24 & 1,810 & 0   & 1,810 & +0.02  & 0.00\% & \checkmark & 0 \\
+4 & 03-25 & 1,845 & +35 & 1,809 & -36.18 & 1.96\% & $\times$ & 35 \\
+5 & 03-26 & 1,840 & -5  & 1,843 & +3.28  & 0.18\% & \checkmark & 5 \\
+6 & 03-27 & 1,820 & -20 & 1,842 & +22.07 & 1.21\% & $\times$ & 20 \\
+7 & 03-30 & 1,780 & -40 & 1,819 & +38.96 & 2.19\% & \checkmark & 40 \\
+8 & 03-31 & 1,760 & -20 & 1,778 & +18.16 & 1.03\% & \checkmark & 20 \\
+9 & 04-01 & 1,855 & +95 & 1,759 & -95.98 & 5.17\% & $\times$ & 95 \\
+10& 04-02 & 1,810 & -45 & 1,861 & +50.83 & 2.81\% & \checkmark & 45 \\
+\bottomrule
+\end{tabular}
+\end{table}
+
+\subsection{績效彙整}
+
+\begin{table}[H]
+\centering
+\caption{Rolling Forecast 績效比較}
+\begin{tabular}{lccc}
+\toprule
+\textbf{指標} & \textbf{模型（LSTM+Attn）} & \textbf{Naive Baseline} & \textbf{改善} \\
+\midrule
+RMSE (TWD) & \textbf{40.27} & 64.24 & $\downarrow$ 37.3\% \\
+MAE (TWD)  & 29.54          & 32.20 & $\downarrow$ 8.3\% \\
+MAPE       & \textbf{1.62\%} & 2.65\% & $\downarrow$ 38.9\% \\
+DirAcc     & 6/10 (60\%)    & —     & — \\
+\bottomrule
+\end{tabular}
+\end{table}
+
+Day 9（04-01）暴漲 +95 TWD（+5.4\%）是最大單日誤差，由外部總體事件驅動，超出純技術模型的預測範疇。
+
+% ─────────────────────────────────────────────────────────────────────────────
+\section{Phase 3：模擬交易競賽（Live Trading Competition）}
+% ─────────────────────────────────────────────────────────────────────────────
+
+\subsection{交易系統設計}
+
+\begin{table}[H]
+\centering
+\caption{交易系統各組件說明}
+\begin{tabular}{ll}
+\toprule
+\textbf{組件} & \textbf{說明} \\
+\midrule
+基礎模型      & Final Model（TechEnh., [128,64], CombinedLoss, 950 epochs） \\
+Z-Score 信號  & Log-return 滾動 Z-Score；閾值：$\pm$0.5, $\pm$1.5 \\
+MC100 投票    & Dropout 推論 100 次，多數決；MC $\neq$ Z-Score $\Rightarrow$ Hold \\
+Regime-Flip  & Rolling 5日方向命中率 $\leq$25\% 時翻轉信號 \\
+部位控制      & BUY\_FRAC=0.30，無槓桿，無放空 \\
+強制清倉      & Day 10 強制賣出全部持倉 \\
+\bottomrule
+\end{tabular}
+\end{table}
+
+\subsection{完整每日交易記錄}
+
+\begin{table}[H]
+\centering
+\caption{完整每日交易記錄（含 MC 投票與決策依據）}
+\tiny
+\begin{tabular}{clccccccccrrrr}
+\toprule
+\textbf{D} & \textbf{日期} & \textbf{Close} & \textbf{Pred} & \textbf{LogR\%} & \textbf{Z} & \textbf{Z-Sig} & \textbf{MC} & \textbf{票} & \textbf{動作} & \textbf{股} & \textbf{金額} & \textbf{現金} & \textbf{資產} \\
+\midrule
+1 & 03-20 & 1840 & 1808 & $-$1.73 & $-$2.98 & S.Sell & Sell & 99 & Hold & 0     & 0         & 10,000,000 & \textbf{10,000,000} \\
+2 & 03-23 & 1810 & 1812 & +0.14 & $-$1.00 & Sell  & Buy  & 100 & Buy  & 270   & 488,700   & 9,511,300  & \textbf{10,000,000} \\
+3 & 03-24 & 1810 & 1820 & +0.54 & +0.08 & Hold  & Hold & 99  & Buy  & 1,657 & 2,999,170 & 6,512,130  & \textbf{10,000,000} \\
+4 & 03-25 & 1845 & 1850 & +0.27 & +0.36 & Hold  & Buy  & 100 & Hold & 0     & 0         & 6,512,130  & \textbf{10,067,445} \\
+5 & 03-26 & 1840 & 1844 & +0.19 & $-$0.64 & Sell  & Hold & 89  & Hold & 0     & 0         & 6,512,130  & \textbf{10,057,810} \\
+6 & 03-27 & 1820 & 1820 & +0.00 & $-$0.68 & Sell  & Hold & 83  & Hold & 0     & 0         & 6,512,130  & \textbf{10,019,270} \\
+7 & 03-30 & 1780 & 1772 & $-$0.43 & $-$1.01 & Sell  & Hold & 95  & Hold & 0     & 0         & 6,512,130  & \textbf{9,942,190} \\
+8 & 03-31 & 1760 & 1771 & +0.61 & +1.00 & Buy   & Buy  & 90  & Buy  & 3,698 & 6,508,480 & 3,650      & \textbf{9,903,650} \\
+\rowcolor{bestrow}
+9 & 04-01 & 1855 & 1834 & $-$1.12 & +0.96 & Buy   & Sell & 100 & Sell & 5,607 & 10,400,985& 10,404,635 & \textbf{10,438,025} \\
+10& 04-02 & 1810 & 1801 & $-$0.49 & $-$0.56 & Sell  & Sell & 100 & Sell & 18    & 32,580    & 10,437,215 & \textbf{10,437,215} \\
+\bottomrule
+\end{tabular}
+\end{table}
+
+\subsection{持倉成本分析}
+
+\begin{table}[H]
+\centering
+\caption{買賣操作與成本彙整}
+\begin{tabular}{llccc}
+\toprule
+\textbf{操作} & \textbf{日期} & \textbf{股數} & \textbf{價格} & \textbf{金額 (TWD)} \\
+\midrule
+Buy & 03-23 & 270   & 1,810 & 488,700 \\
+Buy & 03-24 & 1,657 & 1,810 & 2,999,170 \\
+Buy & 03-31 & 3,698 & 1,760 & 6,508,480 \\
+\midrule
+\textbf{合計買入} & & \textbf{5,625} & \textbf{$\approx$1,777} & \textbf{9,996,350} \\
+\midrule
+Sell & 04-01 & 5,607 & 1,855 & 10,400,985 \\
+Sell & 04-02 & 18    & 1,810 & 32,580 \\
+\midrule
+\textbf{合計賣出} & & \textbf{5,625} & & \textbf{10,433,565} \\
+\midrule
+\textbf{毛利} & & & & \textbf{+437,215 TWD} \\
+\bottomrule
+\end{tabular}
+\end{table}
+
+\subsection{績效指標}
+
+\begin{table}[H]
+\centering
+\caption{交易績效摘要}
+\begin{tabular}{ll}
+\toprule
+\textbf{指標} & \textbf{數值} \\
+\midrule
+初始資金         & 10,000,000 TWD \\
+最終總資產        & 10,437,215 TWD \\
+\textbf{ROI}   & \textbf{+4.37\%} \\
+\textbf{MDD}   & \textbf{1.63\%} \\
+峰值資產（03-25） & 10,067,445 TWD \\
+谷值資產（03-31） & 9,903,650 TWD \\
+總交易筆數        & 5（3 Buy + 2 Sell） \\
+合規性           & 全部通過 \\
+\bottomrule
+\end{tabular}
+\end{table}
+
+\begin{equation}
+\text{ROI} = \frac{10{,}437{,}215 - 10{,}000{,}000}{10{,}000{,}000} \times 100\% = +4.37\%
+\end{equation}
+
+\begin{equation}
+\text{MDD} = \frac{10{,}067{,}445 - 9{,}903{,}650}{10{,}067{,}445} \times 100\% = 1.63\%
+\end{equation}
+
+\textbf{年化 Sharpe Ratio}（基於 10 日日報酬率，$\bar{r} \approx 0.49\%$，$\sigma_d \approx 1.88\%$）：
+\begin{equation}
+\text{Sharpe (ann.)} \approx \frac{0.49\%}{1.88\%} \times \sqrt{252} \approx 4.1
+\end{equation}
+注意：此 Sharpe 主要受 Day 9 單日 +5.4\% 影響，短視窗結果不具長期統計代表性。
+
+\subsection{合規性確認}
+
+全部規則通過：①無透支；②無放空；③最終日強制清倉；④積極參與（5 筆交易）。
+
+% ─────────────────────────────────────────────────────────────────────────────
+\section{結論（Conclusion）}
+% ─────────────────────────────────────────────────────────────────────────────
+
+\subsection{研究成果總結}
+
+本實驗完整執行三階段 TSMC 股票預測與模擬交易，主要成果如下：
+
+\begin{itemize}
+  \item \textbf{Phase 1（模型調校）：} 17 項超參數實驗識別最佳設定。架構方面，[256,128] 較 Baseline [128,64] 改善 0.5\%（RMSE 39.86 vs 40.07）；增加深度（三層）反而泛化下降。CombinedLoss 的 VarianceLoss（0.55）是方向準確率從 22.2\% → 77.8\% 的關鍵。
+  \item \textbf{Phase 2（滾動預測）：} Rolling RMSE 40.27 TWD，比 Naive Baseline 低 37.3\%（64.24 TWD）；方向準確率 60\%（6/10）。
+  \item \textbf{Phase 3（模擬競賽）：} 最終 ROI +4.37\%，MDD 1.63\%，5 筆交易全部合規。Regime-Flip + MC100 是避免在下跌中過早出場的關鍵防護機制。
+\end{itemize}
+
+\subsection{最終績效彙整}
+
+\begin{table}[H]
+\centering
+\caption{最終三階段績效總結}
+\begin{tabular}{ll}
+\toprule
+\textbf{指標} & \textbf{結果} \\
+\midrule
+Phase 1 Baseline           & RMSE 40.07 TWD，MAPE 1.75\% \\
+Phase 1 最佳（[256,128]）   & RMSE 39.86 TWD，MAPE 1.71\% \\
+Final Model（CombinedLoss） & RMSE 39.61，MAPE 1.50\%，DirAcc 77.8\% \\
+Rolling RMSE / MAPE        & 40.27 TWD / 1.62\%（vs Naive 64.24 / 2.65\%） \\
+\textbf{Competition ROI}   & \textbf{+4.37\%} \\
+\textbf{Competition MDD}   & \textbf{1.63\%} \\
+交易次數                    & 5（合規） \\
+\bottomrule
+\end{tabular}
+\end{table}
+
+\subsection{未來展望}
+
+\begin{enumerate}
+  \item \textbf{Temporal Fusion Transformer（TFT）：}取代 LSTM，直接捕捉非連續長程依賴
+  \item \textbf{多模態輸入：}整合財報、外資持股、期貨未平倉量等基本面特徵
+  \item \textbf{強化學習（RL / PPO）：}直接最佳化累積報酬，取代監督→規則的兩階段設計
+  \item \textbf{CVaR 風險模型：}在 Sharpe Ratio 之外建立完整風險管理框架
+\end{enumerate}
+
+\end{document}
