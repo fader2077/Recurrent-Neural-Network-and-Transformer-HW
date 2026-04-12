@@ -1,8 +1,11 @@
 \documentclass[12pt,a4paper]{article}
 
 % ── Packages ──────────────────────────────────────────────────────────────────
-\usepackage{ctex}              % Chinese support (compile with XeLaTeX)
-\usepackage[T1]{fontenc}
+\usepackage{fontspec}
+\usepackage{xeCJK}
+\setmainfont{Times New Roman}
+\setCJKmainfont{Microsoft JhengHei UI}
+\setCJKmonofont{Microsoft JhengHei UI}
 \usepackage[a4paper, margin=2.5cm]{geometry}
 \usepackage{amsmath,amssymb}
 \usepackage{booktabs}
@@ -304,12 +307,12 @@ Test  & \textbf{40.07} & 31.82 & \textbf{1.75\%} & 41 \\
 \toprule
 \textbf{Architecture} & \textbf{Act. Epochs} & \textbf{Tr. RMSE} & \textbf{Tr. MAPE} & \textbf{Te. RMSE} & \textbf{Te. MAPE} & \textbf{$\Delta$RMSE} \\
 \midrule
-[128, 64] (Baseline) & 41 & 9.54 & 1.25\% & 40.07 & 1.75\% & — \\
-[64, 32]             & 31 & 9.60 & 1.26\% & 40.45 & 1.81\% & +0.38 \\
+{}[128, 64] (Baseline) & 41 & 9.54 & 1.25\% & 40.07 & 1.75\% & — \\
+{}[64, 32]             & 31 & 9.60 & 1.26\% & 40.45 & 1.81\% & +0.38 \\
 \rowcolor{bestrow}
-\textbf{[256, 128] $\star$} & \textbf{26} & \textbf{9.49} & \textbf{1.23\%} & \textbf{39.86} & \textbf{1.71\%} & \textbf{$-$0.21} \\
-[128, 64, 32]        & 45 & 9.65 & 1.27\% & 40.93 & 1.87\% & +0.86 \\
-[256, 128, 64]       & 35 & 9.61 & 1.26\% & 41.00 & 1.88\% & +0.93 \\
+\textbf{[256, 128] $\star$} & \textbf{26} & \textbf{9.49} & \textbf{1.23\%} & \textbf{39.86} & \textbf{1.71\%} & \textbf{-0.21} \\
+{}[128, 64, 32]        & 45 & 9.65 & 1.27\% & 40.93 & 1.87\% & +0.86 \\
+{}[256, 128, 64]       & 35 & 9.61 & 1.26\% & 41.00 & 1.88\% & +0.93 \\
 \bottomrule
 \end{tabular}
 \end{table}
@@ -605,7 +608,7 @@ Sell & 04-02 & 18    & 1,810 & 32,580 \\
 
 \subsection{合規性確認}
 
-全部規則通過：①無透支；②無放空；③最終日強制清倉；④積極參與（5 筆交易）。
+全部規則通過：(1) 無透支；(2) 無放空；(3) 最終日強制清倉；(4) 積極參與（5 筆交易）。
 
 % ─────────────────────────────────────────────────────────────────────────────
 \section{結論（Conclusion）}
