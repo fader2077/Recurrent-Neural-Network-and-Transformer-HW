@@ -383,6 +383,14 @@ Rolling Forecast 嚴格模擬真實交易的「每日決策」環境：
 
 ---
 
+**Figure 1: Phase 2 Rolling Prediction vs Actual**
+
+![Phase 2 Rolling Forecast](phase2_rolling_forecast.png)
+
+> **圖 1說明：** 藍線為實際收盤價，紅虛線為滾動預測價格，灰線為 Naive Baseline（昨日收盤 = 今日預測）。每日標記毯 ✓ / ✗ 表示毾漲跨式預測方向是否正確。共 10 日中 6 日方向正確（60%），RMSE = 40.27 TWD，MAPE = 1.62%。Day 9（04-01）暴漲 +95 TWD 有花外部總體事件驅動，為最大單日誤差。
+
+---
+
 ## 8 Phase 3：模擬交易競賽（Live Trading Competition）
 
 ### 8.1 交易系統設計

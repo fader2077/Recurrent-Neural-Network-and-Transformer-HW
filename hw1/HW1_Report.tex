@@ -498,6 +498,13 @@ DirAcc     & 6/10 (60\%)    & —     & — \\
 
 Day 9（04-01）暴漲 +95 TWD（+5.4\%）是最大單日誤差，由外部總體事件驅動，超出純技術模型的預測範疇。
 
+\begin{figure}[H]
+\centering
+\includegraphics[width=\linewidth]{phase2_rolling_forecast.png}
+\caption{Phase 2 Rolling Prediction vs Actual（2026-03-20 \textasciitilde{} 2026-04-02）。藍線為實際收盤價，紅線為滾動預測，灰線為 Naive Baseline（昨收即今預測）。每日標記顯示預測方向是否正確（\checkmark / \texttimes），10 日內 6 日方向正確（60\%）。}
+\label{fig:phase2_rolling}
+\end{figure}
+
 % ─────────────────────────────────────────────────────────────────────────────
 \section{Phase 3：模擬交易競賽（Live Trading Competition）}
 % ─────────────────────────────────────────────────────────────────────────────
