@@ -466,7 +466,7 @@ Naive Baseline 定義：$\hat{P}_{t+1}^{\text{naive}} = P_t$。
 \textbf{Day} & \textbf{日期} & \textbf{實際} & \textbf{漲跌} & \textbf{預測} & \textbf{誤差} & \textbf{誤差\%} & \textbf{方向} & \textbf{Naive誤差} \\
 \midrule
 1 & 03-20 & 1,840 & --  & 1,842 & +2.38  & 0.13\% & \checkmark & -- \\
-2 & 03-23 & 1,810 & -30 & 1,838 & +27.52 & 1.52\% & $\times$ & 30 \\
+2 & 03-23 & 1,810 & -30 & 1,838 & +27.52 & 1.52\% & \checkmark & 30 \\
 3 & 03-24 & 1,810 & 0   & 1,810 & +0.02  & 0.00\% & \checkmark & 0 \\
 4 & 03-25 & 1,845 & +35 & 1,809 & -36.18 & 1.96\% & $\times$ & 35 \\
 5 & 03-26 & 1,840 & -5  & 1,843 & +3.28  & 0.18\% & \checkmark & 5 \\
@@ -474,7 +474,7 @@ Naive Baseline 定義：$\hat{P}_{t+1}^{\text{naive}} = P_t$。
 7 & 03-30 & 1,780 & -40 & 1,819 & +38.96 & 2.19\% & \checkmark & 40 \\
 8 & 03-31 & 1,760 & -20 & 1,778 & +18.16 & 1.03\% & \checkmark & 20 \\
 9 & 04-01 & 1,855 & +95 & 1,759 & -95.98 & 5.17\% & $\times$ & 95 \\
-10& 04-02 & 1,810 & -45 & 1,861 & +50.83 & 2.81\% & \checkmark & 45 \\
+10& 04-02 & 1,810 & -45 & 1,861 & +50.83 & 2.81\% & $\times$ & 45 \\
 \bottomrule
 \end{tabular}
 \end{table}
@@ -488,9 +488,9 @@ Naive Baseline 定義：$\hat{P}_{t+1}^{\text{naive}} = P_t$。
 \toprule
 \textbf{指標} & \textbf{模型（LSTM+Attn）} & \textbf{Naive Baseline} & \textbf{改善} \\
 \midrule
-RMSE (TWD) & \textbf{40.27} & 64.24 & $\downarrow$ 37.3\% \\
-MAE (TWD)  & 29.54          & 32.20 & $\downarrow$ 8.3\% \\
-MAPE       & \textbf{1.62\%} & 2.65\% & $\downarrow$ 38.9\% \\
+RMSE (TWD) & \textbf{40.27} & 41.63 & $\downarrow$ 3.3\% \\
+MAE (TWD)  & 29.54          & 32.22 & $\downarrow$ 8.3\% \\
+MAPE       & \textbf{1.62\%} & 1.77\% & $\downarrow$ 8.5\% \\
 DirAcc     & 6/10 (60\%)    & —     & — \\
 \bottomrule
 \end{tabular}
@@ -620,7 +620,7 @@ Sell & 04-02 & 18    & 1,810 & 32,580 \\
 
 \begin{itemize}
   \item \textbf{Phase 1（模型調校）：} 17 項超參數實驗識別最佳設定。架構方面，[256,128] 較 Baseline [128,64] 改善 0.5\%（RMSE 39.86 vs 40.07）；增加深度（三層）反而泛化下降。CombinedLoss 的 VarianceLoss（0.55）是方向準確率從 22.2\% → 77.8\% 的關鍵。
-  \item \textbf{Phase 2（滾動預測）：} Rolling RMSE 40.27 TWD，比 Naive Baseline 低 37.3\%（64.24 TWD）；方向準確率 60\%（6/10）。
+  \item \textbf{Phase 2（滾動預測）：} Rolling RMSE 40.27 TWD，比 Naive Baseline 低 3.3\%（41.63 TWD）；方向準確率 60\%（6/10）。
   \item \textbf{Phase 3（模擬競賽）：} 最終 ROI +4.37\%，MDD 1.63\%，5 筆交易全部合規。Regime-Flip + MC100 是避免在下跌中過早出場的關鍵防護機制。
 \end{itemize}
 
@@ -636,7 +636,7 @@ Sell & 04-02 & 18    & 1,810 & 32,580 \\
 Phase 1 Baseline           & RMSE 40.07 TWD，MAPE 1.75\% \\
 Phase 1 最佳（[256,128]）   & RMSE 39.86 TWD，MAPE 1.71\% \\
 Final Model（CombinedLoss） & RMSE 39.61，MAPE 1.50\%，DirAcc 77.8\% \\
-Rolling RMSE / MAPE        & 40.27 TWD / 1.62\%（vs Naive 64.24 / 2.65\%） \\
+Rolling RMSE / MAPE        & 40.27 TWD / 1.62\%（vs Naive 41.63 / 1.77\%） \\
 \textbf{Competition ROI}   & \textbf{+4.37\%} \\
 \textbf{Competition MDD}   & \textbf{1.63\%} \\
 交易次數                    & 5（合規） \\
