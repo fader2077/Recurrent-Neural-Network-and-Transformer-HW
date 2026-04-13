@@ -3,6 +3,7 @@
 % Packages
 \usepackage[utf8]{inputenc}
 \usepackage[T1]{fontenc}
+\usepackage{CJKutf8}
 \usepackage{geometry}
 \geometry{margin=2.5cm}
 \usepackage{graphicx}
@@ -32,7 +33,7 @@
 
 \title{\textbf{HW2: Detect AI Generated Text}\\[0.3em]
 \large RNN and Transformer — Comprehensive Report}
-\author{Student}
+\author{\begin{CJK*}{UTF8}{gbsn}李捷新\end{CJK*}}
 \date{April 2026}
 
 \begin{document}
@@ -323,7 +324,7 @@ BERT-large achieves a marginal improvement (AUC $+0.0001$, Accuracy $+0.33$ perc
 
 \begin{figure}[H]
 \centering
-\includegraphics[width=0.85\textwidth]{results_bert-base-cased/bert_performance_comparison.png}
+\includegraphics[width=0.85\textwidth]{results_bert-base-cased/comparison_curves.png}
 \caption{Training and evaluation loss curves for BERT-base and BERT-large.}
 \label{fig:comparison}
 \end{figure}

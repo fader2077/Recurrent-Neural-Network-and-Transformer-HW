@@ -1,5 +1,6 @@
 # HW2 — Detect AI Generated Text
 
+**Author:** 李捷新  
 **Course:** RNN and Transformer  
 **Hardware:** NVIDIA RTX 4090 (24GB VRAM), CUDA 12.4, PyTorch 2.6.0  
 **Dataset:** DAIGT V2 Train Dataset (44,868 essays: 27,371 Human / 17,497 AI)  
