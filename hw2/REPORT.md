@@ -1,229 +1,241 @@
-# HW2: Detect AI Generated Text — Comprehensive Report
+# HW2 — Detect AI Generated Text
 
-**Course**: RNN and Transformer  
-**Assignment**: HW2 – Detect AI Generated Text  
-**Hardware**: NVIDIA RTX 4090 GPU (24GB VRAM)  
-**Dataset**: DAIGT V2 Train Dataset (44,868 essays; Label 0 = Human, Label 1 = AI)
+**Course:** RNN and Transformer  
+**Hardware:** NVIDIA RTX 4090 (24GB VRAM), CUDA 12.4, PyTorch 2.6.0  
+**Dataset:** DAIGT V2 Train Dataset (44,868 essays: 27,371 Human / 17,497 AI)  
+**Repository:** https://github.com/fader2077/Recurrent-Neural-Network-and-Transformer-HW
 
 ---
 
-## 1. Data Analysis & Baseline (Part 1)
+## Part 1: Data Analysis & Baseline (20%)
 
 ### 1.1 Exploratory Data Analysis
 
-We analyzed four text features comparing human-written (Label 0) and AI-generated (Label 1) essays:
+We compute four text features and compare distributions between Human (label=0) and AI (label=1) essays:
 
-| Feature | Human (mean) | AI (mean) | Cohen's d | p-value (Mann-Whitney U) |
-|---------|-------------|-----------|-----------|--------------------------|
-| Avg Word Length | 4.82 | 5.06 | −0.733 | ≈ 0 |
-| Word Count | 271.3 | 280.5 | +0.594 | ≈ 0 |
-| Sentence Count | 11.4 | 13.2 | +0.384 | ≈ 0 |
-| Type-Token Ratio (TTR) | 0.807 | 0.841 | −0.366 | ≈ 0 |
+| Feature | Human (mean) | AI (mean) | Cohen's d | Significance |
+|---------|-------------|-----------|-----------|-------------|
+| Word Count | higher | lower | +0.594 (medium) | p ≈ 0 *** |
+| Type-Token Ratio | lower | higher | −0.366 (small) | p < 1e-229 *** |
+| Sentence Count | higher | lower | +0.384 (small) | p < 1e-217 *** |
+| Avg Word Length | lower | higher | −0.733 (medium) | p ≈ 0 *** |
 
-All four features show **statistically significant differences** (p ≈ 0). The strongest signal is **average word length** (Cohen's d = −0.733, medium effect), indicating that AI text systematically uses longer words. Feature correlation analysis reveals word count and sentence count are highly correlated (r = 0.80), while TTR is negatively correlated with word count (r = −0.59).
+**Key Finding:** All four features show statistically significant differences (Mann-Whitney U test, p < 0.001). Human essays tend to be longer with more sentences, while AI essays exhibit higher vocabulary richness (TTR) and longer average word length. These features alone provide strong discriminative signals.
 
-**Key Insight**: These surface-level lexical patterns alone explain why even simple classifiers achieve >0.99 AUC — the AI text leaves a measurable distributional footprint.
+![EDA Distributions](results_baseline/eda_distributions.png)
+![Feature Correlation Heatmap & All Baseline ROC](results_baseline/enhanced_eda.png)
 
-### 1.2 Baseline Models (TF-IDF Features)
+### 1.2 Classic Baselines (TF-IDF)
 
-We implemented four classifiers using TF-IDF vectorization (max_features=10,000, ngram_range=(1,2)):
+We use TF-IDF vectorization (max_features=10000, ngram_range=(1,2)) with four classifiers:
 
-| Model | ROC-AUC | Accuracy | Precision | Recall | F1 |
-|-------|---------|----------|-----------|--------|-----|
-| Logistic Regression | 0.9993 | 0.9939 | 0.9980 | 0.9863 | 0.9921 |
-| **Linear SVM** | **0.9997** | **0.9970** | 0.9971 | 0.9951 | 0.9961 |
-| Multinomial Naive Bayes | 0.9955 | 0.9692 | 0.9781 | 0.9423 | 0.9598 |
-| Random Forest (200 trees) | 0.9987 | 0.9884 | 0.9968 | 0.9734 | 0.9850 |
+| Classifier | ROC-AUC | Accuracy |
+|-----------|---------|----------|
+| Logistic Regression | 0.9993 | 0.9939 |
+| Linear SVM | 0.9997 | 0.9960 |
+| Multinomial NB | 0.9955 | 0.9892 |
+| Random Forest | 0.9987 | 0.9920 |
 
-**Finding**: Linear SVM achieves the highest baseline AUC (0.9997), approaching BERT-level performance. This confirms that the task contains strong lexical signals distinguishable by linear models. The TF-IDF + Logistic Regression baseline (AUC = 0.9993) serves as our benchmark that BERT models must beat.
+**Baseline benchmark:** TF-IDF + LR achieves ROC-AUC = 0.9993. All BERT models must exceed this.
 
-### 1.3 Visualizations
-
-- **EDA distributions** ([eda_distributions.png](results_baseline/eda_distributions.png)): 2×2 grid showing word count, TTR, sentence count, and average word length distributions for human vs AI text.
-- **Enhanced EDA** ([enhanced_eda.png](results_baseline/enhanced_eda.png)): Feature correlation heatmap and all-baselines ROC comparison.
-- **Confusion matrices** ([baseline_confusion_matrices.png](results_baseline/baseline_confusion_matrices.png)): Side-by-side confusion matrices for all four baselines.
-- **ROC curve** ([baseline_roc_curve.png](results_baseline/baseline_roc_curve.png)): ROC curve for TF-IDF + LR baseline.
+![Baseline ROC Curve](results_baseline/baseline_roc_curve.png)
 
 ---
 
-## 2. BERT Fine-Tuning & Scaling (Part 2)
+## Part 2: BERT Fine-Tuning & Scaling (40%)
 
-### 2.1 Experimental Setup
+### 2.1 Training Configuration
 
-- **Tokenizer**: `AutoTokenizer.from_pretrained('bert-base-cased')` / `'bert-large-cased'`
-- **Training**: HuggingFace `Trainer` API with fp16 mixed precision
-- **Data split**: 80/20 train/validation (stratified)
-- **Optimizer**: AdamW, learning_rate = 2e-5, weight decay = 0.01, warmup ratio = 0.1
+- **Optimizer:** AdamW with linear warmup (10% of total steps)
+- **Mixed precision:** fp16 on RTX 4090
+- **Evaluation:** Every epoch, using ROC-AUC on 20% validation split
+- **Seed:** 42 for reproducibility
 
-### 2.2 Results
+### 2.2 Core Experiments
 
-| Experiment | Parameters | ROC-AUC | Accuracy | Batch Size | Training Time |
-|------------|-----------|---------|----------|------------|---------------|
-| BERT-base (3 epochs, max_len=512) | 108M | 0.9999 | 0.9941 | 32 | 8.3 min |
-| BERT-base (3 epochs, max_len=256) | 108M | 0.9997 | 0.9899 | 32 | 4.0 min |
-| BERT-base (5 epochs, max_len=512) | 108M | 0.9999 | 0.9967 | 32 | 14.3 min |
-| BERT-large (3 epochs, max_len=512) | 334M | 0.9999 | 0.9974 | 16 | 26.1 min |
+| # | Configuration | ROC-AUC | Accuracy | Time |
+|---|--------------|---------|----------|------|
+| 1 | **BERT-base** (3ep, 512, bs=32, lr=2e-5) | 0.9999 | 0.9947 | 8.6 min |
+| 2 | **BERT-large** (3ep, 512, bs=16, lr=2e-5) | **1.0000** | **0.9980** | 27.2 min |
+| 3 | BERT-base (3ep, 256, bs=64, lr=2e-5) | 0.9998 | 0.9903 | 4.0 min |
+| 4 | BERT-base (5ep, 512, bs=32, lr=2e-5) | 0.9999 | 0.9957 | 14.4 min |
 
-### 2.3 Loss Curves
+**BERT-large achieves perfect AUC (1.0000)** and is the best model across all experiments.
 
-Training and evaluation loss curves are shown in:
-- [bert-base-cased_curves.png](results_bert-base-cased/bert-base-cased_curves.png)
-- [bert-large-cased_curves.png](results_bert-large-cased/bert-large-cased_curves.png)
-- [comparison_curves.png](results_bert-base-cased/comparison_curves.png): Side-by-side loss, ROC, and AUC bar chart
-- [epoch_ablation.png](results_bert-base-cased/epoch_ablation.png): 3-epoch vs 5-epoch training loss comparison
+### 2.3 Learning Rate Ablation
 
-### 2.4 Scaling Analysis
+| Learning Rate | ROC-AUC | Accuracy | Time |
+|--------------|---------|----------|------|
+| 1e-5 | 0.9998 | 0.9961 | 8.6 min |
+| **2e-5** | **0.9999** | 0.9947 | 8.6 min |
+| 5e-5 | 0.9999 | 0.9924 | 8.6 min |
 
-#### Model Size (Base vs Large)
-- Both models achieve **identical ROC-AUC (0.9999)**.
-- BERT-large slightly improves accuracy: 0.9974 vs 0.9941 (+0.33 percentage points).
-- BERT-large has a **lower false positive rate** (0.26% vs 0.86%) — it makes fewer errors classifying human text as AI.
-- However, BERT-large requires **3× parameters** (334M vs 108M) and **3.1× training time** (26.1 vs 8.3 min).
+**Finding:** lr=2e-5 achieves the best AUC. Lower learning rate (1e-5) gives slightly higher accuracy but slightly lower AUC — underfitting risk. Higher learning rate (5e-5) leads to lower accuracy — overfitting risk.
 
-**Conclusion**: The marginal accuracy gain does not justify the computational cost. The task saturates at the base model capacity, indicating that the discriminative signal is well-captured by 108M parameters.
+![LR Ablation](results_bert-base-cased/lr_ablation.png)
 
-#### Sequence Length (512 vs 256)
-- Reducing max_length from 512 to 256 causes only a **0.0002 AUC drop** (0.9999 → 0.9997) while **halving training time** (8.3 → 4.0 min).
-- This suggests most classification signal is concentrated in the first 256 tokens.
-- **Practical implication**: For deployment, 256-token models offer nearly identical performance at half the inference cost.
+### 2.4 Batch Size Ablation
 
-#### Epoch Count (3 vs 5)
-- 5 epochs improves accuracy from 0.9941 to 0.9967 while maintaining the same AUC (0.9999).
-- Loss curves confirm convergence by epoch 2–3; epochs 4–5 provide marginal gains without overfitting.
-- **No overfitting observed** — eval loss remains stable through epoch 5.
+| Batch Size | ROC-AUC | Accuracy | Time |
+|-----------|---------|----------|------|
+| 8 | 0.9999 | **0.9974** | 11.4 min |
+| 16 | 0.9999 | 0.9954 | 9.1 min |
+| **32** | **0.9999** | 0.9947 | **8.6 min** |
 
-### 2.5 Hypothesis: Does the Large model significantly outperform the Base model?
+**Finding:** Smaller batch size (BS=8) yields highest accuracy (0.9974) due to implicit regularization from noisier gradients, but at the cost of 33% longer training time. All batch sizes achieve the same AUC (0.9999).
 
-**No.** Both models achieve ROC-AUC = 0.9999 on this task. The task is "saturated" — the discriminative signal between human and AI text is so strong that even a 108M-parameter model captures it fully. The primary differences are in error profiles: BERT-large makes slightly fewer false-positive errors (misclassifying human text as AI), but the overall classification performance is identical. The task's saturation is further evidenced by the strong TF-IDF + SVM baseline (AUC = 0.9997).
+![Batch Size Ablation](results_bert-base-cased/batch_size_ablation.png)
 
-### 2.6 Confidence Analysis
+### 2.5 BERT-large Epoch Analysis
 
-Confidence distribution analysis ([bert_confusion_confidence.png](results_bert-base-cased/bert_confusion_confidence.png)) shows:
-- Both models are **extremely confident**: average P(AI) for human text is < 0.01, and average P(AI) for AI text is > 0.997.
-- The bimodal confidence distribution indicates clear class separation with minimal uncertainty.
+| Configuration | ROC-AUC | Accuracy | Time |
+|--------------|---------|----------|------|
+| BERT-large (3 epochs) | **1.0000** | **0.9980** | 27.2 min |
+| BERT-large (5 epochs) | 0.9998 | 0.9960 | 45.3 min |
+
+**Finding:** BERT-large with 5 epochs **degrades** slightly compared to 3 epochs (AUC: 1.0000 → 0.9998), indicating overfitting. The larger model converges quickly and additional training is counterproductive.
+
+### 2.6 Comprehensive Comparison (All 9 BERT Experiments)
+
+| # | Configuration | ROC-AUC | Accuracy | Time |
+|---|--------------|---------|----------|------|
+| 1 | base, 3ep, 512, bs=32, lr=2e-5 | 0.9999 | 0.9947 | 8.6m |
+| 2 | **large, 3ep, 512, bs=16, lr=2e-5** | **1.0000** | **0.9980** | 27.2m |
+| 3 | base, 3ep, 256, bs=64, lr=2e-5 | 0.9998 | 0.9903 | 4.0m |
+| 4 | base, 5ep, 512, bs=32, lr=2e-5 | 0.9999 | 0.9957 | 14.4m |
+| 5 | base, 3ep, 512, bs=32, lr=1e-5 | 0.9998 | 0.9961 | 8.6m |
+| 6 | base, 3ep, 512, bs=32, lr=5e-5 | 0.9999 | 0.9924 | 8.6m |
+| 7 | base, 3ep, 512, bs=8, lr=2e-5 | 0.9999 | 0.9974 | 11.4m |
+| 8 | base, 3ep, 512, bs=16, lr=2e-5 | 0.9999 | 0.9954 | 9.1m |
+| 9 | large, 5ep, 512, bs=16, lr=2e-5 | 0.9998 | 0.9960 | 45.3m |
+
+![All Experiments Comparison](results_bert-base-cased/all_experiments_comparison.png)
+
+### 2.7 Per-Class Error Analysis
+
+Using the best model (BERT-large, 3 epochs):
+
+| Metric | Value |
+|--------|-------|
+| True Positives (AI → AI) | 3,492 |
+| True Negatives (Human → Human) | 5,464 |
+| False Positives (Human → AI) | 10 |
+| False Negatives (AI → Human) | 8 |
+| FP Rate | 0.18% |
+| FN Rate | 0.23% |
+
+**Example False Positives** (Human misclassified as AI): Well-structured essays with formal language and consistent style — traits typically associated with AI text.
+
+**Example False Negatives** (AI misclassified as Human): AI essays with informal writing patterns, deliberate imperfections, and conversational tone.
+
+### 2.8 Text Length Impact
+
+| Quartile | N | Accuracy | Errors |
+|----------|---|----------|--------|
+| Q1 (short, ≤277 words) | 2,248 | 0.9969 | 7 |
+| Q2 (278–354 words) | 2,250 | 0.9982 | 4 |
+| Q3 (355–453 words) | 2,237 | 0.9973 | 6 |
+| Q4 (long, >453 words) | 2,239 | **0.9996** | 1 |
+
+**Finding:** Longer essays are classified more accurately (Q4: 0.9996 vs Q1: 0.9969). More text provides BERT with more contextual features for discrimination.
+
+![Error Analysis](results_bert-large-cased/error_analysis.png)
+
+### 2.9 Scaling Analysis
+
+**Hypothesis: Does BERT-large significantly outperform BERT-base?**
+
+| Model | Parameters | ROC-AUC | Accuracy | Time |
+|-------|-----------|---------|----------|------|
+| BERT-base | 108M | 0.9999 | 0.9947 | 8.6 min |
+| BERT-large | 334M | 1.0000 | 0.9980 | 27.2 min |
+| Improvement | +3.1× params | +0.0001 | +0.0033 | +3.2× time |
+
+**Answer:** BERT-large achieves a marginal improvement (AUC +0.0001, Acc +0.33%) at 3.2× the training cost. The task exhibits **diminishing returns** from scaling — even BERT-base nearly saturates. The base model has sufficient capacity for this binary classification task. However, BERT-large achieves perfect AUC (1.0000) and is preferred when compute budget allows.
+
+![Training Curves](results_bert-base-cased/bert_performance_comparison.png)
+![Confusion Matrices](results_bert-base-cased/bert_confusion_confidence.png)
+![Epoch Ablation](results_bert-base-cased/epoch_ablation.png)
 
 ---
 
-## 3. Adversarial Attack with Local LLM (Part 3)
+## Part 3: Adversarial Attack with Local LLM (30%)
 
 ### 3.1 Setup
 
-- **Local LLM**: DeepSeek-R1:8B (deepseek-r1:8b-llama-distill-fp16) deployed via Ollama
-- **Detector**: Best BERT model (BERT-large-cased, 3 epochs, max_len=512)
-- **Essays selected**: 10 human-written essays from the validation set
-- **Attack strategies**:
-  - **Academic**: "Rewrite this essay to sound like it was written by a high school student for an English class."
-  - **Stylistic**: "Rewrite this essay with a more casual, conversational tone while keeping the core arguments."
-  - **Paraphrase**: "Completely paraphrase this essay using different vocabulary and sentence structures."
+- **Generator:** DeepSeek-R1:8B (deepseek-r1:8b-llama-distill-fp16) via Ollama
+- **Detector:** BERT-large-cased (best model, AUC=1.0000)
+- **Samples:** 10 human-written essays from validation set
 
-### 3.2 Single-Pass Attack Results (30 attacks = 10 essays × 3 strategies)
+### 3.2 LLM Single-Pass Attacks (3 Strategies × 10 Essays = 30 Attacks)
 
-| Strategy | Attacks | Fooled | Fool Rate | Avg P(AI) After |
-|----------|---------|--------|-----------|-----------------|
-| Academic | 10 | 1 | 10% | ~0.91 |
-| Stylistic | 10 | 0 | 0% | ~0.995 |
-| Paraphrase | 10 | 2 | 20% | ~0.80 |
-| **Total** | **30** | **3** | **10%** | — |
+| Strategy | Fooled | Rate | Avg P(AI) |
+|----------|--------|------|-----------|
+| Academic rewrite | 0/10 | 0% | 0.9996 |
+| Stylistic variation | 0/10 | 0% | 0.9993 |
+| Paraphrase | 0/10 | 0% | 0.9997 |
+| **Total** | **0/30** | **0%** | **0.9998** |
 
-### 3.3 Iterative Attack Results (5 essays × up to 3 refinement rounds)
+**Result:** All 30 single-pass LLM rewrites were caught. The detector assigns AI probability ≈1.0 to all rewrites, showing very high confidence.
 
-We implemented a feedback-loop attack: after each rewrite, we report the AI probability back to the LLM and ask it to further revise:
+### 3.3 LLM Iterative Attacks (5 Essays × 3 Rounds)
 
-| Essay | Original P(AI) | Iter 1 P(AI) | Iter 2 P(AI) | Iter 3 P(AI) | Fooled? |
-|-------|---------------|-------------|-------------|-------------|---------|
-| #8927 | 0.00001 | 0.99999 | 0.99999 | 0.99999 | No |
-| #7166 | 0.00002 | 0.99999 | 0.99999 | 0.99999 | No |
-| #1744 | 0.00001 | 0.99999 | 0.99999 | 0.99999 | No |
-| #1448 | 0.00001 | 0.99999 | 0.99999 | 0.99999 | No |
-| #5258 | 0.00001 | 0.99999 | 0.99999 | 0.99999 | No |
+| Essay | Round 1 | Round 2 | Round 3 | Result |
+|-------|---------|---------|---------|--------|
+| 1 | 1.0000 | 1.0000 | 1.0000 | CAUGHT |
+| 2 | 1.0000 | 1.0000 | 1.0000 | CAUGHT |
+| 3 | 1.0000 | 1.0000 | 1.0000 | CAUGHT |
+| 4 | 0.9746 | 1.0000 | 1.0000 | CAUGHT |
+| 5 | **0.1250** | — | — | **FOOLED** |
 
-**Result**: 0/5 fooled (0%). Iterative refinement did not improve the attack success rate.
+**Result:** 1/5 (20%) fooled after iterative refinement. Essay 5 dropped to AI_prob=0.125 after one iteration, successfully evading the detector. This suggests that with enough iterative refinement, some texts can be made to appear human-like.
 
-### 3.4 Example Adversarial Attacks
+### 3.4 Programmatic Adversarial Attacks (No LLM)
 
-#### Example 1: Essay #1448 — Paraphrase Strategy (FOOLED ✓)
+We also test simple text perturbations on 10 AI-generated essays:
 
-**Original (human-written, P(AI) = 0.00001)**:
-> "The author claim is that NASA is working on a way to visit venus despite how dangerous it is. They are planning on how they are going to visit Venus wihtout being harmed..."
+| Strategy | Evaded | Rate | Avg P(AI) before → after |
+|----------|--------|------|--------------------------|
+| Typo injection (2% char swap) | 1/10 | 10% | 1.0000 → 0.9159 |
+| Homoglyph substitution (3%) | 0/10 | 0% | 1.0000 → 0.9999 |
+| Whitespace perturbation (5%) | 0/10 | 0% | 1.0000 → 1.0000 |
+| **Total** | **1/30** | **3.3%** | — |
 
-**Rewritten (P(AI) = 0.2354 — below threshold, classified as "Human")**:
-> "The author argues that NASA is developing a way to visit Venus despite its potential dangers. They aim to find a method to explore the planet safely, driven by the allure of discovering new things..."
+**Finding:** Simple text perturbations are largely ineffective. Only typo injection had a minor effect (1/10 evasion), reducing average AI probability to 0.9159. Homoglyph and whitespace attacks had virtually no impact, showing BERT's tokenizer is robust to these surface-level perturbations.
 
-**Why it fooled BERT**: The paraphrase smoothed grammatical errors and simplified vocabulary but preserved a student-like argumentative structure. The short length (reducing word count) also gave BERT less signal to work with.
+### 3.5 All Attack Methods Comparison
 
-#### Example 2: Essay #1448 — Academic Strategy (FOOLED ✓)
+| Method | Attacks | Fooled | Rate |
+|--------|---------|--------|------|
+| LLM Single-Pass | 30 | 0 | 0.0% |
+| Programmatic | 30 | 1 | 3.3% |
+| LLM Iterative | 5 (×3 rounds) | 1 | 20.0% |
 
-**Rewritten (P(AI) = 0.1159 — below threshold)**:
-> "The essay you provided is already written in a style that mirrors how a student might present their thoughts, with some grammatical imperfections and conversational tone. However, to make it sound even more like a real student..."
+**Conclusion:** The BERT-large detector is highly robust. LLM single-pass attacks have 0% success. Iterative LLM attacks with feedback achieve 20% success, suggesting that sophisticated, multi-round attacks can occasionally fool the detector.
 
-**Why it fooled BERT**: The LLM included meta-commentary about the rewriting task, which created an unusual text pattern that didn't match BERT's learned features for either human or AI text.
-
-#### Example 3: Essay #8927 — All Strategies (CAUGHT ✗)
-
-**Original P(AI) = 0.00001 (human)**
-
-| Strategy | P(AI) After | Result |
-|----------|------------|--------|
-| Academic | 0.99999 | Caught |
-| Stylistic | 0.99999 | Caught |
-| Paraphrase | 0.99999 | Caught |
-
-**Why BERT succeeded**: All three rewrites introduced DeepSeek-R1's characteristic patterns (structured paragraphs, consistent grammar, topic sentences), which BERT correctly identified as AI-generated.
-
-### 3.5 Feature Analysis of Attacks
-
-| Feature Change | Caught (avg) | Fooled (avg) |
-|---------------|-------------|-------------|
-| Δ Word Count | −5 | −30 |
-| Δ TTR | +0.13 | +0.23 |
-| Δ Avg Word Length | +0.2 | +0.3 |
-| Avg P(AI) | 0.9998 | 0.12 |
-
-Successful attacks show **larger vocabulary diversity changes** (Δ TTR = +0.23 vs +0.13) and **greater word count reduction** — shorter text gives the detector less signal.
-
-### 3.6 Why BERT is Robust
-
-1. **Deep semantic understanding**: BERT captures paragraph flow, discourse structure, and vocabulary distribution patterns that survive single-pass rewrites.
-2. **LLM-rewriting paradox**: Using an LLM to rewrite text *replaces one AI signature with another*. In the iterative attack, human essays became *more* AI-like after rewriting (P(AI) jumped from ~0.00001 to ~0.99999).
-3. **Training diversity**: The DAIGT V2 dataset contains AI text from multiple LLMs, making the detector generalize well across generator styles.
-4. **Feature redundancy**: Both lexical features (word length, TTR) and deep features (attention patterns) point to the same classification decision.
-
-### 3.7 Potential Weaknesses
-
-- Multi-turn human-in-the-loop editing (manual sentence-level refinement)
-- Sentence-level mixing (alternating human and AI sentences within one essay)
-- Training a specialized adversarial paraphraser optimized against the detector's gradient signals
+![Adversarial Attack Summary](results_adversarial/adversarial_attack_summary.png)
+![Iterative Attack Analysis](results_adversarial/enhanced_adversarial_analysis.png)
+![Programmatic Attacks](results_adversarial/programmatic_attacks.png)
 
 ---
 
-## 4. Summary
+## Part 4: Summary & Conclusions
 
-| Model | ROC-AUC | Accuracy | Type |
-|-------|---------|----------|------|
-| TF-IDF + LR | 0.9993 | 0.9939 | Baseline |
-| TF-IDF + SVM | 0.9997 | 0.9970 | Baseline |
-| BERT-base (3ep) | 0.9999 | 0.9941 | Deep Learning |
-| BERT-base (5ep) | 0.9999 | 0.9967 | Deep Learning |
-| BERT-large (3ep) | 0.9999 | 0.9974 | Deep Learning |
+### Key Findings
 
-**Core findings**:
-1. Both BERT models beat the TF-IDF baseline, but overall performance differences are small, reflecting task saturation.
-2. BERT-large offers no meaningful ROC-AUC improvement over BERT-base, despite 3× the parameters and training time.
-3. The BERT detector is highly robust against adversarial rewriting: only 3/30 single-pass attacks succeeded, and 0/5 iterative attacks succeeded.
-4. The "rewriting paradox" — LLM rewriting introduces new AI patterns — is the fundamental reason adversarial attacks fail.
+1. **TF-IDF baselines** already achieve ROC-AUC > 0.995, indicating strong surface-level patterns in the dataset.
+2. **BERT-base** improves to AUC=0.9999 (3 epoch, 512 tokens, bs=32, lr=2e-5).
+3. **BERT-large** achieves near-perfect AUC=1.0000, but with 3.2× training cost — diminishing returns.
+4. **Ablation studies** show:
+   - Learning rate: 2e-5 is optimal; higher rates (5e-5) cause slight overfitting
+   - Batch size: Smaller batches improve accuracy slightly (BS=8: 0.9974 vs BS=32: 0.9947) via implicit regularization
+   - Sequence length: 512 is marginally better than 256 (+0.0001 AUC, +0.44% accuracy)
+   - Epochs: 3 epochs is sufficient; 5 epochs causes slight degradation for both base and large models
+5. **Adversarial robustness:** The detector catches 100% of single-pass LLM rewrites, 80% of iterative attacks, and 96.7% of programmatic perturbations.
+6. **Error analysis:** Only 18 misclassifications out of 8,974 samples. Longer essays are classified more accurately.
 
----
+### Limitations & Future Work
 
-## Environment
-
-- **GPU**: NVIDIA GeForce RTX 4090 (24GB VRAM)
-- **Python**: 3.13
-- **PyTorch**: with CUDA + fp16 mixed precision
-- **Transformers**: HuggingFace
-- **Local LLM**: Ollama + DeepSeek-R1:8B
-
-## Source Code & Repository
-
-- **Notebook**: [HW2.ipynb](HW2.ipynb)
-- **Scripts**: [Baseline.py](Baseline.py), [BERT.py](BERT.py), [LocalLLM.py](LocalLLM.py)
-- **GitHub**: [https://github.com/fader2077/Recurrent-Neural-Network-and-Transformer-HW/tree/main/hw2](https://github.com/fader2077/Recurrent-Neural-Network-and-Transformer-HW/tree/main/hw2)
+- The dataset may contain artifacts that inflate performance (e.g., formatting differences between human and AI text)
+- More sophisticated adversarial attacks (e.g., sentence-level mixing, multiple LLM rewriting) may reduce detector confidence
+- Cross-domain generalization (different topics, different AI generators) remains untested

@@ -2,55 +2,55 @@
   "model_used": "deepseek-r1:8b-llama-distill-fp16",
   "detector_model": "saved_model_bert-large-cased",
   "total_attacks": 30,
-  "total_fooled": 3,
-  "overall_fool_rate": 0.1,
+  "total_fooled": 0,
+  "overall_fool_rate": 0.0,
   "strategy_stats": {
     "academic": {
       "total": 10,
-      "fooled": 1,
+      "fooled": 0,
       "deltas": [
-        -0.9999821782112122,
-        -0.9999744892120361,
-        -0.9999829530715942,
-        -0.11584342271089554,
-        -0.9999789595603943,
-        -0.9999741911888123,
-        -0.999982476234436,
-        -0.9999794960021973,
-        -0.9999830722808838,
-        -0.999980628490448
+        -0.999366283416748,
+        -0.9996376633644104,
+        -0.9996969699859619,
+        -0.9994117617607117,
+        -0.9996618032455444,
+        -0.9996852278709412,
+        -0.9996860027313232,
+        -0.9996911883354187,
+        -0.9996845722198486,
+        -0.999687671661377
       ]
     },
     "stylistic": {
       "total": 10,
       "fooled": 0,
       "deltas": [
-        -0.9999095797538757,
-        -0.9999756813049316,
-        -0.9999833106994629,
-        -0.994785487651825,
-        -0.99997478723526,
-        -0.9999834895133972,
-        -0.9999829530715942,
-        -0.9999804496765137,
-        -0.9999793767929077,
-        -0.9999812245368958
+        -0.9996477365493774,
+        -0.9996404051780701,
+        -0.9996789693832397,
+        -0.9996930360794067,
+        -0.99864262342453,
+        -0.9996734261512756,
+        -0.9996895790100098,
+        -0.999695360660553,
+        -0.997032880783081,
+        -0.9996062517166138
       ]
     },
     "paraphrase": {
       "total": 10,
-      "fooled": 2,
+      "fooled": 0,
       "deltas": [
-        -0.9999106526374817,
-        -0.013450547121465206,
-        -0.9999721050262451,
-        -0.2354116141796112,
-        -0.9999783635139465,
-        -0.9999670386314392,
-        -0.9999790191650391,
-        -0.9999786615371704,
-        -0.9999812841415405,
-        -0.9999794363975525
+        -0.9996942281723022,
+        -0.9996917843818665,
+        -0.9996781349182129,
+        -0.9996980428695679,
+        -0.9996767044067383,
+        -0.9996935725212097,
+        -0.9996943473815918,
+        -0.9996965527534485,
+        -0.9996929168701172,
+        -0.9996923208236694
       ]
     }
   },
@@ -58,280 +58,280 @@
     {
       "index": 8927,
       "original_text": "Having Phones at School\n\nMost people would like to have cell phones on there free time but some wouldn't.\n\nI think that having cell phones at school would be good but just not in class.\n\nIf we had cell phones in class then no one would learn anything because they would be texting instead of listing.\n\nIf no one listened then no one would get a good education and not a good job.\n\nMaybe some people from different schools cant have a cell phone and you text them and they get caught trying to text or",
-      "original_ai_prob": 1.2193374459457118e-05,
+      "original_ai_prob": 0.00029491548775695264,
       "rewrites": [
         {
           "strategy": "academic",
-          "rewritten_text": "Having Phones at School: A Student’s Perspective\n\nI’ve always been a bit of a tech enthusiast, so when I hear people debate whether phones should be allowed at school, I have a few thoughts. On one hand, phones can be super helpful for staying connected and keeping up with homework. But on the other hand, I’ve seen firsthand how they can turn into a major distraction. So, I think it’s important to figure out a balance.\n\nLet me start by saying this: if phones were allowed in class, I don’t think ",
-          "ai_prob": 0.9999943971633911,
+          "rewritten_text": "**Having Phones at School**\n\nI mean, who doesn’t want to have their phone nearby when you’re not in class? Phones are super useful for everything—like, you can listen to music, snap pics with your friends, or even study some extra stuff when you have downtime. But here’s the thing: I think phones at school aren’t such a great idea, especially during class time.\n\nIf we had phones in class, I can already imagine how things would go. People would be scrolling through their texts, sending messages, ",
+          "ai_prob": 0.9996612071990967,
           "fooled": 0,
-          "prob_delta": -0.9999821782112122
+          "prob_delta": -0.999366283416748
         },
         {
           "strategy": "stylistic",
-          "rewritten_text": "Having Phones at School: A Casual Take\n\nMost folks would love having their phones during their free time, but some totally wouldn't for sure. I mean, yeah, having phones at school could be a cool idea, but not during class hours. If we had cell phones in class, no one would learn anything because they'd be texting instead of listening. If no one paid attention, they'd end up with no good job and a lousy education.\n\nMaybe some folks from other schools can't have phones, and you try to text them, ",
-          "ai_prob": 0.9999217987060547,
+          "rewritten_text": "Having Phones at School\n\nMost folks, you know, they’d love to have their phones on their free time, but some just can’t handle it. I mean, imagine if phones were allowed in class—next thing you know, everyone’s texting instead of paying attention, right? Without focus, nobody’s gonna get that good education, and guess what? They won’t land a decent job either.\n\nNow, picture this: some kids can’t even get a phone, and then they text someone else who might get caught, you know? Or worse, they’re j",
+          "ai_prob": 0.9999426603317261,
           "fooled": 0,
-          "prob_delta": -0.9999095797538757
+          "prob_delta": -0.9996477365493774
         },
         {
           "strategy": "paraphrase",
-          "rewritten_text": "Having Phones at School\n\nMost people enjoy having cell phones on their free time, though some don’t. I think allowing phones at school could have its benefits, but not during class hours. If phones were allowed in class, students might lose focus, as they’d likely send texts instead of paying attention. This could lead to poor learning outcomes, making it harder for students to secure good jobs later on.\n\nSome schools might have rules against phones, and students who text despite these rules cou",
-          "ai_prob": 0.9999228715896606,
+          "rewritten_text": "**Rewritten Essay: Having Phones at School**\n\nMost people enjoy having cell phones on their spare time, though some prefer not to. I believe that allowing cell phones at school could be beneficial, but it should be restricted during class hours.\n\nIf phones were permitted in class, many would likely use them for texting instead of focusing on their studies. This could hinder learning, as students would lose concentration. Consequently, if phones are prevalent, it might lead to poor academic perfo",
+          "ai_prob": 0.9999891519546509,
           "fooled": 0,
-          "prob_delta": -0.9999106526374817
+          "prob_delta": -0.9996942281723022
         }
       ]
     },
     {
       "index": 7166,
       "original_text": "A thorough search\n\nBy: Generic_Name\n\nIt's becoming too much to bare. Despite the happiness and comfort they gave you all those years ago, they've changed. They're being more critical of you and your other friends, they have been asking you for money frequently without paying back their debt, and are being rude about you not spending time with them, despite them barely spending time with you. Despite you telling them about your concerns, they haven't stopped. You think it's about time you cut tie",
-      "original_ai_prob": 1.838792195485439e-05,
+      "original_ai_prob": 0.00029930032906122506,
       "rewrites": [
         {
           "strategy": "academic",
-          "rewritten_text": "Man, it's been a rough couple of weeks. I've been dealing with this friend who used to be my rock, but now seems to have changed. They've started being super critical of me and my other friends, asking for money non-stop without ever paying back the debt they owe. It's gotten to the point where they've been rude about me not spending time with them, even though I feel like I'm barely getting any from them. It's honestly been a lot to handle, and I'm starting to think I need to cut ties with some",
-          "ai_prob": 0.999992847442627,
+          "rewritten_text": "**A Thorough Search: Navigating Friendships and Seeking Advice**\n\nYou know that feeling when you've known someone since elementary school, and they were your rock, your go-to person. But now, things have changed. They've become more critical, demand money without repaying debts, and act rude about your time together. It's tough because you've known them for so long, but you're starting to feel like cutting ties might be the right move. When you talk to your mom about it, she offers her perspecti",
+          "ai_prob": 0.9999369382858276,
           "fooled": 0,
-          "prob_delta": -0.9999744892120361
+          "prob_delta": -0.9996376633644104
         },
         {
           "strategy": "stylistic",
-          "rewritten_text": "**Cutting Ties: When to Walk Away**\n\nIt’s getting overwhelming out there, right? We’ve all got friends who used to be our rocks, but now it feels like they’ve changed for the worse. They’re not just being a bit harsh; they’re flat-out rude. And let’s not forget the money thing—they’re always asking for cash but never paying back what they owe. It’s enough to make anyone reconsider their friendships. So, what do you do when you’re stuck between wanting to hold onto a long-standing friendship and ",
-          "ai_prob": 0.9999940395355225,
+          "rewritten_text": "A Thorough Search\n\nBy: Generic_Name\n\nMan, it’s like, you know, everything was cool for a while there. You and your crew were tight, hanging out, having fun, no issues. But now, it’s all downhill. They’re coming at you hard, criticizing you left and right, always asking for cash but never paying back what they owe. And don’t even get me started on how they’re acting about you not spending time with them. It’s like, \"Why are you mad? You’re the one who’s never around!\" It’s enough to make you want",
+          "ai_prob": 0.9999396800994873,
           "fooled": 0,
-          "prob_delta": -0.9999756813049316
+          "prob_delta": -0.9996404051780701
         },
         {
           "strategy": "paraphrase",
-          "rewritten_text": "**A Thorough Search**\n\nBy: Someone_else\n\n这已经变得太难以忍受了。尽管这些人曾经给你带来过那么多年来的幸福和舒适，但他们已经发生了变化。他们对你和你的其他朋友越来越苛刻，经常索要你交钱却不还债，并对你不花时间陪伴他们表示不满，尽管他们自己很少花时间和你相处。尽管你已经向他们表达过你的担忧，他们仍没有停止。你觉得是时候与你从小学就认识的 closest friend 施斥了。您问母亲该怎么办，她从外部给出她的看法。你理解她的想法，但她的回答并没有让你感到满意。你觉得应该再问 someone else，但这不是因为你不尊重母亲的意见，只是想得到另一条建议。为什么会这样？为什么我们会在得到一条满意的回答后，仍有必要寻求更多的建议？原因有三个。\n\n首先，在做决定之前，你需要考虑更多的选项。这样可以让你得到更多元化和不同的观点。此外，有些人可能更有资格提供你所需的帮助和建议。\n\n当你向更多的人请教时，做出决定会变得更加容易，因为你可以考虑更多的观点。这个说法可能一开始听起来有些矛盾。你可能会问：“更多的人、更多的观点和更多的主张，难道不会让你更难理解你的情",
-          "ai_prob": 0.013468935154378414,
-          "fooled": 1,
-          "prob_delta": -0.013450547121465206
+          "rewritten_text": "A Heavy Burden\n\nBy: Anonymous\n\nIt feels like a heavy weight to carry. Once a source of joy and comfort, things have changed. They’ve become more critical, often demanding money without repaying debts, and are rude about your lack of time together, even as they spend little of theirs. Despite your concerns, they haven’t stopped. You’re considering cutting ties with a childhood friend, a decision that’s heavy on your heart. You’ve asked your mom for advice, valuing her perspective but feeling it d",
+          "ai_prob": 0.9999910593032837,
+          "fooled": 0,
+          "prob_delta": -0.9996917843818665
         }
       ]
     },
     {
       "index": 1744,
       "original_text": "Dear Principal,\n\nI don't think that making students that are having C averages not compete in sports is not very fair. You might say \"why\"?\n\nWell in my opinion i think they should still be aloud to.\n\nBecause i have suffered with C s and have been is basketball and track.\n\nI mean we try hard enough just to make a C s! if you did do that i don't think you would have many kids in athletes. Why? Because its hard to just pass with a B or a A.\n\nSo we try to make a C that way we still pass.\n\nOkay so wh",
-      "original_ai_prob": 1.1458009794296231e-05,
+      "original_ai_prob": 0.00029277210705913603,
       "rewrites": [
         {
           "strategy": "academic",
-          "rewritten_text": "**Dear Principal,**\n\nHi Principal,\n\nI hope you're doing well. I wanted to talk to you about a rule that's been bothering me. I don't think it's fair that students who get C averages can't play in sports. It seems like a tough call to me because, well, I've been in that situation before.\n\nWhen I was in school, getting Cs felt like a struggle. I remember putting in the effort, staying after class, and still not meeting the standards. But despite that, I was part of the basketball and track teams. ",
-          "ai_prob": 0.9999943971633911,
+          "rewritten_text": "**Dear Principal,**\n\nI'm writing to share my thoughts on the policy of requiring students with C averages to sit out from sports competitions. To be honest, I don't think it's fair. Let me explain why.\n\nI've struggled with C's in school, and I know how much effort it takes to pass. If we have to compete in sports while juggling schoolwork, it feels like a lot to handle. I mean, getting a C isn't easy; it's not like we're just coasting. We're putting in the work, and if we can't participate in sp",
+          "ai_prob": 0.9999897480010986,
           "fooled": 0,
-          "prob_delta": -0.9999829530715942
+          "prob_delta": -0.9996969699859619
         },
         {
           "strategy": "stylistic",
-          "rewritten_text": "Dear Principal,\n\nI don’t think it’s fair that kids who get C’s can’t play sports. Like, why not? In my opinion, they should still be allowed to. I mean, I’ve dealt with C’s myself, and I’ve been on the basketball and track teams. We work our butts off just to get those C’s, right? If you take that away, I don’t think many kids would wanna be athletes. Why? Because it’s super hard to just scrape by with a B or an A. So, we try to push through and make those C’s so we can still play.\n\nNow, imagine",
-          "ai_prob": 0.9999947547912598,
+          "rewritten_text": "Hey Principal,\n\nI just wanted to chat about this rule where kids with C's can't play sports. Like, I mean, I get it, but I don't think that's fair. We work our butts off to get those C's, right? If you take that away, you're basically saying athletes can't even try hard in schoolwork. It's tough enough to get B's or A's as it is.\n\nSo imagine this: the best player on the team, RELATIVE_NAME, he's the backbone of the football team, playing quarterback. He's been cramming for this big math test lik",
+          "ai_prob": 0.9999717473983765,
           "fooled": 0,
-          "prob_delta": -0.9999833106994629
+          "prob_delta": -0.9996789693832397
         },
         {
           "strategy": "paraphrase",
-          "rewritten_text": "Dear [Principal's Name],\n\nI believe it's unfair to prevent students with C averages from competing in sports. You might ask, \"Why?\" \n\nIn my opinion, they should still be permitted to participate. I understand this firsthand since I've struggled with C's while excelling in sports like basketball and track. We put in a lot of effort just to achieve C's, and if the rule was stricter, fewer students might participate in athletics because it's challenging to earn a B or A.\n\nConsider this: if the top ",
-          "ai_prob": 0.999983549118042,
+          "rewritten_text": "Dear Principal,\n\nI believe it is unfair to prevent students who earn C averages from participating in sports. You might wonder, \"Why?\" \n\nIn my opinion, they should still be allowed to compete. I have firsthand experience with C grades while playing basketball and track. Earning Cs is challenging enough, and if you apply that kind of pressure, you might not see many athletes in the ranks. Why? Because it’s tough to settle for just a B or an A. We push ourselves to achieve C's, so we can still pas",
+          "ai_prob": 0.9999709129333496,
           "fooled": 0,
-          "prob_delta": -0.9999721050262451
+          "prob_delta": -0.9996781349182129
         }
       ]
     },
     {
       "index": 1448,
       "original_text": "The author claim is that NASA is working on a way to visit venus despite how dangerous it is. They are planning on how they are going to visit Venus wihtout being harmed. In the author claim the reason they thought of \"The challenge of Exploring Venus\" is to show that even though it could be dangerous to go to Venus but they imagination of Venus makes them want to visit it discover things. The author claim could also be that nothing is impossible because reguardless of how dangerous Venus is Nas",
-      "original_ai_prob": 1.1325558261887636e-05,
+      "original_ai_prob": 0.00029334655846469104,
       "rewrites": [
         {
           "strategy": "academic",
-          "rewritten_text": "The essay you provided is already written in a style that mirrors how a student might present their thoughts, with some grammatical imperfections and conversational tone. However, to make it sound even more like a real student, I can tweak it slightly by adding personal opinions, varying sentence lengths, and incorporating minor grammatical errors. Here's a rewritten version:\n\n---\n\nThe author claims that NASA is working on a way to visit Venus despite its dangers. They want to figure out how to ",
-          "ai_prob": 0.11585474759340286,
-          "fooled": 1,
-          "prob_delta": -0.11584342271089554
+          "rewritten_text": "The essay you provided reads like it might have been written by someone trying to mimic a student's style, but it still feels a bit too polished and formal. To make it sound more like a real student wrote it, I’d add a bit of personal opinion, vary the sentence lengths, and include some minor grammatical imperfections. Here's a rewritten version with those qualities:\n\n---\n\nThe author is talking about how NASA is planning to visit Venus, even though it’s super dangerous. They want to figure out a",
+          "ai_prob": 0.9997051358222961,
+          "fooled": 0,
+          "prob_delta": -0.9994117617607117
         },
         {
           "strategy": "stylistic",
-          "rewritten_text": "The author is claiming that NASA is working on a way to visit Venus, even though it’s super dangerous. They’re figuring out how to go there without getting hurt. The main reason they mention \"The Challenge of Exploring Venus\" is to show that, yeah, Venus might be risky, but the thought of exploring it is just so appealing because of all the cool stuff you could discover there. Basically, they’re saying that nothing is impossible because, no matter how dangerous Venus is, NASA still wants to give",
-          "ai_prob": 0.9947968125343323,
+          "rewritten_text": "The author is saying that NASA is figuring out how to visit Venus even though it's super dangerous. They want to explore Venus without getting hurt, and the main idea is that nothing is impossible. Let me break this down for you because it's pretty cool but also a bit wild.\n\nSo, first off, NASA is planning a trip to Venus. They’re thinking about how to do this safely. From what I gather, they’re not just going to float down because of the thick atmosphere. Instead, they’re planning to hover abov",
+          "ai_prob": 0.9999864101409912,
           "fooled": 0,
-          "prob_delta": -0.994785487651825
+          "prob_delta": -0.9996930360794067
         },
         {
           "strategy": "paraphrase",
-          "rewritten_text": "The author argues that NASA is developing a way to visit Venus despite its potential dangers. They aim to find a method to explore the planet safely, driven by the allure of discovering new things. The idea of \"The Challenge of Exploring Venus\" suggests that, despite the risks, the fascination with Venus inspires them to take action. This stance also reflects the belief that nothing is impossible, as NASA remains committed to exploring Venus regardless of its challenges.\n\nIn paragraph 6, the tex",
-          "ai_prob": 0.23542293906211853,
-          "fooled": 1,
-          "prob_delta": -0.2354116141796112
+          "rewritten_text": "The essay suggests that NASA is developing a strategy to visit Venus despite the potential dangers. The goal of their mission is to explore Venus safely, driven by curiosity and the belief that even challenging tasks are achievable. The text highlights NASA's determination to overcome obstacles, as they aim to visit Venus without risking harm to their teams. This aligns with the broader theme that nothing is impossible, as they remain committed to pushing the boundaries of exploration.\n\nIn parag",
+          "ai_prob": 0.9999914169311523,
+          "fooled": 0,
+          "prob_delta": -0.9996980428695679
         }
       ]
     },
     {
       "index": 5258,
       "original_text": "What would you think if you heard \"Your principal has decided that all students must participate in at least one extracurricular activity?\" I agree with this prompt because kids wont get in trouble as much Also, Some kids dont have many friends, It can also be a good life trait.\n\nFirstly, Kids make it look like they love being in trouble. If we had an after school activity they liked to do, They would have a reason to stay out of trouble. Generic_Name, was always in trouble in school. Until, The",
-      "original_ai_prob": 1.4632709280704148e-05,
+      "original_ai_prob": 0.00030576082644984126,
       "rewrites": [
         {
           "strategy": "academic",
-          "rewritten_text": "**The Principal's Extracurricular Decision: A Positive Move**\n\nImagine hearing that your principal has mandated all students to participate in at least one extracurricular activity. My initial reaction? A heartfelt thumbs-up! I believe this is a brilliant move, especially considering how it can steer students away from trouble and foster valuable life skills.\n\nTake my friend, Generic_Name, for instance. He was always entangled in mischief until the varsity football coach took him under their win",
-          "ai_prob": 0.9999935626983643,
+          "rewritten_text": "**The Importance of Extracurricular Activities: A Student's Perspective**\n\nI’m all for the principal’s decision that every student must participate in at least one extracurricular activity. I’ve seen firsthand how these activities can transform a student’s life, and I’m excited to share my thoughts on why this is a great idea.\n\nFirst off, I’ve always been amazed at how extracurricular activities can help kids avoid trouble. I remember a classmate of mine, let’s call him Generic_Name, who was alw",
+          "ai_prob": 0.9999675750732422,
           "fooled": 0,
-          "prob_delta": -0.9999789595603943
+          "prob_delta": -0.9996618032455444
         },
         {
           "strategy": "stylistic",
-          "rewritten_text": "Sure! Here's a more human-sounding version of your essay:\n\n---\n\nWhat would you think if you heard, \"Your principal has decided that all students must participate in at least one extracurricular activity?\" I mean, I totally get it. Kids are gonna be way less likely to get into trouble if they’ve got something fun to distract them after school. Plus, some kids just don’t have it easy when it comes to making friends. Extracurricular activities could be a game-changer for them.\n\nLet’s take my friend",
-          "ai_prob": 0.99998939037323,
+          "rewritten_text": "You know what? If I heard that the principal was making all students join at least one extracurricular activity, I’d be all for it. Why? Well, let’s see. First off, kids these days seem to love getting into trouble. If they had something fun to do after school, like a club or a sport they actually enjoy, they’d have no reason to cause a ruckus. Take my friend, Generic Name—always had a knack for trouble. But when he joined the football team, he totally turned his life around. Now he’s making mov",
+          "ai_prob": 0.9989483952522278,
           "fooled": 0,
-          "prob_delta": -0.99997478723526
+          "prob_delta": -0.99864262342453
         },
         {
           "strategy": "paraphrase",
-          "rewritten_text": "The principal has decided that all students must participate in at least one after-school activity. I completely agree with this idea because it can have several positive effects on students.\n\nOne reason this makes sense is that it helps reduce misbehavior. When kids are involved in activities they enjoy, they have less time for trouble. Take Generic_Name, for instance. He was always getting into trouble at school until the football coach recruited him for the team. This activity gave him a reas",
-          "ai_prob": 0.9999929666519165,
+          "rewritten_text": "What would you think if you heard, \"Your school administrator has decided that all students must participate in at least one extracurricular activity?\" I agree with this idea for a few reasons. First, it can help kids avoid getting into trouble. Also, some kids have a hard time making friends, and this could be a great way to build connections and develop skills that might benefit them in the future.\n\nFor instance, kids often seem to enjoy getting into trouble. If they had an after-school activi",
+          "ai_prob": 0.999982476234436,
           "fooled": 0,
-          "prob_delta": -0.9999783635139465
+          "prob_delta": -0.9996767044067383
         }
       ]
     },
     {
       "index": 4280,
       "original_text": "Dear Senador\n\nI personally think that the electoral college is unfair, outdated, and irrational. The people around count of having a better life in the country but not giving they what they want will bring big problems the nation. Its overruled to decleared the candidate who receives the most popular votes the winner you have to be fair. It doesn't matter if you have more popular votes than others you have to win by having regular votes. The Electoral Colleges metod is not being democratic at al",
-      "original_ai_prob": 1.1117642316094134e-05,
+      "original_ai_prob": 0.00029785424703732133,
       "rewrites": [
         {
           "strategy": "academic",
-          "rewritten_text": "**Dear Senador,**\n\nI hope this letter finds you well. I wanted to share my thoughts on a topic that has been on my mind for some time: the Electoral College. I strongly believe that the Electoral College system in our country is unfair, outdated, and doesn’t truly reflect the will of the people. It’s frustrating to see that even when a candidate wins the popular vote, the Electoral College can override that and declare someone else the winner. This system feels anything but democratic, and it br",
-          "ai_prob": 0.9999853372573853,
+          "rewritten_text": "**Dear Senator,**\n\nI’ve always thought the electoral college is flawed. It’s not fair, outdated, or rational—sometimes it feels like it’s from another era. Why should the president of the United States have to win the popular vote to represent everyone? If the people want a better life, but the system gives them a leader who doesn’t reflect their choices, that’s a problem. It’s like telling people, “You want change, but too bad, you don’t get what you want because of this old system.” That’s fru",
+          "ai_prob": 0.9999830722808838,
           "fooled": 0,
-          "prob_delta": -0.9999741911888123
+          "prob_delta": -0.9996852278709412
         },
         {
           "strategy": "stylistic",
-          "rewritten_text": "Here's a more human-sounding rewrite of your essay:\n\n---\n\nDear Senator,\n\nI mean, I’ve always been against the electoral college. It just doesn’t make sense to me. You know, people are struggling to get by in this country, and when they vote, they should feel like their voices actually count. But the way it works now, it’s like their votes don’t matter if someone wins the electoral college but not the popular vote. It’s wild, right? It’s not fair. So, if you get more votes than someone else, you ",
-          "ai_prob": 0.9999946355819702,
+          "rewritten_text": "Dear Senator,\n\nI’ve always believed the electoral college is unfair, outdated, and just plain irrational. People are working their tails off to make life better for everyone, but they’re not getting the leadership they deserve, and that’s a recipe for big problems. It’s supposed to declare the winner based on popular vote, right? I mean, that’s the whole point, isn’t it? But no, you have to win by having the most regular votes, not just the most popular ones. It’s like, “Trust the people’s choic",
+          "ai_prob": 0.9999712705612183,
           "fooled": 0,
-          "prob_delta": -0.9999834895133972
+          "prob_delta": -0.9996734261512756
         },
         {
           "strategy": "paraphrase",
-          "rewritten_text": "Dear Senator,\n\nI believe the electoral college is an outdated system that doesn't make sense anymore. People are struggling to improve their lives but aren't getting the change they need, which could lead to serious issues for the country. It's frustrating that the candidate with the most popular votes isn't always declared the winner. You have to win by getting the majority of electoral votes, not just the popular vote.\n\nThe way the Electoral College works isn't democratic in today's context. I",
-          "ai_prob": 0.9999781847000122,
+          "rewritten_text": "Dear Senator,\n\nAs far as I'm concerned, the electoral college system is undemocratic, outdated, and unjust. When a nation strives to improve the quality of life for its people, yet fails to provide them with the representation they deserve, it creates significant issues for the country. This system disregards the popular vote, favoring instead a method that often declares a winner without the support of a majority. It's not fair that a candidate can win without the people's endorsement, undermin",
+          "ai_prob": 0.9999914169311523,
           "fooled": 0,
-          "prob_delta": -0.9999670386314392
+          "prob_delta": -0.9996935725212097
         }
       ]
     },
     {
       "index": 7330,
       "original_text": "The electoral college, a mistake? Many Americans are unsatisfied with the electoral college and the system it follows. The electoral college has disappointed millions of Americans of any social class. According to The Indefensible Electoral College: Why even the bestlaid defenses of the system are wrong , by Bradford Plummer, \" Under the electoral college system, voters vote not for the president, but for a slate of the electors, who in turn elect the president.\" America should abolish the elect",
-      "original_ai_prob": 1.1683706361509394e-05,
+      "original_ai_prob": 0.0002937097742687911,
       "rewrites": [
         {
           "strategy": "academic",
-          "rewritten_text": "The electoral college—yeah, I think it’s a mess. I’ve heard so many people, like, really upset about it, no matter where you go. It’s crazy how a system that’s supposed to represent us so well ends up doing the opposite. From what I understand, the electoral college isn’t fair because it’s not based on the popular vote. You know, those 538 electors don’t really reflect what most Americans want. It’s like, you’re not even voting for the president directly—you’re voting for people who will then vo",
-          "ai_prob": 0.999994158744812,
+          "rewritten_text": "The Electoral College: A Frustration for Americans\n\nThe Electoral College is a system that leaves many Americans feeling disconnected from the political process. I’ve always been puzzled by how a system designed to represent the people can feel so disconnected from their actual votes. Let’s unpack why this system feels so unfair and why it’s time to move away from it.\n\nOne major issue is how candidates ignore non-swing states. I remember in 2000, the candidates didn’t even visit some states, and",
+          "ai_prob": 0.9999797344207764,
           "fooled": 0,
-          "prob_delta": -0.999982476234436
+          "prob_delta": -0.9996860027313232
         },
         {
           "strategy": "stylistic",
-          "rewritten_text": "Now, the electoral college? Man, it's been a mess. Millions of folks are totally unsatisfied with this system, no matter where you look. It's treated people bad, regardless of where they're from. I mean, it's just not fair. According to some experts, like Bradford Plummer, the whole setup is flawed because voters don't even get to choose the president directly. You know, it's like voting for a slate of people who then pick the leader. It's just weird.\n\nAnd let's not forget the 2000 election. Man",
-          "ai_prob": 0.9999946355819702,
+          "rewritten_text": "Is the electoral college even a good idea? Let's talk about this. I mean, it's been around for ages, but does it really make sense? I've heard a lot of people say it's a mess, and honestly, I agree. It's been making Americans unhappy for years, no matter where you look. Whether you're rich or poor, it seems like this system just doesn't cut it.\n\nSo, how does it work? Well, from what I understand, you don't vote directly for the president. Instead, you vote for a bunch of electors who then pick t",
+          "ai_prob": 0.9999833106994629,
           "fooled": 0,
-          "prob_delta": -0.9999829530715942
+          "prob_delta": -0.9996895790100098
         },
         {
           "strategy": "paraphrase",
-          "rewritten_text": "The electoral college—could it be a flawed system? Many people are dissatisfied with the electoral college, a system that has let down millions of Americans regardless of their background. As noted by Bradford Plummer, voters don't directly choose the president; instead, they elect representatives who then select the president. This system has frustrated 60% of Americans and led to the election of leaders they didn't support.\n\nTake the 2000 election as an example. Candidates didn't campaign in 1",
-          "ai_prob": 0.999990701675415,
+          "rewritten_text": "The Electoral College—often criticized for its flaws—is disliked by many Americans. It’s easy to see why: the system consistently frustrates millions, regardless of their background. In *The Indefensible Electoral College: Why Even the Best-Laid Defenses Are Wrong*, Bradford Plummer explains that under this system, voters aren’t directly choosing the president—they’re selecting a slate of electors who then elect the president. This setup has left 60% of Americans feeling disconnected from the pr",
+          "ai_prob": 0.9999880790710449,
           "fooled": 0,
-          "prob_delta": -0.9999790191650391
+          "prob_delta": -0.9996943473815918
         }
       ]
     },
     {
       "index": 259,
       "original_text": "I think this technology might be helpful for students, but it could also be a bad thing. It could be good for students becase it would show how they really feel about the work so the teacher would know that their confused, bored, or angry. In the paragraph 3 it talks about what it is capible of in facial recognizion and how it could chage a lesson to better suit a student just by their facial expression. I also believe it could be a bad thing. For example would you like someone to know what you'",
-      "original_ai_prob": 1.4324629773909692e-05,
+      "original_ai_prob": 0.00029474348411895335,
       "rewrites": [
         {
           "strategy": "academic",
-          "rewritten_text": "The technology in question could be really helpful for students, but it also might have some negative aspects. I think it's cool because it could show teachers how students truly feel about their work, letting them know if they're confused, bored, or even angry. Imagine if a teacher could tell from a student's expression that they're struggling. That could help the teacher adjust the lesson to better suit the student's needs. \n\nBut I'm worried too. Would you want people to know exactly what you'",
-          "ai_prob": 0.9999938011169434,
+          "rewritten_text": "I think this technology might be helpful for students, but it could also have some downsides. On the positive side, I can see how it might be useful because it could show teachers how students really feel about their work. For example, if a student is confused or bored, the teacher might notice through their facial expressions and adjust the lesson accordingly. That’s something I think could make learning smoother for everyone.  \n\nBut then again, I’m not so sure about the negative aspects. Imagi",
+          "ai_prob": 0.999985933303833,
           "fooled": 0,
-          "prob_delta": -0.9999794960021973
+          "prob_delta": -0.9996911883354187
         },
         {
           "strategy": "stylistic",
-          "rewritten_text": "Hey man, let me tell you something. I'm totally into this tech stuff, and I'm trying to figure out how it could affect students, both good and bad. So, imagine you're a teacher using this tech to understand how your students really feel about their work. It could show if they're confused, bored, or even angry, right? That's pretty cool because it helps teachers adjust their lessons on the fly, making sure each student is getting what they need.\n\nBut hold on, it's not all sunshine and rainbows. Y",
-          "ai_prob": 0.9999947547912598,
+          "rewritten_text": "I think this tech could be super useful for students, but it also has its downsides. On one hand, it might help teachers understand how students really feel about their work, like if they're confused, bored, or upset. Imagine seeing a student look frustrated during a tough problem— the teacher could adjust the lesson on the spot to make it easier. \n\nBut then again, it's not all good. Think about it: would you want everyone to know exactly what you're thinking just by your face? Like, if you're t",
+          "ai_prob": 0.9999901056289673,
           "fooled": 0,
-          "prob_delta": -0.9999804496765137
+          "prob_delta": -0.999695360660553
         },
         {
           "strategy": "paraphrase",
-          "rewritten_text": "Technology can be both a helpful and harmful tool for students. On one hand, it might offer benefits by revealing how students truly feel about their work, allowing teachers to understand if they're confused, bored, or upset. For instance, facial recognition technology could be used to adapt lessons in real-time based on a student's expression, making learning more effective. However, this same technology could also have drawbacks. Imagine if others knew exactly what you were thinking just by yo",
-          "ai_prob": 0.9999929666519165,
+          "rewritten_text": "I believe this technology could be both beneficial and problematic for students. On the positive side, it might be advantageous for students since it would reveal their true feelings towards the work, letting the teacher know if they're confused, bored, or angry. The text explores the capabilities of facial recognition technology and how it might adjust a lesson to better meet a student's needs based solely on their facial expressions.\n\nHowever, it also presents some concerns. For instance, imag",
+          "ai_prob": 0.9999912977218628,
           "fooled": 0,
-          "prob_delta": -0.9999786615371704
+          "prob_delta": -0.9996965527534485
         }
       ]
     },
     {
       "index": 48,
       "original_text": "Have you ever walked outside and taken a deep breath of fresh air but then you realise that the air your breathing isnt alll that fresh? Thats because air pollution has greatly increased in recent years and the number one reason for air pollution is the exhaust from your cars. Yes, the amount of cars in the world has increased dramtically in the last 10 years. While this is good that the luxury of owning an auto mobile it has also put a burden on the earth and future generations. while cars have",
-      "original_ai_prob": 1.1564064152480569e-05,
+      "original_ai_prob": 0.0002983578306157142,
       "rewrites": [
         {
           "strategy": "academic",
-          "rewritten_text": "**The Air Quality Dilemma: A Call for Change**\n\nI mean, it's kind of sad when you think about it—breathing in fresh air feels great, but then you realize it's not as fresh as it should be. Air pollution is a growing issue, and car exhaust is one of the main culprits. Over the past decade, the number of cars on the road has skyrocketed. While this is convenient, it's also taking a toll on our planet. I can't help but feel like we're trading immediate comfort for a future with dirtier skies.\n\nThe ",
-          "ai_prob": 0.9999946355819702,
+          "rewritten_text": "**The Hidden Cost of Convenience: A Call for Reduced Car Usage**\n\nHave you ever taken a stroll and noticed the air feels heavier, as if the fresh breath of nature is slowly being suffocated? That’s the reality we face today, thanks to the silent polluters zooming by us—our cars. While they offer undeniable convenience, their toll on our planet is becoming increasingly clear. Over the past decade, the number of vehicles on the road has skyrocketed, and this surge in car usage has left a lasting m",
+          "ai_prob": 0.9999829530715942,
           "fooled": 0,
-          "prob_delta": -0.9999830722808838
+          "prob_delta": -0.9996845722198486
         },
         {
           "strategy": "stylistic",
-          "rewritten_text": "Have you ever taken a deep breath outside and realized it wasn’t as fresh as it should be? You’ve probably noticed that the air feels a little off, like something’s not quite right. That’s because air pollution has gotten a lot worse over the past few years—and the main culprit? It’s not just the factories or the smokestacks you see on the horizon. It’s your car. Yeah, that’s right. The exhaust from all these vehicles is a huge part of the problem. And man, have we been driving more lately? In t",
-          "ai_prob": 0.9999909400939941,
+          "rewritten_text": "**A Breath of Fresh Air: Biking and Walking for a Cleaner World**\n\nYou've probably Enjoyed the Fresh Air on a Walk, but Ever Wondered Why It's Not as Pure as It Seems? That's Because Air Pollution is on the Rise, and Car Exhaust is the Main Culprit. Sure, Having a Car is Luxurious, but It's Also Taking a Toll on Our Planet. While Cars Make Daily Life Easier, the Environmental Cost is Too High. We Can't Ignore This Anymore.\n\nInstead of Reaching for the Keys Every Time You Leave the House, What If",
+          "ai_prob": 0.9973312616348267,
           "fooled": 0,
-          "prob_delta": -0.9999793767929077
+          "prob_delta": -0.997032880783081
         },
         {
           "strategy": "paraphrase",
-          "rewritten_text": "Have you ever noticed how the fresh air you breathe while walking feels less than refreshing? That’s because air pollution has become a growing concern in recent years, and the primary culprit? Car emissions. While the rise in vehicle ownership has brought undeniable convenience, it’s also placing a heavy burden on the planet and future generations. On one hand, cars make daily life easier, but on the other, the pollution they produce has reached dangerous levels. Instead of relying on cars for ",
-          "ai_prob": 0.999992847442627,
+          "rewritten_text": "Have you ever taken a deep breath of air only to realize it’s not as fresh as it seems? That’s because air pollution has surged in recent years, primarily due to car emissions. While the rise in car ownership has brought convenience, it also poses a significant threat to our planet and future generations. Though cars make daily life easier, the environmental impact has become overwhelming, necessitating urgent action.\n\nInstead of relying on cars for every trip, consider biking or walking. Even i",
+          "ai_prob": 0.9999912977218628,
           "fooled": 0,
-          "prob_delta": -0.9999812841415405
+          "prob_delta": -0.9996929168701172
         }
       ]
     },
     {
       "index": 6694,
       "original_text": "Students should participate in extracurricular activities\n\nI believe students should participate in extracurricular activities because one it keep them out of trouble, two some of the activities keep them healthy, and three they are fun.\n\nOne reason students should participate in extracurricular activities is because they keep most students out of trouble. For example, it can keep the students occupied so they don't have to be on the streets. Another example is sometimes these activities can hel",
-      "original_ai_prob": 1.3761177797277924e-05,
+      "original_ai_prob": 0.00029910888406448066,
       "rewrites": [
         {
           "strategy": "academic",
-          "rewritten_text": "**The Importance of Extracurricular Activities**\n\nI think extracurricular activities are super important for students. They keep us out of trouble, help us stay healthy, and are just plain fun! Let me explain why.\n\nFirst off, these activities keep us busy and out of trouble. Instead of hanging around the streets, we're engaged in something productive. I remember when I was in high school, joining the soccer team kept me occupied and away from negative influences. It was like having a positive ou",
-          "ai_prob": 0.9999943971633911,
+          "rewritten_text": "From what I’ve noticed, extracurricular activities play a huge role in a student’s life, and I strongly believe everyone should get involved. These activities aren’t just about having fun; they can really make a big difference in keeping students out of trouble. I remember when I first joined the basketball team, it kept me so busy after school that I didn’t have time to get into any trouble. It was cool how the team became like a second family, and we always had something to do together instead",
+          "ai_prob": 0.9999867677688599,
           "fooled": 0,
-          "prob_delta": -0.999980628490448
+          "prob_delta": -0.999687671661377
         },
         {
           "strategy": "stylistic",
-          "rewritten_text": "Sure, here's a more conversational and human-sounding version of your essay:\n\n---\n\nStudents Should Get Into Extracurricular Activities\n\nI think kids need to get involved in extracurricular activities, y’know what I mean? Like, it keeps ‘em outta trouble, helps ‘em stay healthy, and, let’s face it, they’re just fun as hell.\n\nFirst off, these activities keep students out of trouble. You ever notice how kids who are always at home or hanging around the streets end up in scrapes? Extracurriculars gi",
-          "ai_prob": 0.9999949932098389,
+          "rewritten_text": "Now, I'm all for extracurricular activities, you know? They're like the cherry on top of the school experience. Let's dive into why I think every student should give 'em a shot.\n\nFirst off, these activities keep kids out of trouble. You know how after school, some kids just roam the streets looking for something to do? That's where trouble often starts. But when they're part of a team or a group, like playing football or joining a club, they're too busy having fun to get into mischief. Plus, it ",
+          "ai_prob": 0.9999053478240967,
           "fooled": 0,
-          "prob_delta": -0.9999812245368958
+          "prob_delta": -0.9996062517166138
         },
         {
           "strategy": "paraphrase",
-          "rewritten_text": "Students should definitely get involved in extracurricular activities. I strongly believe that participating in after-school activities can have a positive impact on students in multiple ways. First, these activities can help keep students occupied and out of trouble. By providing structured, engaging events, they reduce the likelihood of kids getting into unwanted situations. Additionally, many activities can help students relax and manage stress, further minimizing behavior issues.\n\nSecondly, ",
-          "ai_prob": 0.9999932050704956,
+          "rewritten_text": "**The Benefits of Extracurricular Activities for Students**\n\nStudents should definitely participate in extracurricular activities. These activities not only help students stay out of trouble but also contribute to their overall well-being and provide a fun, engaging way to develop new skills.\n\nOne key advantage of extracurricular activities is that they keep students occupied and reduce the likelihood of getting into trouble. By offering a structured, positive environment, these activities help ",
+          "ai_prob": 0.9999914169311523,
           "fooled": 0,
-          "prob_delta": -0.9999794363975525
+          "prob_delta": -0.9996923208236694
         }
       ]
     }
@@ -339,137 +339,125 @@
   "iterative_attack": {
     "num_samples": 5,
     "max_iterations": 3,
-    "fooled": 0,
+    "fooled": 1,
     "results": [
       {
         "essay_index": 8927,
-        "original_ai_prob": 1.2193374459457118e-05,
+        "original_ai_prob": 0.00029491548775695264,
         "iterations": [
           {
             "iteration": 1,
-            "ai_prob": 0.9999921321868896,
+            "ai_prob": 0.999984622001648,
             "fooled": false,
-            "text_preview": "I mean, who doesn’t love having their phone handy? It’s basically your go-to for everything—communication, entertainment, and, let’s be honest, a distraction from homework. But when it comes to school"
+            "text_preview": "**Should Phones Be Allowed in School?**\n\nYou know, I’ve been thinking about this whole phone thing at school. It's like, on one hand, phones are super cool and can make your day way more fun, especial"
           },
           {
             "iteration": 2,
-            "ai_prob": 0.9999895095825195,
+            "ai_prob": 0.9999734163284302,
             "fooled": false,
-            "text_preview": "**The Great Phone Debate: To Bring or Not to Bring**\n\nYou know, phones are like the Swiss Army knife of today's world—useful for everything from a quick chat to a last-minute homework reminder. But wh"
+            "text_preview": "**Should Phones Be Allowed in School?**\n\nYou know, phones are such a big part of our lives these days, aren't they? I mean, when I was in school, it felt like everyone had a phone glued to their hands"
           },
           {
             "iteration": 3,
-            "ai_prob": 0.9999872446060181,
+            "ai_prob": 0.9999805688858032,
             "fooled": false,
-            "text_preview": "**The Great Phone Debate: To Bring or Not to Bring**\n\nYou know, phones are like the Swiss Army knife of today's world—super useful for everything from a quick chat to a last-minute homework reminder. "
+            "text_preview": "**Should Phones Be Allowed in School?**\n\nMan, phones are everywhere now, aren't they? I mean, when I was in school, it felt like everyone had a phone stuck to their ears. But now, when the bell rings,"
           }
         ],
         "final_fooled": false,
-        "final_ai_prob": 0.9999872446060181
+        "final_ai_prob": 0.9999805688858032
       },
       {
         "essay_index": 7166,
-        "original_ai_prob": 1.838792195485439e-05,
+        "original_ai_prob": 0.00029930032906122506,
         "iterations": [
           {
             "iteration": 1,
-            "ai_prob": 0.9999929666519165,
+            "ai_prob": 0.9999834299087524,
             "fooled": false,
-            "text_preview": "**A Friend's Changing Dynamics: The Struggle to Cut Ties**\n\nIt's been a rough few months. I thought I had a friend I could rely on, someone who always made me laugh and was there for me through thick "
+            "text_preview": "**A Thorough Search: The Importance of Seeking Multiple Perspectives**\n\nI've been thinking a lot about this situation with my friend. It's been a rough time, and I'm trying to figure out what's best f"
           },
           {
             "iteration": 2,
-            "ai_prob": 0.999993085861206,
+            "ai_prob": 0.999984622001648,
             "fooled": false,
-            "text_preview": "**A Friend's Changing Dynamics: The Struggle to Cut Ties**\n\nMan, these past few months have been a rollercoaster. I thought I had a friend I could rely on, someone who always made me laugh and was the"
+            "text_preview": "**When Decisions Get Tough: Why I Listen to More Than One Person**\n\nI've been thinking a lot about my friend's recent issue. It's been a tough time, and I'm trying to figure out what's best for her. I"
           },
           {
             "iteration": 3,
-            "ai_prob": 0.9999936819076538,
+            "ai_prob": 0.9999827146530151,
             "fooled": false,
-            "text_preview": "I’ve been going back and forth on this decision, trying to figure out whether cutting ties with this friend is the right move. It’s been a long time since we started hanging out, and I thought we had "
+            "text_preview": "**When Decisions Get Tough: Why I Listen to More Than One Person**\n\nYou know how sometimes you're trying to help a friend with a big decision, and you're like, \"What should they do?\" Yeah, that's been"
           }
         ],
         "final_fooled": false,
-        "final_ai_prob": 0.9999936819076538
+        "final_ai_prob": 0.9999827146530151
       },
       {
         "essay_index": 1744,
-        "original_ai_prob": 1.1458009794296231e-05,
+        "original_ai_prob": 0.00029277210705913603,
         "iterations": [
           {
             "iteration": 1,
-            "ai_prob": 0.9999946355819702,
+            "ai_prob": 0.9999773502349854,
             "fooled": false,
-            "text_preview": "**To Principal:**\n\nHey, so I just wanted to talk about this new rule where students with C averages can't play sports. I think it's not fair, and I feel strongly about this. Let me explain why.\n\nI've "
+            "text_preview": "Hey, Principal,  \n\nI just wanted to talk about this rule where students with C averages can’t play sports. I think it’s not fair because it feels like they’re being punished for something that’s alrea"
           },
           {
             "iteration": 2,
-            "ai_prob": 0.9999923706054688,
+            "ai_prob": 0.9999794960021973,
             "fooled": false,
-            "text_preview": "**To Principal [Name]:**\n\nHey, so I just wanted to chat with you about this new rule where students with C averages can't play sports. I think it's not fair, and honestly, it bugs me a lot. Let me try"
+            "text_preview": "Subject: Concerns About the C Grade Requirement for Sports\n\nDear Principal,\n\nI wanted to talk to you about a rule that's been on my mind. It's about how students with C averages can't play sports. I t"
           },
           {
             "iteration": 3,
-            "ai_prob": 0.9999912977218628,
+            "ai_prob": 0.9999724626541138,
             "fooled": false,
-            "text_preview": "**To Principal [Name]:**\n\nHey, so I just wanted to chat with you about this new rule where students with C averages can't play sports. I think it's not fair, and honestly, it bugs me a lot. I mean, I "
+            "text_preview": "Hey, I wanted to talk about something that's been bugging me for a while. It's about this rule at school that I think isn't fair. You know, the one where if you don't get a B or an A, you can't play s"
           }
         ],
         "final_fooled": false,
-        "final_ai_prob": 0.9999912977218628
+        "final_ai_prob": 0.9999724626541138
       },
       {
         "essay_index": 1448,
-        "original_ai_prob": 1.1325558261887636e-05,
+        "original_ai_prob": 0.00029334655846469104,
         "iterations": [
           {
             "iteration": 1,
-            "ai_prob": 0.9999938011169434,
+            "ai_prob": 0.9746332764625549,
             "fooled": false,
-            "text_preview": "The essay discusses NASA's ambitious plan to explore Venus despite the numerous challenges it presents. The determination of NASA to venture to this mysterious planet is driven by a mix of scientific "
+            "text_preview": "The essay you’ve provided reads like it was written by a program rather than a human. To make it sound more like a genuine student, I’ll rewrite it with natural language, varied sentence structures, a"
           },
           {
             "iteration": 2,
-            "ai_prob": 0.9999946355819702,
+            "ai_prob": 0.9999881982803345,
             "fooled": false,
-            "text_preview": "Exploring Venus: A Trip to Our Sister Planet\n\nThe idea of NASA venturing to Venus is super exciting to me. I mean, we're talking about a planet that's sort of like Earth but with way more harsh condit"
+            "text_preview": "**A Human's Take on Exploring Venus**\n\nI’ve got this essay here that feels more like a bot wrote it. Let me tell you, exploring other planets is just so fascinating, right? Even something as tough as "
           },
           {
             "iteration": 3,
-            "ai_prob": 0.9999923706054688,
+            "ai_prob": 0.9999902248382568,
             "fooled": false,
-            "text_preview": "Exploring Venus: A Trip to Our Sister Planet  \n\nThe idea of NASA heading to Venus is super exciting to me. I mean, it's our sister planet, right? But instead of the serene landscapes we usually imagin"
+            "text_preview": "**A Human's Take on Exploring Venus**\n\nOkay, so I’ve got this essay here that feels more like a robot wrote it. Let me tell you, exploring other planets is just so fascinating, right? Even something a"
           }
         ],
         "final_fooled": false,
-        "final_ai_prob": 0.9999923706054688
+        "final_ai_prob": 0.9999902248382568
       },
       {
         "essay_index": 5258,
-        "original_ai_prob": 1.4632709280704148e-05,
+        "original_ai_prob": 0.00030576082644984126,
         "iterations": [
           {
             "iteration": 1,
-            "ai_prob": 0.9999945163726807,
-            "fooled": false,
-            "text_preview": "**Extracurricular Activities: A Path to Success and Friendship**\n\nImagine hearing that your principal has decided all students must participate in at least one extracurricular activity. I wholehearted"
-          },
-          {
-            "iteration": 2,
-            "ai_prob": 0.9999932050704956,
-            "fooled": false,
-            "text_preview": "**Extracurricular Activities: A Path to Success and Friendship**\n\nImagine if your principal suddenly announced that every student must join at least one extracurricular activity. I remember when our s"
-          },
-          {
-            "iteration": 3,
-            "ai_prob": 0.9999932050704956,
-            "fooled": false,
-            "text_preview": "**Extracurricular Activities: A Path to Success and Friendship**\n\nImagine if your principal suddenly announced that every student must join at least one extracurricular activity. I remember when our s"
+            "ai_prob": 0.12504445016384125,
+            "fooled": true,
+            "text_preview": "The idea that every student must participate in at least one extracurricular activity seems like a solid plan to me. I think it's a smart move by the principal because it addresses a few key issues th"
           }
         ],
-        "final_fooled": false,
-        "final_ai_prob": 0.9999932050704956
+        "final_fooled": true,
+        "final_ai_prob": 0.12504445016384125
       }
     ]
   }
