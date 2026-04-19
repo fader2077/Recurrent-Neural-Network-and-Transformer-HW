@@ -33,7 +33,7 @@ We use TF-IDF vectorization (max_features=10000, ngram_range=(1,2)) with four cl
 | Classifier | ROC-AUC | Accuracy |
 |-----------|---------|----------|
 | Logistic Regression | 0.9993 | 0.9939 |
-| Linear SVM | 0.9997 | 0.9960 |
+| Linear SVM | 0.9997 | 0.9970 |
 | Multinomial NB | 0.9955 | 0.9892 |
 | Random Forest | 0.9987 | 0.9920 |
 
@@ -154,7 +154,7 @@ Using the best model (BERT-large, 3 epochs):
 
 **Answer:** BERT-large achieves a marginal improvement (AUC +0.0001, Acc +0.33%) at 3.2× the training cost. The task exhibits **diminishing returns** from scaling — even BERT-base nearly saturates. The base model has sufficient capacity for this binary classification task. However, BERT-large achieves perfect AUC (1.0000) and is preferred when compute budget allows.
 
-![Training Curves](results_bert-base-cased/bert_performance_comparison.png)
+![Training Curves](results_bert-base-cased/comparison_curves.png)
 ![Confusion Matrices](results_bert-base-cased/bert_confusion_confidence.png)
 ![Epoch Ablation](results_bert-base-cased/epoch_ablation.png)
 
@@ -191,7 +191,30 @@ Using the best model (BERT-large, 3 epochs):
 
 **Result:** 1/5 (20%) fooled after iterative refinement. Essay 5 dropped to AI_prob=0.125 after one iteration, successfully evading the detector. This suggests that with enough iterative refinement, some texts can be made to appear human-like.
 
-### 3.4 Programmatic Adversarial Attacks (No LLM)
+### 3.4 Adversarial Text Example
+
+#### Original Human-Written Text (Essay 5, P(AI)=0.0003)
+
+> "What would you think if you heard 'Your principal has decided that all students must participate in at least one extracurricular activity?' I agree with this prompt because kids wont get in trouble as much Also, Some kids dont have many friends, It can also be a good life-trait.
+>
+> Firstly, Kids make it look like they love being in trouble. If we had an after school activity they liked to do, They would have a reason to stay out of trouble. Generic_Name, was always in trouble in school. Until, The..."
+
+**Analysis:** Characteristic human markers — grammatical errors ("wont", "dont"), informal punctuation, inconsistent capitalisation, first-person anecdote. BERT assigns P(AI)=0.0003 (confident human).
+
+#### LLM-Rewritten Text (1 Iteration, P(AI)=0.125) — **FOOLED**
+
+> "The idea that every student must participate in at least one extracurricular activity seems like a solid plan to me. I think it's a smart move by the principal because it addresses a few key issues that many schools face today. Students who are involved in activities outside the classroom tend to stay out of trouble, build social connections, and develop skills that prepare them for life..."
+
+**Why this fooled BERT:** The rewrite corrects grammar but preserves the first-person, student-like voice ("seems like a solid plan to me") without introducing formal academic headings or rigid paragraph structure. Most LLM rewrites produce bold headings and polished topic sentences — strong AI signals. This rewrite avoided that pattern, causing BERT's confidence to drop from P(AI)≈1.0 to P(AI)=0.125.
+
+#### Comparison: Failed Attack (Essay 1)
+
+> **Original:** "You know, I've been thinking about this whole phone thing at school..."  
+> **After LLM rewrite:** Bold heading added ("**Should Phones Be Allowed in School?**"), structured paragraphs → P(AI)=0.9999 (CAUGHT)
+
+**Key Insight (the rewriting paradox):** For most essays, LLM rewriting *replaces one AI signature with another*, driving P(AI)→1.0. Essay 5 succeeded because the model produced a colloquial, conversational rewrite that preserved human-like discourse patterns.
+
+### 3.5 Programmatic Adversarial Attacks (No LLM)
 
 We also test simple text perturbations on 10 AI-generated essays:
 
