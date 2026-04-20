@@ -55,6 +55,8 @@ This report presents a comprehensive study on detecting AI-generated text using 
 
 We analyzed four text-level features comparing human-written (Label 0) and AI-generated (Label 1) essays. Statistical significance was evaluated using the Mann-Whitney U test, with effect sizes measured by Cohen's $d$.
 
+Here, Cohen's $d$ is computed as $(\mu_{\text{human}} - \mu_{\text{AI}}) / \sigma_{\text{pooled}}$, so positive values mean the feature is larger for human essays, while negative values mean it is larger for AI essays.
+
 \begin{table}[H]
 \centering
 \caption{EDA: Feature comparison between human and AI text}
@@ -63,10 +65,10 @@ We analyzed four text-level features comparing human-written (Label 0) and AI-ge
 \toprule
 \textbf{Feature} & \textbf{Human (mean)} & \textbf{AI (mean)} & \textbf{Cohen's $d$} & \textbf{$p$-value} \\
 \midrule
-Avg Word Length     & 4.82  & 5.06  & $-0.733$ & $\approx 0$ \\
-Word Count          & 271.3 & 280.5 & $+0.594$ & $\approx 0$ \\
-Sentence Count      & 11.4  & 13.2  & $+0.384$ & $\approx 0$ \\
-Type-Token Ratio    & 0.807 & 0.841 & $-0.366$ & $\approx 0$ \\
+Avg Word Length     & 4.53  & 5.09  & $-0.733$ & $\approx 0$ \\
+Word Count          & 418.3 & 329.4 & $+0.594$ & $\approx 0$ \\
+Sentence Count      & 22.3  & 19.1  & $+0.384$ & $7.11 \times 10^{-217}$ \\
+Type-Token Ratio    & 0.4785 & 0.5104 & $-0.366$ & $1.99 \times 10^{-229}$ \\
 \bottomrule
 \end{tabular}
 \end{table}
@@ -517,8 +519,8 @@ LLM Iterative        & 5 ($\times$3 rounds) & 1 & 20.0\% \\
 \midrule
 TF-IDF + Logistic Regression & Baseline        & 0.9993 & 0.9939 \\
 TF-IDF + Linear SVM          & Baseline        & 0.9997 & 0.9970 \\
-TF-IDF + Random Forest        & Baseline        & 0.9987 & 0.9920 \\
-TF-IDF + Naive Bayes          & Baseline        & 0.9955 & 0.9892 \\
+TF-IDF + Random Forest        & Baseline        & 0.9987 & 0.9884 \\
+TF-IDF + Naive Bayes          & Baseline        & 0.9955 & 0.9692 \\
 BERT-base (3ep, bs=32)        & Deep Learning   & 0.9999 & 0.9947 \\
 BERT-base (3ep, bs=8)         & Deep Learning   & 0.9999 & 0.9974 \\
 BERT-base (5ep, bs=32)        & Deep Learning   & 0.9999 & 0.9957 \\

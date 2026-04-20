@@ -16,10 +16,12 @@ We compute four text features and compare distributions between Human (label=0) 
 
 | Feature | Human (mean) | AI (mean) | Cohen's d | Significance |
 |---------|-------------|-----------|-----------|-------------|
-| Word Count | higher | lower | +0.594 (medium) | p ≈ 0 *** |
-| Type-Token Ratio | lower | higher | −0.366 (small) | p < 1e-229 *** |
-| Sentence Count | higher | lower | +0.384 (small) | p < 1e-217 *** |
-| Avg Word Length | lower | higher | −0.733 (medium) | p ≈ 0 *** |
+| Word Count | 418.3 | 329.4 | +0.594 (medium) | p ≈ 0 *** |
+| Type-Token Ratio | 0.4785 | 0.5104 | −0.366 (small) | p < 1e-229 *** |
+| Sentence Count | 22.3 | 19.1 | +0.384 (small) | p < 1e-217 *** |
+| Avg Word Length | 4.53 | 5.09 | −0.733 (medium) | p ≈ 0 *** |
+
+**Sign convention:** Cohen's d is computed as `(human_mean - ai_mean) / pooled_std`, so positive values indicate larger feature values for human essays, while negative values indicate larger values for AI essays.
 
 **Key Finding:** All four features show statistically significant differences (Mann-Whitney U test, p < 0.001). Human essays tend to be longer with more sentences, while AI essays exhibit higher vocabulary richness (TTR) and longer average word length. These features alone provide strong discriminative signals.
 
@@ -34,8 +36,8 @@ We use TF-IDF vectorization (max_features=10000, ngram_range=(1,2)) with four cl
 |-----------|---------|----------|
 | Logistic Regression | 0.9993 | 0.9939 |
 | Linear SVM | 0.9997 | 0.9970 |
-| Multinomial NB | 0.9955 | 0.9892 |
-| Random Forest | 0.9987 | 0.9920 |
+| Multinomial NB | 0.9955 | 0.9692 |
+| Random Forest | 0.9987 | 0.9884 |
 
 **Baseline benchmark:** TF-IDF + LR achieves ROC-AUC = 0.9993. All BERT models must exceed this.
 
