@@ -1,0 +1,51 @@
+idx,question,answer,option_pred,option_gap,rag_pred,model_pred,final_pred,source,is_correct
+0,How does power density differ between renewable and non-renewable energy sources?,E,E,0.08231692910194399,E,,E,rag_option_agree,True
+1,Who acquired the Castle League franchise of the National First Division club Moja United to establish Durban Stars FC?,D,A,0.023963737487793013,D,D,D,majority_vote,True
+2,Where is Eldorado High School located?,A,B,0.009817886352539107,B,,B,rag_option_agree,False
+3,"Who are some of the actors starring in the film ""Jellyfish""?",D,B,0.05825433731079105,D,D,D,majority_vote,True
+4,What is the Hell Is Real Derby?,D,D,1.4604215539991854,,,D,option_aware_high_conf,True
+5,"What is the common name of the species of lizard in the family Gymnophthalmidae, which is endemic to Peru and is monotypic in the genus Wilsonosaura?",E,A,0.0,E,E,E,majority_vote,True
+6,What is the primary sport associated with Club Internacional de Foot-ball?,D,D,1.0682485103607178,,,D,option_aware_high_conf,True
+7,"What was the significance of the film ""King Stag"" in the Soviet Union?",D,A,0.447069352865219,,,A,option_aware_high_conf,False
+8,What is Iain David Johnston's current position in the United States judicial system?,B,B,0.07205694913864136,B,,B,rag_option_agree,True
+9,What was the significance of the 1975 Pan American Games field hockey tournament?,E,D,0.17347815036773684,D,,D,rag_option_agree,False
+10,When did Jackson Heywood start appearing as the character Brody in Home and Away?,D,D,1.12566237449646,,,D,option_aware_high_conf,True
+11,What is Ellen Renee Stofan's current role at The Smithsonian?,B,C,0.009521913528442338,B,B,B,majority_vote,True
+12,What were the western region stores of the electronics retailer Silo known as for a number of years?,E,E,1.1960776805877684,,,E,option_aware_high_conf,True
+13,Who stars as Vivienne Rook in the television miniseries Years and Years?,E,C,0.10328063964843759,E,E,E,majority_vote,True
+14,What is the function of the Glutamate-cysteine ligase regulatory subunit encoded by the GCLM gene?,C,A,0.6259340047836304,,,A,option_aware_high_conf,False
+15,"What inspired the creation of the documentary ""Winning: The Racing Life of Paul Newman""?",D,B,0.04730786085128784,D,D,D,majority_vote,True
+16,How was the Laidunina Lighthouse recognized in Estonia?,A,A,0.0,A,,A,rag_option_agree,True
+17,Which year did the Cold Lake Air Force Museum first open its doors?,E,B,0.10563912540674208,A,C,C,judge,False
+18,What famous activist was associated with The Body Shop International Limited?,C,B,0.11695800423622138,C,C,C,majority_vote,True
+19,"What is the meaning of the term ""horror vacui""?",B,B,0.21275306344032274,B,,B,rag_option_agree,True
+20,What is the significance of the large shifting sand dunes in Lost Forest Research Natural Area?,D,A,0.014848279953002919,D,D,D,majority_vote,True
+21,Which of the following is a common name for the grass species known as Amphicarpum muehlenbergianum?,E,E,0.5601317882537842,,,E,option_aware_high_conf,True
+22,What is the height of the Phare du Cap Leucate lighthouse?,D,D,1.6483680963516236,,,D,option_aware_high_conf,True
+23,"What was one of the notable features of The Gentlewoman, a weekly illustrated paper for women published in London in 1890?",C,D,0.07688045501708982,A,A,A,majority_vote,False
+24,"What role does the film ""Citadel"" play in the genre of horror?",D,C,0.0042671084403992365,D,B,D,judge,True
+25,What is the difference between natural convection and forced convection?,C,C,0.5814522981643676,,,C,option_aware_high_conf,True
+26,What is Andre Ryan Adams known for in the world of cricket?,B,C,0.8242323100566864,,,C,option_aware_high_conf,False
+27,What is one of the criticisms of the theory of multiple intelligences?,E,A,0.4996421575546265,,,A,option_aware_high_conf,False
+28,What is the Star Trek Ship Construction Manual?,C,C,0.7296242609620094,,,C,option_aware_high_conf,True
+29,What was the cause of the crash of Merpati Nusantara Airlines Flight 8968?,E,D,0.821853232383728,,,D,option_aware_high_conf,False
+30,How is the prime minister of Italy appointed and required to stay in office based on the Constitution of Italy?,C,C,0.976564884185791,,,C,option_aware_high_conf,True
+31,"What is the radio format of WGPA, a Class D daytimer radio station based in Bethlehem, Pennsylvania?",E,A,0.0,D,D,D,majority_vote,False
+32,What is the geographical relationship between the village of Kåfjord and the village of Kvenvik based on the Wikipedia excerpt?,C,A,0.0,C,C,C,majority_vote,True
+33,"What is a ""coffee ring"" in physics?",E,E,0.29774417877197257,B,B,B,majority_vote,False
+34,"How does the Kelvin-Helmholtz instability impact the operation of Kawakura Station in Aomori, Japan?",C,A,0.0,C,A,A,majority_vote,False
+35,"What is the primary habitat of Tabanus calens, a species of horse fly?",E,A,0.0,B,E,B,judge,False
+36,"What is the plot of the 1993 Italian comedy film titled ""The Storm Is Coming""?",D,B,0.015725708007812506,D,D,D,majority_vote,True
+37,Which teams did Jason Bay play for during his career in Major League Baseball (MLB)?,A,E,0.8227139234542846,,,E,option_aware_high_conf,False
+38,When was the nonfiction book Fighting for Space: Two Pilots and Their Historic Battle for Female Spaceflight published?,E,E,1.25345778465271,,,E,option_aware_high_conf,True
+39,"What is the unique characteristic of the genus Notocomplana, according to the provided Wikipedia excerpt?",A,A,0.0,B,A,A,majority_vote,True
+40,What is the reason behind the largest externally observed electrical effects when two conductors are separated by the smallest distance without touching?,D,D,1.4674601793289186,,,D,option_aware_high_conf,True
+41,What is the primary component of the Slovenian Armed Forces?,D,C,0.16199374198913574,D,D,D,majority_vote,True
+42,What was Anthony D. Gonsolin's pathway to the Major League Baseball (MLB)?,E,A,0.0,E,E,E,majority_vote,True
+43,Where did Christopher Ryan Herrmann play college baseball?,A,A,0.26935939788818364,A,,A,rag_option_agree,True
+44,What is the one-character play that Monsieur Lazhar is based on?,D,D,1.0971196770668028,,,D,option_aware_high_conf,True
+45,Where is Tokyo International School located?,C,C,0.1463398456573486,C,,C,rag_option_agree,True
+46,What is Bernard Kangro primarily known for?,B,B,0.265205705165863,B,,B,rag_option_agree,True
+47,What is the reason for the formation of stars exclusively within molecular clouds?,B,C,0.0026853561401367076,B,B,B,majority_vote,True
+48,What is the period drama film Gods and Monsters (1998) based on?,C,C,0.5522230625152589,,,C,option_aware_high_conf,True
+49,What unique feature can be found at Amnicon Falls State Park in Wisconsin?,C,B,0.005662769079208374,A,C,C,judge,True
