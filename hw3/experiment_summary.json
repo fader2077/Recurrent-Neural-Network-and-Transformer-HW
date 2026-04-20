@@ -1,0 +1,13 @@
+{
+  "index_a_chunks": 6865,
+  "index_b_chunks": 3204,
+  "hit_rate_a_vector_only": 0.46,
+  "hit_rate_a_reranked": 0.46,
+  "hit_rate_b_vector_only": 0.5,
+  "hit_rate_b_reranked": 0.5,
+  "final_accuracy": 0.2,
+  "avg_latency_vector_search": 0.021804499626159667,
+  "avg_latency_reranking": 0.021818828582763673,
+  "avg_latency_generation": 2.4893645524978636,
+  "avg_latency_total": 2.532987880706787
+}

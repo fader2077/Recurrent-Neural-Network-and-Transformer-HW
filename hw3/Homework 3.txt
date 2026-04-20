@@ -1,0 +1,133 @@
+Homework 3 
+Course: RNN and Transformer 
+Assignment: RAG for Science Question Answering  
+Date: Spring 2026 
+1. Overview 
+In this assignment, you will engineer and optimize a Retrieval-Augmented Generation (RAG) 
+pipeline from scratch. 
+RAG is not just about calling an API; it is about Data Engineering (Chunking), Search Quality 
+(Embeddings & Re-ranking), and Latency Management. You will build a system to answer 
+questions from the Kaggle LLM Science Exam dataset (or a provided technical documentation 
+corpus) and optimize its accuracy. 
+2. Technical Components & Requirements 
+Part 1: The Indexing Pipeline (Data Engineering) (30%) 
+Your first task is to process raw text into a high-quality Vector Database. You must compare 
+different chunking strategies. 
+1. Data Source: Use the Wikipedia plain text subset provided in the Kaggle competition 
+data. 
+2. Chunking Strategy Experiment: 
+o Implement two different chunking methods using langchain.text_splitter or custom 
+code: 
+§ Method A: Fixed-size chunking (e.g., 512 tokens) with 10% overlap. 
+§ Method B: Semantic/Recursive chunking (splitting by paragraphs or 
+headers first). 
+3. Vector Database Construction: 
+o Use ChromaDB or FAISS (running locally). 
+o Use a high-quality Embedding Model compatible with your 4090 (e.g., BAAI/bge
+m3 or nomic-embed-text). 
+o Deliverable: Build two separate vector indices (Index A for Method A, Index B for 
+Method B). 
+Part 2: The Retrieval & Re-ranking System (40%) 
+Retrieval is rarely perfect on the first try. You will implement a two-stage retrieval process. 
+1. Stage 1: Dense Retrieval (Vector Search) 
+o Query your Vector DB to retrieve the top-K (e.g., k=20) candidates. 
+2. Stage 2: Re-ranking (The "Secret Sauce") 
+o Implement a Cross-Encoder (e.g., cross-encoder/ms-marco-MiniLM-L-6-v2) to 
+score the relevance between the User Query and the 20 retrieved candidates. 
+o Sort the candidates by the Cross-Encoder score and select the top-N (e.g., k=3) 
+final context chunks. 
+o Why? Vector search is fast but approximate; Cross-Encoders are slow but accurate.  
+3. Experiment: Compare the retrieval quality (Hit Rate) of "Vector Search Only" vs. "Vector 
+Search + Re-ranking". 
+Part 3: Generation with Ollama (30%) 
+Connect your optimized retrieval pipeline to the LLM generation. 
+1. Ollama Integration: 
+o Use the local Ollama instance (from HW2) running Llama-3 or Mistral. 
+o Feed the top-3 chunks from Part 2 into the prompt context window. 
+2. System Prompt Design: 
+o Design a strict system prompt that prevents Hallucination (e.g., "If the answer is 
+not in the context, state 'I do not know'."). 
+3. Evaluation: 
+o Run your pipeline on 50 questions from the Kaggle dataset. 
+o Report the Accuracy. 
+3. Implementation Steps (Guide) 
+Step 1: Chunking & Indexing 
+Don't just use default settings. Analyze how chunk size affects context quality. 
+Python 
+from langchain.text_splitter import RecursiveCharacterTextSplitter 
+from langchain_community.vectorstores import Chroma 
+from langchain_community.embeddings import HuggingFaceEmbeddings 
+# 1. Define Embedding Model (Run on GPU) 
+embedding_model = HuggingFaceEmbeddings( 
+model_name="BAAI/bge-m3", 
+model_kwargs={'device': 'cuda'} 
+) 
+# 2. Strategy A: Naive Chunking 
+splitter_a = RecursiveCharacterTextSplitter(chunk_size=500, 
+chunk_overlap=50) 
+docs_a = splitter_a.split_documents(raw_documents) 
+# 3. Strategy B: Semantic/Context-Aware (Simulated by larger chunks or 
+paragraph split) 
+splitter_b = RecursiveCharacterTextSplitter(chunk_size=1000, 
+chunk_overlap=200) 
+docs_b = splitter_b.split_documents(raw_documents) 
+# 4. Build DB (This will take time, utilize GPU) 
+vector_db_a = Chroma.from_documents( 
+documents=docs_a,  
+embedding=embedding_model,  
+persist_directory="./chroma_db_fixed" 
+) 
+Step 2: Retrieval & Re-ranking (Critical for HW3) 
+This is where you utilize the RTX 4090 to boost accuracy. 
+Python 
+from sentence_transformers import CrossEncoder 
+# Load Cross-Encoder on GPU 
+reranker = CrossEncoder('cross-encoder/ms-marco-MiniLM-L-6-v2', 
+device='cuda') 
+def advanced_retrieve(query, vector_db, initial_k=20, final_k=3): 
+# Stage 1: Fast Retrieval 
+candidates = vector_db.similarity_search(query, k=initial_k) 
+# Stage 2: Re-ranking 
+# Prepare pairs for the Cross-Encoder: [[Query, Doc1], [Query, 
+Doc2], ...] 
+candidate_texts = [doc.page_content for doc in candidates] 
+pairs = [[query, doc_text] for doc_text in candidate_texts] 
+# Get scores 
+scores = reranker.predict(pairs) 
+# Sort by score (descending) 
+scored_candidates = sorted(zip(scores, candidates), key=lambda x: 
+x[0], reverse=True) 
+# Return top-N highly relevant docs 
+final_docs = [doc for score, doc in scored_candidates[:final_k]] 
+return final_docs 
+Step 3: Generation via Ollama 
+Integrate the Python script with your running Ollama service. 
+Python 
+import requests 
+import json 
+def generate_answer(query, context_docs): 
+context_str = "\n\n".join([d.page_content for d in context_docs]) 
+prompt = f"""Use the following context to answer the question. 
+Context: {context_str} 
+Question: {query} 
+Answer:""" 
+# Call Ollama API (assuming it's running on localhost:11434) 
+response = requests.post('http://localhost:11434/api/generate', 
+json={ 
+"model": "llama3", 
+"prompt": prompt, 
+"stream": False 
+}) 
+return response.json()['response'] 
+4. Report Requirements (The "Why") 
+Your report must answer these engineering questions: 
+1. Chunk Size Analysis: How did the chunk size (500 vs 1000 tokens) affect the ability to 
+capture the complete answer? Did smaller chunks cut off sentences? 
+2. Re-ranking Impact: Show 2 examples where the Vector Search (Stage 1) retrieved 
+irrelevant documents at the top, but the Re-ranker (Stage 2) successfully promoted the 
+correct document to the top. 
+3. Latency: Measure the average time taken for: 
+o Vector Search 
+o Re-ranking (Cross-Encoder) 
+o LLM Generation 
+o Is the re-ranking worth the extra time cost?
