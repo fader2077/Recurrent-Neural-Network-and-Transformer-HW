@@ -1,0 +1,93 @@
+[
+  {
+    "index": "A",
+    "eval_idx": 38,
+    "question": "What is Modified Newtonian Dynamics (MOND)?",
+    "correct_answer": "C. MOND is a hypothesis that proposes a modification of Newton's law of universal gravitation to account for observed properties of galaxies. It is an alternative to the hypothesis of dark matter in terms of explaining why galaxies do not appear to obey the currently understood laws of physics.",
+    "vector_top1_score": -10.360509872436523,
+    "reranked_top1_score": -6.946590900421143,
+    "reranked_original_rank": 6,
+    "vector_hits": "",
+    "rerank_hits": "newton | law | for | the | laws",
+    "vector_snippet": "Magnetic field",
+    "reranked_snippet": "Sir Isaac Newton's laws of motion contain an important formula: F = ma. F is force. m is mass. a is acceleration. An object with a mass (m) of one kilogram will accelerate (a) at one meter per second per second when acted upon by a force (F) of one newton. This about one-tenth the acceleration due to earth’s gravity."
+  },
+  {
+    "index": "A",
+    "eval_idx": 31,
+    "question": "What is the 'reactive Leidenfrost effect' observed in non-volatile materials?",
+    "correct_answer": "A. The 'reactive Leidenfrost effect' is a phenomenon where solid particles float above hot surfaces and move erratically, observed in non-volatile materials.",
+    "vector_top1_score": -10.705440521240234,
+    "reranked_top1_score": -7.52013635635376,
+    "reranked_original_rank": 13,
+    "vector_hits": "",
+    "rerank_hits": "the | reactive | and | non",
+    "vector_snippet": "How ice is formed",
+    "reranked_snippet": "Oxygen is part of the chalcogen group on the periodic table. It is a very reactive nonmetal. It makes oxides and other compounds with many elements. The oxygen in these oxides and in other compounds (mostly silicate minerals, and calcium carbonate in limestone) makes up nearly half of the Earth's crust, by mass."
+  },
+  {
+    "index": "A",
+    "eval_idx": 3,
+    "question": "What is accelerator-based light-ion fusion?",
+    "correct_answer": "A. Accelerator-based light-ion fusion is a technique that uses particle accelerators to achieve particle kinetic energies sufficient to induce light-ion fusion reactions. This method is relatively easy to implement and can be done in an efficient manner, requiring only a vacuum tube, a pair of electrodes, and a high-voltage transformer. Fusion can be observed with as little as 10 kV between the electrodes.",
+    "vector_top1_score": -9.729817390441895,
+    "reranked_top1_score": -5.8276896476745605,
+    "reranked_original_rank": 9,
+    "vector_hits": "ion",
+    "rerank_hits": "light | ion | fusion | and | the",
+    "vector_snippet": "Photon interactions with matter",
+    "reranked_snippet": "The light and heat created by nuclear fusion makes stars like the Sun very hot. It also makes bigger chemical elements. In the Sun (but not all stars) the change which takes place is the production of helium, with small amounts of heavier elements.  Stars have a lot of hydrogen. Fusion makes a lot of energy. The energy produced by stars moves (radi"
+  },
+  {
+    "index": "B",
+    "eval_idx": 26,
+    "question": "What is a regular polytope?",
+    "correct_answer": "C. A regular polytope is a geometric shape whose symmetry group is transitive on its flags.",
+    "vector_top1_score": -10.931061744689941,
+    "reranked_top1_score": -5.89929723739624,
+    "reranked_original_rank": 6,
+    "vector_hits": "",
+    "rerank_hits": "shape | whose | its",
+    "vector_snippet": "Hydrogen has three common isotopes. The most common isotope of hydrogen is called protium (1H), which has one proton and no neutrons. A hydrogen atom that has a proton and a neutron (atomic mass of 2) is called deuterium (2H). Hydrogen with one proton and two neutrons (atomic mass of 3) is called tritium (3H). Protium and deuterium are stable isoto",
+    "reranked_snippet": "A cube is a type of polyhedron with all right angles and whose height, width and depth are all the same. It is a type of rectangular prism, which is itself a type of hexahedron.  A cube is one of the simplest mathematical shapes in space. Something that is shaped like a cube can be called cubic. Surface area of cube=6l^2 Lateral Surface area of cub"
+  },
+  {
+    "index": "A",
+    "eval_idx": 13,
+    "question": "What is the Ozma Problem?",
+    "correct_answer": "C. The Ozma Problem is a conundrum that examines whether there is any fundamental asymmetry to the universe. It concerns various aspects of atomic and subatomic physics and how they relate to mirror asymmetry and the related concepts of chirality, antimatter, magnetic and electrical polarity, parity, charge and spin.",
+    "vector_top1_score": -9.200711250305176,
+    "reranked_top1_score": -5.884016990661621,
+    "reranked_original_rank": 3,
+    "vector_hits": "problem",
+    "rerank_hits": "the | problem | and | they",
+    "vector_snippet": "Problems",
+    "reranked_snippet": "A salesman has to visit different customers, but wants to keep the distance traveled as small as possible. The problem is to find a way so they can do it. This problem is known as Travelling Salesman Problem (and often abbreviated TSP). It is among the hardest problems to solve. If a commonly believed conjecture is true (described as P ≠ NP), then "
+  },
+  {
+    "index": "B",
+    "eval_idx": 45,
+    "question": "What is the relation between the three moment theorem and the bending moments at three successive supports of a continuous beam?",
+    "correct_answer": "C. The three moment theorem describes the relationship between bending moments at three successive supports of a continuous beam, subject to a loading on two adjacent spans with or without settlement of the supports.",
+    "vector_top1_score": -10.945781707763672,
+    "reranked_top1_score": -7.469574928283691,
+    "reranked_original_rank": 3,
+    "vector_hits": "the",
+    "rerank_hits": "the | three | moment | bending",
+    "vector_snippet": "Big Bang model   The prevailing Big Bang model accounts for many of the experimental observations described above, such as the correlation of distance and redshift of galaxies, the universal ratio of hydrogen:helium atoms, and the ubiquitous, isotropic microwave radiation background. As noted above, the redshift arises from the metric expansion of ",
+    "reranked_snippet": "The General Theory of Relativity   The General Theory of Relativity was published in 1915, ten years after the special theory of relativity was created. Einstein's general theory of relativity uses the idea of spacetime. Spacetime is the fact that we have a four-dimensional universe, having three spatial (space) dimensions and one temporal (time) d"
+  },
+  {
+    "index": "B",
+    "eval_idx": 1,
+    "question": "What is the \"ultraviolet catastrophe\"?",
+    "correct_answer": "B. It is the misbehavior of a formula for higher frequencies.",
+    "vector_top1_score": -9.938532829284668,
+    "reranked_top1_score": -8.207411766052246,
+    "reranked_original_rank": 19,
+    "vector_hits": "the",
+    "rerank_hits": "the | for | higher",
+    "vector_snippet": "Gravitational wave astronomy  Gravitational wave astronomy is the study of the Universe in the gravitational wave spectrum.  So far, all astronomy that has been done has used the electromagnetic spectrum.  Gravitational waves are ripples in spacetime emitted by very dense objects changing shape, which include white dwarves, neutron stars and black ",
+    "reranked_snippet": "The photoelectric effect happens when light shining on a metal surface causes it to emit electrons. The difficulty for the classical wave theory was to explain why this effect only seems to occur for high frequency light such as UV, but not lower frequency such as red or infrared. Einstein showed that, since higher frequency light has photons with "
+  }
+]

@@ -1,0 +1,33 @@
+{
+  "dataset": {
+    "source": "Sangeetha/Kaggle-LLM-Science-Exam",
+    "full_rows": 6684,
+    "science_pool_rows": 1469,
+    "dev_rows": 10,
+    "heldout_test_rows": 50
+  },
+  "baseline": {
+    "original_llama3_pipeline_accuracy": 0.20,
+    "llama3_model_only_dev_accuracy": 0.30,
+    "deepseek_model_only_dev_accuracy": 0.40
+  },
+  "retrieval_experiments": {
+    "deepseek_rag_vector_only_dev_accuracy": 0.30,
+    "deepseek_rag_rerank_dev_accuracy": 0.60,
+    "option_aware_rerank_nli_dev_accuracy": 0.60
+  },
+  "ensemble": {
+    "dev_accuracy": 0.80,
+    "heldout_50_dev_tuned_accuracy": 0.72,
+    "heldout_50_posthoc_best_rule_accuracy": 0.74,
+    "best_posthoc_gap_threshold": 0.70
+  },
+  "notes": {
+    "heldout_80_reached": false,
+    "main_findings": [
+      "The original 20% result was caused by a mixed-domain sample and a weak corpus.",
+      "On the corrected science dev slice, re-ranking improved DeepSeek RAG from 30% to 60%.",
+      "The strongest ensemble reached 80% on dev and 72% on a 50-question held-out science test."
+    ]
+  }
+}

@@ -1,0 +1,51 @@
+question_idx,question,correct_answer,predicted_answer,is_correct,response
+0,What is the main sequence in astronomy?,C,C,True,C
+1,"What is the ""ultraviolet catastrophe""?",B,D,False,D
+2,What is the Carnot engine?,B,B,True,B
+3,What is accelerator-based light-ion fusion?,A,A,True,A
+4,"What is a ""coffee ring"" in physics?",E,B,False,B
+5,What is water hammer?,E,E,True,E
+6,What is the application of Memristor?,D,X,False,None
+7,What can be inferred about the electronic entropy of insulators and metals based on their densities of states at the Fermi level?,B,B,True,B
+8,What is the difference between illuminance and luminance?,B,B,True,B
+9,What is classical mechanics?,A,A,True,A
+10,What is the Peierls bracket in canonical quantization?,C,C,True,C
+11,What is the proposed name for the field that is responsible for cosmic inflation and the metric expansion of space?,A,A,True,A
+12,What is linear frame dragging?,D,D,True,D
+13,What is the Ozma Problem?,C,A,False,A
+14,What is the significance of the high degree of fatty-acyl disorder in the thylakoid membranes of plants?,C,C,True,C
+15,What is the relationship between Coordinated Universal Time (UTC) and Universal Time (UT1)?,D,B,False,B
+16,What is a planetary system?,C,C,True,C
+17,What is the relationship between chemical potential and quarks/antiquarks?,A,A,True,A
+18,What is the reason for the formation of stars exclusively within molecular clouds?,B,B,True,B
+19,What is the Maxwell's Demon thought experiment?,C,A,False,A
+20,What are the four qualitative levels of crystallinity described by geologists?,B,B,True,B
+21,What is the most popular explanation for the shower-curtain effect?,E,X,False,None
+22,What is a crossover experiment?,B,B,True,B
+23,What is the interpretation of supersymmetry in stochastic supersymmetric theory?,E,E,True,E
+24,What is the relevant type of coherence for the Young's double-slit interferometer?,E,C,False,C
+25,What is the revised view of the atmosphere's nature based on the time-varying multistability that is associated with the modulation of large-scale processes and aggregated feedback of small-scale processes?,B,B,True,B
+26,What is a regular polytope?,C,E,False,E
+27,What is the isophotal diameter used for in measuring a galaxy's size?,E,E,True,E
+28,What is an order parameter?,D,D,True,D
+29,What is the main factor that determines the occurrence of each type of supernova?,E,E,True,E
+30,What is the role of axioms in a formal theory?,A,A,True,A
+31,What is the 'reactive Leidenfrost effect' observed in non-volatile materials?,A,A,True,A
+32,What is the SI base unit of time and how is it defined?,B,B,True,B
+33,What is the piezoelectric strain coefficient for AT-cut quartz crystals?,B,X,False,None
+34,"What is the reason behind the designation of Class L dwarfs, and what is their color and composition?",B,B,True,B
+35,What is the Landau-Lifshitz-Gilbert equation used for in physics?,C,A,False,A
+36,Who was the first person to describe the pulmonary circulation system?,E,E,True,E
+37,What is the main focus of the Environmental Science Center at Qatar University?,D,D,True,D
+38,What is Modified Newtonian Dynamics (MOND)?,C,C,True,C
+39,What is the difference between probability mass function (PMF) and probability density function (PDF)?,D,B,False,B
+40,What is a Hilbert space in quantum mechanics?,E,E,True,E
+41,What happens to excess base metal as a solution cools from the upper transformation temperature towards an insoluble state?,B,B,True,B
+42,What is the spin quantum number?,E,E,True,E
+43,What is the decay energy for the free neutron decay process?,E,A,False,A
+44,How many crystallographic point groups are there in three-dimensional space?,B,B,True,B
+45,What is the relation between the three moment theorem and the bending moments at three successive supports of a continuous beam?,C,X,False,None
+46,What is the function of the fibrous cardiac skeleton?,C,C,True,C
+47,What is reciprocal length or inverse length?,E,E,True,E
+48,What is the role of methane in Fischer-Tropsch processes?,A,C,False,C
+49,What is the formalism that angular momentum is associated with in rotational invariance?,D,D,True,D

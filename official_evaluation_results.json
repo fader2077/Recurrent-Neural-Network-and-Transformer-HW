@@ -1,0 +1,402 @@
+[
+  {
+    "question_idx":0,
+    "question":"What is the main sequence in astronomy?",
+    "correct_answer":"C",
+    "predicted_answer":"C",
+    "is_correct":true,
+    "response":"C"
+  },
+  {
+    "question_idx":1,
+    "question":"What is the \"ultraviolet catastrophe\"?",
+    "correct_answer":"B",
+    "predicted_answer":"D",
+    "is_correct":false,
+    "response":"D"
+  },
+  {
+    "question_idx":2,
+    "question":"What is the Carnot engine?",
+    "correct_answer":"B",
+    "predicted_answer":"B",
+    "is_correct":true,
+    "response":"B"
+  },
+  {
+    "question_idx":3,
+    "question":"What is accelerator-based light-ion fusion?",
+    "correct_answer":"A",
+    "predicted_answer":"A",
+    "is_correct":true,
+    "response":"A"
+  },
+  {
+    "question_idx":4,
+    "question":"What is a \"coffee ring\" in physics?",
+    "correct_answer":"E",
+    "predicted_answer":"B",
+    "is_correct":false,
+    "response":"B"
+  },
+  {
+    "question_idx":5,
+    "question":"What is water hammer?",
+    "correct_answer":"E",
+    "predicted_answer":"E",
+    "is_correct":true,
+    "response":"E"
+  },
+  {
+    "question_idx":6,
+    "question":"What is the application of Memristor?",
+    "correct_answer":"D",
+    "predicted_answer":"X",
+    "is_correct":false,
+    "response":null
+  },
+  {
+    "question_idx":7,
+    "question":"What can be inferred about the electronic entropy of insulators and metals based on their densities of states at the Fermi level?",
+    "correct_answer":"B",
+    "predicted_answer":"B",
+    "is_correct":true,
+    "response":"B"
+  },
+  {
+    "question_idx":8,
+    "question":"What is the difference between illuminance and luminance?",
+    "correct_answer":"B",
+    "predicted_answer":"B",
+    "is_correct":true,
+    "response":"B"
+  },
+  {
+    "question_idx":9,
+    "question":"What is classical mechanics?",
+    "correct_answer":"A",
+    "predicted_answer":"A",
+    "is_correct":true,
+    "response":"A"
+  },
+  {
+    "question_idx":10,
+    "question":"What is the Peierls bracket in canonical quantization?",
+    "correct_answer":"C",
+    "predicted_answer":"C",
+    "is_correct":true,
+    "response":"C"
+  },
+  {
+    "question_idx":11,
+    "question":"What is the proposed name for the field that is responsible for cosmic inflation and the metric expansion of space?",
+    "correct_answer":"A",
+    "predicted_answer":"A",
+    "is_correct":true,
+    "response":"A"
+  },
+  {
+    "question_idx":12,
+    "question":"What is linear frame dragging?",
+    "correct_answer":"D",
+    "predicted_answer":"D",
+    "is_correct":true,
+    "response":"D"
+  },
+  {
+    "question_idx":13,
+    "question":"What is the Ozma Problem?",
+    "correct_answer":"C",
+    "predicted_answer":"A",
+    "is_correct":false,
+    "response":"A"
+  },
+  {
+    "question_idx":14,
+    "question":"What is the significance of the high degree of fatty-acyl disorder in the thylakoid membranes of plants?",
+    "correct_answer":"C",
+    "predicted_answer":"C",
+    "is_correct":true,
+    "response":"C"
+  },
+  {
+    "question_idx":15,
+    "question":"What is the relationship between Coordinated Universal Time (UTC) and Universal Time (UT1)?",
+    "correct_answer":"D",
+    "predicted_answer":"B",
+    "is_correct":false,
+    "response":"B"
+  },
+  {
+    "question_idx":16,
+    "question":"What is a planetary system?",
+    "correct_answer":"C",
+    "predicted_answer":"C",
+    "is_correct":true,
+    "response":"C"
+  },
+  {
+    "question_idx":17,
+    "question":"What is the relationship between chemical potential and quarks\/antiquarks?",
+    "correct_answer":"A",
+    "predicted_answer":"A",
+    "is_correct":true,
+    "response":"A"
+  },
+  {
+    "question_idx":18,
+    "question":"What is the reason for the formation of stars exclusively within molecular clouds?",
+    "correct_answer":"B",
+    "predicted_answer":"B",
+    "is_correct":true,
+    "response":"B"
+  },
+  {
+    "question_idx":19,
+    "question":"What is the Maxwell's Demon thought experiment?",
+    "correct_answer":"C",
+    "predicted_answer":"A",
+    "is_correct":false,
+    "response":"A"
+  },
+  {
+    "question_idx":20,
+    "question":"What are the four qualitative levels of crystallinity described by geologists?",
+    "correct_answer":"B",
+    "predicted_answer":"B",
+    "is_correct":true,
+    "response":"B"
+  },
+  {
+    "question_idx":21,
+    "question":"What is the most popular explanation for the shower-curtain effect?",
+    "correct_answer":"E",
+    "predicted_answer":"X",
+    "is_correct":false,
+    "response":null
+  },
+  {
+    "question_idx":22,
+    "question":"What is a crossover experiment?",
+    "correct_answer":"B",
+    "predicted_answer":"B",
+    "is_correct":true,
+    "response":"B"
+  },
+  {
+    "question_idx":23,
+    "question":"What is the interpretation of supersymmetry in stochastic supersymmetric theory?",
+    "correct_answer":"E",
+    "predicted_answer":"E",
+    "is_correct":true,
+    "response":"E"
+  },
+  {
+    "question_idx":24,
+    "question":"What is the relevant type of coherence for the Young's double-slit interferometer?",
+    "correct_answer":"E",
+    "predicted_answer":"C",
+    "is_correct":false,
+    "response":"C"
+  },
+  {
+    "question_idx":25,
+    "question":"What is the revised view of the atmosphere's nature based on the time-varying multistability that is associated with the modulation of large-scale processes and aggregated feedback of small-scale processes?",
+    "correct_answer":"B",
+    "predicted_answer":"B",
+    "is_correct":true,
+    "response":"B"
+  },
+  {
+    "question_idx":26,
+    "question":"What is a regular polytope?",
+    "correct_answer":"C",
+    "predicted_answer":"E",
+    "is_correct":false,
+    "response":"E"
+  },
+  {
+    "question_idx":27,
+    "question":"What is the isophotal diameter used for in measuring a galaxy's size?",
+    "correct_answer":"E",
+    "predicted_answer":"E",
+    "is_correct":true,
+    "response":"E"
+  },
+  {
+    "question_idx":28,
+    "question":"What is an order parameter?",
+    "correct_answer":"D",
+    "predicted_answer":"D",
+    "is_correct":true,
+    "response":"D"
+  },
+  {
+    "question_idx":29,
+    "question":"What is the main factor that determines the occurrence of each type of supernova?",
+    "correct_answer":"E",
+    "predicted_answer":"E",
+    "is_correct":true,
+    "response":"E"
+  },
+  {
+    "question_idx":30,
+    "question":"What is the role of axioms in a formal theory?",
+    "correct_answer":"A",
+    "predicted_answer":"A",
+    "is_correct":true,
+    "response":"A"
+  },
+  {
+    "question_idx":31,
+    "question":"What is the 'reactive Leidenfrost effect' observed in non-volatile materials?",
+    "correct_answer":"A",
+    "predicted_answer":"A",
+    "is_correct":true,
+    "response":"A"
+  },
+  {
+    "question_idx":32,
+    "question":"What is the SI base unit of time and how is it defined?",
+    "correct_answer":"B",
+    "predicted_answer":"B",
+    "is_correct":true,
+    "response":"B"
+  },
+  {
+    "question_idx":33,
+    "question":"What is the piezoelectric strain coefficient for AT-cut quartz crystals?",
+    "correct_answer":"B",
+    "predicted_answer":"X",
+    "is_correct":false,
+    "response":null
+  },
+  {
+    "question_idx":34,
+    "question":"What is the reason behind the designation of Class L dwarfs, and what is their color and composition?",
+    "correct_answer":"B",
+    "predicted_answer":"B",
+    "is_correct":true,
+    "response":"B"
+  },
+  {
+    "question_idx":35,
+    "question":"What is the Landau-Lifshitz-Gilbert equation used for in physics?",
+    "correct_answer":"C",
+    "predicted_answer":"A",
+    "is_correct":false,
+    "response":"A"
+  },
+  {
+    "question_idx":36,
+    "question":"Who was the first person to describe the pulmonary circulation system?",
+    "correct_answer":"E",
+    "predicted_answer":"E",
+    "is_correct":true,
+    "response":"E"
+  },
+  {
+    "question_idx":37,
+    "question":"What is the main focus of the Environmental Science Center at Qatar University?",
+    "correct_answer":"D",
+    "predicted_answer":"D",
+    "is_correct":true,
+    "response":"D"
+  },
+  {
+    "question_idx":38,
+    "question":"What is Modified Newtonian Dynamics (MOND)?",
+    "correct_answer":"C",
+    "predicted_answer":"C",
+    "is_correct":true,
+    "response":"C"
+  },
+  {
+    "question_idx":39,
+    "question":"What is the difference between probability mass function (PMF) and probability density function (PDF)?",
+    "correct_answer":"D",
+    "predicted_answer":"B",
+    "is_correct":false,
+    "response":"B"
+  },
+  {
+    "question_idx":40,
+    "question":"What is a Hilbert space in quantum mechanics?",
+    "correct_answer":"E",
+    "predicted_answer":"E",
+    "is_correct":true,
+    "response":"E"
+  },
+  {
+    "question_idx":41,
+    "question":"What happens to excess base metal as a solution cools from the upper transformation temperature towards an insoluble state?",
+    "correct_answer":"B",
+    "predicted_answer":"B",
+    "is_correct":true,
+    "response":"B"
+  },
+  {
+    "question_idx":42,
+    "question":"What is the spin quantum number?",
+    "correct_answer":"E",
+    "predicted_answer":"E",
+    "is_correct":true,
+    "response":"E"
+  },
+  {
+    "question_idx":43,
+    "question":"What is the decay energy for the free neutron decay process?",
+    "correct_answer":"E",
+    "predicted_answer":"A",
+    "is_correct":false,
+    "response":"A"
+  },
+  {
+    "question_idx":44,
+    "question":"How many crystallographic point groups are there in three-dimensional space?",
+    "correct_answer":"B",
+    "predicted_answer":"B",
+    "is_correct":true,
+    "response":"B"
+  },
+  {
+    "question_idx":45,
+    "question":"What is the relation between the three moment theorem and the bending moments at three successive supports of a continuous beam?",
+    "correct_answer":"C",
+    "predicted_answer":"X",
+    "is_correct":false,
+    "response":null
+  },
+  {
+    "question_idx":46,
+    "question":"What is the function of the fibrous cardiac skeleton?",
+    "correct_answer":"C",
+    "predicted_answer":"C",
+    "is_correct":true,
+    "response":"C"
+  },
+  {
+    "question_idx":47,
+    "question":"What is reciprocal length or inverse length?",
+    "correct_answer":"E",
+    "predicted_answer":"E",
+    "is_correct":true,
+    "response":"E"
+  },
+  {
+    "question_idx":48,
+    "question":"What is the role of methane in Fischer-Tropsch processes?",
+    "correct_answer":"A",
+    "predicted_answer":"C",
+    "is_correct":false,
+    "response":"C"
+  },
+  {
+    "question_idx":49,
+    "question":"What is the formalism that angular momentum is associated with in rotational invariance?",
+    "correct_answer":"D",
+    "predicted_answer":"D",
+    "is_correct":true,
+    "response":"D"
+  }
+]

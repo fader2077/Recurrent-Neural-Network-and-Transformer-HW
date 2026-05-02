@@ -1,0 +1,61 @@
+question_idx,question,correct_answer,predicted_answer,is_correct,response
+0,What was the main purpose of the 442nd Infantry Regiment during World War II?...,E,E,True,E
+1,Which of the following books written by Alice Dalgliesh was named to the Lewis C...,D,D,True,D
+2,When did the Dirt Road Diaries Tour begin and end?...,E,X,False,I do not know.
+3,Where is Surveyor Generals Corner located?...,D,D,True,D
+4,"What is the significance of the 1924 American silent mystery film ""Great Diamond...",C,X,False,I do not know
+5,What are the key components of the Fluent Design System developed by Microsoft?...,D,D,True,"D: Light, depth, motion, material, and scale.
+
+The Fluent Design System, developed by Microsoft, is a design language that focuses on creating a cohesive and intuitive user experience across various M"
+6,What is Micaela Flores Amaya's nickname and additional artistic talent besides f...,D,X,False,I do not know
+7,How many seasons did John Gordon Dobbs play in Major League Baseball (MLB)?...,A,X,False,I do not know
+8,What is Saint-Colomb-de-Lauzun?...,A,D,False,D
+9,Where does the Fishing River join the Missouri River?...,E,D,False,D
+10,What does the Wikipedia excerpt say about the location of Cwmffrwd?...,B,X,False,I do not know.
+11,What is Sylhet Gas Fields Limited?...,C,X,False,I do not know
+12,Where is the Ecotorq heavy duty diesel engine family primarily produced?...,A,C,False,C
+13,"What are the boundaries of Chebrolu mandal in Guntur district, Andhra Pradesh, I...",A,D,False,D
+14,Where was The Castaway Cowboy primarily filmed?...,B,X,False,I do not know
+15,Who composed the music for the 2014 Indian Malayalam-language film Vellimoonga?...,C,D,False,D
+16,What is the significance of Frick's Locks Historic District?...,C,C,True,C
+17,In which country did Costa Rica compete in the 2014 Summer Youth Olympics?...,D,D,True,D
+18,What is the main function of EVS Broadcast Equipment SA's XT-VIA production vide...,A,D,False,D
+19,"What is the primary theme of the album ""Borscht Belt Studies"" by Jamie Saft?...",C,X,False,I do not know
+20,"What is the content of the second disc in the album ""Dirty"" by Aborym?...",A,X,False,I do not know
+21,"What song is featured on Maynard Ferguson's 1972 big band jazz album ""M.F. Horn ...",E,X,False,I do not know
+22,What position did Arnnon Geshuri hold at the Wikimedia Foundation's board of tru...,A,X,False,I do not know
+23,In which team does Dennis Sveum currently play for as an ice hockey player?...,C,X,False,I do not know
+24,What is Sergey Aleksandrovich Fursenko known for?...,C,X,False,I do not know.
+25,"How many municipalities were merged into Longueuil on January 1, 2002?...",B,X,False,I do not know
+26,Who directed the 1939 American crime film King of Chinatown?...,B,D,False,D
+27,Which of the following statements is true about the history of Lipica in Sloveni...,D,D,True,D
+28,"How did FastBack, a computer backup software, expand into the Macintosh market?...",C,D,False,D
+29,"In what museum is the painting ""The Tightrope Dancer"" by Henri de Toulouse-Lautr...",A,D,False,"D: The British Museum in London.
+
+The context mentions ""Toulouse-Lautrec: The Soul of Montmartre – Reinhold Heller"", which suggests that the museum is the British Museum in London, as Henri de Toulous"
+30,What is the magnitude of the 2010 Kalgoorlie-Boulder earthquake?...,E,D,False,"D: The 2010 Kalgoorlie-Boulder earthquake had a magnitude of 6.5 Mw.
+
+Note: The provided context does not mention the 2010 Kalgoorlie-Boulder earthquake, but the question asks about its magnitude."
+31,What phenomenon is the De Haas-Van Alphen effect associated with?...,B,D,False,D
+32,What is the primary subject of John 10 in the Gospel of John?...,A,D,False,D
+33,"Which department is Le Bez located in, in southern France?...",E,D,False,D
+34,What caused the crash of Linjeflyg Flight 618?...,B,D,False,"D: The aircraft suffered from a structural failure, leading to the collapse of its wings and subsequent crash.
+
+Note: There is no mention of Linjeflyg Flight 618 in the provided context. The context o"
+35,What was the primary role of SM U-117 submarine in the Imperial German Navy?...,D,D,True,D
+36,What did Newton adopt after his correspondence with Hooke in 1679-1680?...,A,D,False,D
+37,What was the purpose of Wisbech St Mary railway station on the Midland and Great...,A,X,False,I do not know
+38,"What is the focus of the American reality TV series ""Mrs. Eastwood & Company""?...",B,D,False,"D: The show revolves around the daily life of Dina Eastwood, then-wife of Clint Eastwood, and their daughters."
+39,What is Jan Tony Soren Rickardsson famous for in the world of motorcycle speedwa...,E,D,False,D
+40,Where did Tory Bruno make the transition from engineer to executive?...,B,X,False,I do not know
+41,What role does Luke Shuey play in the Australian Football League (AFL)?...,C,C,True,C
+42,What is the main application of the General Electric F414 turbofan engine?...,B,D,False,D
+43,What was Atišta formerly a part of?...,B,X,False,I do not know
+44,"What is polyethylene furan-2,5-dicarboxylate (PEF)?...",D,D,True,D
+45,What conference does the South Florida Bulls softball team participate in?...,A,X,False,I do not know
+46,What are the current ratings of Western & Southern Financial Group?...,D,X,False,I do not know.
+47,"What can be said about the location and features of Topham, a hamlet in Yorkshir...",B,X,False,I do not know
+48,What is Jonathan Campbell well known for in the sport of soccer?...,D,X,False,I do not know.
+49,What is the key distinction between the two forms of automimicry in zoology?...,B,D,False,"D: The first form of automimicry involves a different species mimicking the same species, while the second form involves the same species mimicking a different species.
+
+There is no mention of automim"

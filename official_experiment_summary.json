@@ -1,0 +1,47 @@
+{
+  "dataset": {
+    "source_file": "D:\\\\course\\\\rnnlstm\\\\HW3\\\\kaggle-llm-science-exam\\\\train.csv",
+    "train_rows": 200,
+    "eval_rows": 50,
+    "sampling": "official_train_df.sample(n=50, random_state=42).rename(columns={\"prompt\": \"question\"})"
+  },
+  "device": "cuda",
+  "corpus": {
+    "raw_documents": 500,
+    "raw_total_chars": 2252107
+  },
+  "chunking": {
+    "strategy_a": {
+      "chunks": 6865,
+      "avg_chars": 334.47705753823743,
+      "min_chars": 2,
+      "max_chars": 500
+    },
+    "strategy_b": {
+      "chunks": 3204,
+      "avg_chars": 732.7306491885143,
+      "min_chars": 5,
+      "max_chars": 1000
+    }
+  },
+  "retrieval": {
+    "top_k_initial": 20,
+    "top_n_final": 3,
+    "index_a_vector_only_hit_rate": 0.66,
+    "index_a_rerank_hit_rate": 0.72,
+    "index_b_vector_only_hit_rate": 0.78,
+    "index_b_rerank_hit_rate": 0.78
+  },
+  "generation": {
+    "model": "llama3",
+    "official_accuracy": 0.7
+  },
+  "latency": {
+    "avg_vector_search_time": 0.01189887046813965,
+    "avg_rerank_time": 0.017221360206604003,
+    "avg_generation_time": 2.428187117576599,
+    "avg_total_time": 2.4573073482513426
+  },
+  "reranking_examples_file": "reranking_examples_selected.json",
+  "appendix_reference": "advanced_experiment_summary.json"
+}
