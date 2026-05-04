@@ -1,0 +1,5 @@
+Index,Query mode,Vector-only Hit Rate,Reranked Hit Rate,Improvement pp
+A,question_only,0.66,0.72,5.999999999999995
+A,question_plus_choices,0.78,0.8,2.0000000000000018
+B,question_only,0.78,0.82,3.9999999999999925
+B,question_plus_choices,0.78,0.84,5.999999999999995

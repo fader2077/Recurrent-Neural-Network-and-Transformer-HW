@@ -1,0 +1,29 @@
+\contentsline {section}{\numberline {1}Introduction}{3}{section.2}%
+\contentsline {section}{\numberline {2}Dataset and Official Evaluation Setup}{3}{section.3}%
+\contentsline {subsection}{\numberline {2.1}Random 50-question sample from train.csv}{3}{subsection.4}%
+\contentsline {subsection}{\numberline {2.2}Wikipedia corpus construction}{3}{subsection.5}%
+\contentsline {section}{\numberline {3}Part 1: Indexing Pipeline}{3}{section.6}%
+\contentsline {subsection}{\numberline {3.1}Chunking Strategy A}{3}{subsection.7}%
+\contentsline {subsection}{\numberline {3.2}Chunking Strategy B}{4}{subsection.8}%
+\contentsline {subsection}{\numberline {3.3}Vector Index Construction}{4}{subsection.9}%
+\contentsline {subsection}{\numberline {3.4}Chunk Size Analysis}{4}{subsection.10}%
+\contentsline {section}{\numberline {4}Part 2: Retrieval and Re-ranking}{5}{section.13}%
+\contentsline {subsection}{\numberline {4.1}Dense Retrieval}{5}{subsection.14}%
+\contentsline {subsection}{\numberline {4.2}Cross-Encoder Re-ranking}{5}{subsection.15}%
+\contentsline {subsection}{\numberline {4.3}Hit Rate Comparison}{5}{subsection.16}%
+\contentsline {subsection}{\numberline {4.4}Query Formulation and Top-k Sensitivity}{6}{subsection.19}%
+\contentsline {subsection}{\numberline {4.5}Two Qualitative Re-ranking Examples}{7}{subsection.22}%
+\contentsline {section}{\numberline {5}Part 3: Ollama Generation}{9}{section.23}%
+\contentsline {subsection}{\numberline {5.1}Llama-3 Integration}{9}{subsection.24}%
+\contentsline {subsection}{\numberline {5.2}Anti-hallucination Prompt}{9}{subsection.25}%
+\contentsline {subsection}{\numberline {5.3}Accuracy on 50 Random train.csv Questions}{9}{subsection.26}%
+\contentsline {subsection}{\numberline {5.4}End-to-end Pipeline Ablation}{10}{subsection.27}%
+\contentsline {section}{\numberline {6}Latency Analysis}{11}{section.30}%
+\contentsline {section}{\numberline {7}Error Analysis}{11}{section.33}%
+\contentsline {section}{\numberline {8}Optional Advanced Experiment}{12}{section.36}%
+\contentsline {subsection}{\numberline {8.1}Motivation}{12}{subsection.37}%
+\contentsline {subsection}{\numberline {8.2}Science-only evaluation setup}{12}{subsection.38}%
+\contentsline {subsection}{\numberline {8.3}Advanced retrieval changes}{12}{subsection.39}%
+\contentsline {subsection}{\numberline {8.4}Model and ensemble comparison}{13}{subsection.40}%
+\contentsline {subsection}{\numberline {8.5}Why this is not the official HW3 score}{13}{subsection.43}%
+\contentsline {section}{\numberline {9}Conclusion}{14}{section.44}%

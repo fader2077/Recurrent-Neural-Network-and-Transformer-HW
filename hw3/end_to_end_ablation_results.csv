@@ -1,0 +1,5 @@
+Pipeline,Retrieval setting,Correct / 50,Accuracy,Avg total latency,Avg vector latency,Avg rerank latency,Avg LLM latency
+Index A + Vector-only + Llama3,dense top-3,37 / 50,0.74,2.478159213066101,0.01671077251434326,0.0,2.4614484405517576
+Index A + Re-ranking + Llama3,dense top_k=50 + rerank top-3,40 / 50,0.8,2.4505686140060425,0.01585331916809082,0.021723809242248534,2.412991485595703
+Index B + Vector-only + Llama3,dense top-3,35 / 50,0.7,2.4762603521347044,0.012278203964233398,0.0,2.463982148170471
+Index B + Re-ranking + Llama3,dense top_k=50 + rerank top-3,37 / 50,0.74,2.494952583312988,0.01077838897705078,0.03292536735534668,2.4512488269805908

@@ -1,0 +1,45 @@
+{
+  "rows": [
+    {
+      "Pipeline": "Index A + Vector-only + Llama3",
+      "Retrieval setting": "dense top-3",
+      "Correct / 50": "37 / 50",
+      "Accuracy": 0.74,
+      "Avg total latency": 2.478159213066101,
+      "Avg vector latency": 0.01671077251434326,
+      "Avg rerank latency": 0.0,
+      "Avg LLM latency": 2.4614484405517576
+    },
+    {
+      "Pipeline": "Index A + Re-ranking + Llama3",
+      "Retrieval setting": "dense top_k=50 + rerank top-3",
+      "Correct / 50": "40 / 50",
+      "Accuracy": 0.8,
+      "Avg total latency": 2.4505686140060425,
+      "Avg vector latency": 0.01585331916809082,
+      "Avg rerank latency": 0.021723809242248534,
+      "Avg LLM latency": 2.412991485595703
+    },
+    {
+      "Pipeline": "Index B + Vector-only + Llama3",
+      "Retrieval setting": "dense top-3",
+      "Correct / 50": "35 / 50",
+      "Accuracy": 0.7,
+      "Avg total latency": 2.4762603521347044,
+      "Avg vector latency": 0.012278203964233398,
+      "Avg rerank latency": 0.0,
+      "Avg LLM latency": 2.463982148170471
+    },
+    {
+      "Pipeline": "Index B + Re-ranking + Llama3",
+      "Retrieval setting": "dense top_k=50 + rerank top-3",
+      "Correct / 50": "37 / 50",
+      "Accuracy": 0.74,
+      "Avg total latency": 2.494952583312988,
+      "Avg vector latency": 0.01077838897705078,
+      "Avg rerank latency": 0.03292536735534668,
+      "Avg LLM latency": 2.4512488269805908
+    }
+  ],
+  "official_pipeline": "Index B + Re-ranking + Llama3"
+}

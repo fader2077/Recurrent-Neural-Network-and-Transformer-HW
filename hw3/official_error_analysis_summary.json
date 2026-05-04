@@ -1,0 +1,8 @@
+{
+  "wrong_count": 10,
+  "category_counts": {
+    "Partial / weak evidence": 1,
+    "LLM reasoning error": 5,
+    "Missing evidence": 4
+  }
+}

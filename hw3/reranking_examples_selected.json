@@ -1,0 +1,40 @@
+[
+  {
+    "source": "official",
+    "source_pool": "official_random50",
+    "index_used": "Index A",
+    "case_title": "Planetary-system concept sharpening",
+    "original_train_idx": null,
+    "question": "What is a planetary system?",
+    "correct_answer": "C. Any set of gravitationally bound non-stellar objects in or out of orbit around a star or star system.",
+    "vector_top1_snippet": "A planet is a large object such as Venus or Earth that orbits a star. Planets are smaller than stars, and they do not make light. Jupiter is the biggest planet in the Solar System, while the smallest planet in the Solar System is Mercury.  Planets are shaped l",
+    "vector_top1_score": 2.634428024291992,
+    "vector_top1_original_rank": 1,
+    "vector_top1_why_irrelevant": "Dense top-1 chunk is weak or off-topic for the target concept.",
+    "reranked_top1_snippet": "Planetary astronomy  Planetary astronomy is the study of planets, moons, dwarf planets, comets and asteroids as well as other small objects that orbit stars. The planets of our own Solar System have been studied in depth by many visiting spacecraft such as Cas",
+    "reranked_top1_original_vector_rank": 2,
+    "reranked_top1_score": 4.282773017883301,
+    "evidence_phrase": "study of planets ... objects that orbit stars",
+    "reranked_top1_why_answer_bearing": "Cross-encoder promotes a chunk with stronger concept/evidence overlap for the correct option.",
+    "explanation": "Dense retrieval top-1 gives a generic single-planet definition, while reranking promotes a broader planetary-system chunk from vector rank 2 to rank 1 with a higher score."
+  },
+  {
+    "source": "official",
+    "source_pool": "official_random50",
+    "index_used": "Index A",
+    "case_title": "Molecular-cloud formation mechanism promotion",
+    "original_train_idx": null,
+    "question": "What is the reason for the formation of stars exclusively within molecular clouds?",
+    "correct_answer": "B. The low temperatures and high densities of molecular clouds cause the gravitational force to exceed the internal pressures that are acting \"outward\" to prevent a collapse.",
+    "vector_top1_snippet": "Many galaxies continue to form new generations of stars. The Milky Way, and all spiral shaped galaxies like it (see right side image of NGC 2997), produce new stars at a rate of one or two stars per year. This star formation happens in the vast interstellar cl",
+    "vector_top1_score": -1.4519635438919067,
+    "vector_top1_original_rank": 1,
+    "vector_top1_why_irrelevant": "Dense top-1 chunk is weak or off-topic for the target concept.",
+    "reranked_top1_snippet": "The Solar System is about 4.568 billion years old. The Sun formed by gravity in a large molecular cloud. It is mainly hydrogen, which it converts into helium through nuclear fusion. The planets are in a flattened orbiting disk. This disk was left over from the",
+    "reranked_top1_original_vector_rank": 25,
+    "reranked_top1_score": -0.17041438817977905,
+    "evidence_phrase": "Sun formed by gravity in a large molecular cloud",
+    "reranked_top1_why_answer_bearing": "Cross-encoder promotes a chunk with stronger concept/evidence overlap for the correct option.",
+    "explanation": "Dense retrieval top-1 is broad star-formation background. Reranking promotes a molecular-cloud mechanism chunk from vector rank 25 to rank 1 with a clear score gain."
+  }
+]

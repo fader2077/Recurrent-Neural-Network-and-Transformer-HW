@@ -1,0 +1,100 @@
+{
+  "dataset": {
+    "source_file": "D:\\course\\rnnlstm\\HW3\\kaggle-llm-science-exam\\train.csv",
+    "train_rows": 200,
+    "eval_rows": 50,
+    "sampling": "train_df = pd.read_csv(train_path); official_eval_df = train_df.sample(n=50, random_state=42).reset_index(drop=True); official_eval_df = official_eval_df.rename(columns={\"prompt\": \"question\"})",
+    "sampled_source_row_indices": [
+      95,
+      15,
+      30,
+      158,
+      128,
+      115,
+      69,
+      170,
+      174,
+      45,
+      66,
+      182,
+      165,
+      78,
+      186,
+      177,
+      56,
+      152,
+      82,
+      68,
+      124,
+      16,
+      148,
+      93,
+      65,
+      60,
+      84,
+      67,
+      125,
+      132,
+      9,
+      18,
+      55,
+      75,
+      150,
+      104,
+      135,
+      137,
+      164,
+      76,
+      79,
+      197,
+      38,
+      24,
+      122,
+      195,
+      29,
+      19,
+      143,
+      86
+    ]
+  },
+  "device": "cuda",
+  "corpus": {
+    "raw_documents": 500,
+    "raw_total_chars": 2252107
+  },
+  "chunking": {
+    "strategy_a": {
+      "chunks": 6865,
+      "avg_chars": 334.47705753823743,
+      "min_chars": 2,
+      "max_chars": 500
+    },
+    "strategy_b": {
+      "chunks": 3204,
+      "avg_chars": 732.7306491885143,
+      "min_chars": 5,
+      "max_chars": 1000
+    }
+  },
+  "retrieval": {
+    "top_k_initial": 50,
+    "top_n_final": 3,
+    "index_a_vector_only_hit_rate": 0.66,
+    "index_a_rerank_hit_rate": 0.72,
+    "index_b_vector_only_hit_rate": 0.78,
+    "index_b_rerank_hit_rate": 0.82
+  },
+  "generation": {
+    "model": "llama3",
+    "official_index": "A",
+    "official_accuracy": 0.8
+  },
+  "latency": {
+    "avg_vector_search_time": 0.013191075325012206,
+    "avg_rerank_time": 0.026893138885498047,
+    "avg_generation_time": 2.4215429258346557,
+    "avg_total_time": 2.461627140045166
+  },
+  "reranking_examples_file": "official_reranking_examples.json",
+  "appendix_reference": "advanced_experiment_summary.json"
+}

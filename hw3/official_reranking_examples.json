@@ -1,0 +1,52 @@
+[
+  {
+    "question": "What is the relation between the three moment theorem and the bending moments at three successive supports of a continuous beam?",
+    "correct_answer": "C",
+    "correct_answer_text": "The three moment theorem describes the relationship between bending moments at three successive supports of a continuous beam, subject to a loading on two adjacent spans with or without settlement of the supports.",
+    "vector_top1_chunk": "Big Bang model \n\nThe prevailing Big Bang model accounts for many of the experimental observations described above, such as the correlation of distance and redshift of galaxies, the universal ratio of hydrogen:helium atoms, and the ubiquitous, isotropic microwave radiation background. As noted above, the redshift arises from the metric expansion of space; as the space itself expands, the wavelength of a photon traveling through space likewise increases, decreasing its energy. The longer a photon has been traveling, the more expansion it has undergone; hence, older photons from more distant galaxies are the most red-shifted. Determining the correlation between distance and redshift is an impor",
+    "vector_top1_rerank_score": -10.945781707763672,
+    "vector_top1_rerank_rank": 26,
+    "reranked_top1_chunk": "The General Theory of Relativity \n\nThe General Theory of Relativity was published in 1915, ten years after the special theory of relativity was created. Einstein's general theory of relativity uses the idea of spacetime. Spacetime is the fact that we have a four-dimensional universe, having three spatial (space) dimensions and one temporal (time) dimension. Any physical event happens at some place inside these three space dimensions, and at some moment in time. According to the general theory of relativity, any mass causes spacetime to curve, and any other mass follows these curves. Bigger mass causes more curving. This was a new way to explain gravitation (gravity).\n\nGeneral relativity expl",
+    "reranked_top1_score": -7.469574928283691,
+    "reranked_overlap_terms": [
+      "three",
+      "moment",
+      "bending",
+      "three",
+      "three",
+      "moment",
+      "bending",
+      "three"
+    ],
+    "vector_overlap_terms": [
+      "between",
+      "between"
+    ],
+    "explanation": "The reranker promoted the new top chunk because it aligned better with the question and correct answer terms. Promoted chunk matches: three, moment, bending, three, three, moment, bending, three. Original vector top-1 matches: between, between."
+  },
+  {
+    "question": "What can be inferred about the electronic entropy of insulators and metals based on their densities of states at the Fermi level?",
+    "correct_answer": "B",
+    "correct_answer_text": "Insulators have zero density of states at the Fermi level, and therefore, their density of states-based electronic entropy is essentially zero. Metals have non-zero density of states at the Fermi level, and thus, their electronic entropy should be proportional to the temperature and density of states at the Fermi level.",
+    "vector_top1_chunk": ". For example, if there were one mole of the sulfate ions SO42- on the copper side, then the process is limited to transferring two moles of electrons through the external circuit. The amount of electric charge contained in a mole of electrons is called the Faraday constant, and is equal to Avogadro's number times the electron charge:Faraday constant = F = NAe = 6.022 x 1023 x 1.602 x 10-19 = 96,485 Coulombs/moleThe energy yield from a voltaic cell is given by the cell voltage times the number of moles of electrons transferred times the Faraday constant.Electrical energy output = nFEcellThe cell emf Ecell may be predicted from the standard electrode potentials for the two metals. For the zin",
+    "vector_top1_rerank_score": -8.983356475830078,
+    "vector_top1_rerank_rank": 2,
+    "reranked_top1_chunk": "Other states \nMany other states of matter can exist under special conditions, including strange matter, supersolids, and possibly string-net liquids. Scientist work on experiments at very high or very low temperatures to learn more about phases of matter.\n\nCondensates \nBose-Einstein condensates and fermionic condensates are phases of matter that apply to particles called bosons and fermions, respectively. (More than one boson can exist in the same spot at the same time. Only one fermion can exist in the same spot at the same time). Bose-Einstein condensates and fermionic condensates occur at incredibly low temperatures. All of the particles in these condensates begin to act like one big quan",
+    "reranked_top1_score": -6.0972065925598145,
+    "reranked_overlap_terms": [
+      "can",
+      "states",
+      "have",
+      "states",
+      "states",
+      "have",
+      "states",
+      "states"
+    ],
+    "vector_overlap_terms": [
+      "metals",
+      "metals"
+    ],
+    "explanation": "The reranker promoted the new top chunk because it aligned better with the question and correct answer terms. Promoted chunk matches: can, states, have, states, states, have, states, states. Original vector top-1 matches: metals, metals."
+  }
+]

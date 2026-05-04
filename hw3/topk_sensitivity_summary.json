@@ -1,0 +1,26 @@
+{
+  "rows": [
+    {
+      "top_k": 20,
+      "Rerank top_n": 3,
+      "Hit Rate": 0.78,
+      "Accuracy": 0.7,
+      "Vector latency": 0.012149891853332519,
+      "Rerank latency": 0.015151352882385253,
+      "LLM latency": 2.450911636352539,
+      "Total latency": 2.4782128810882567,
+      "Vector-only Hit Rate": 0.78
+    },
+    {
+      "top_k": 50,
+      "Rerank top_n": 3,
+      "Hit Rate": 0.82,
+      "Accuracy": 0.74,
+      "Vector latency": 0.011347241401672363,
+      "Rerank latency": 0.03382538318634033,
+      "LLM latency": 2.446215925216675,
+      "Total latency": 2.4913885498046877,
+      "Vector-only Hit Rate": 0.78
+    }
+  ]
+}

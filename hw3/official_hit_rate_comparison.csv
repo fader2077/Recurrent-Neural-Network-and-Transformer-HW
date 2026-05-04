@@ -1,0 +1,5 @@
+index,method,hit_rate
+Index A (fixed 500/50),Vector Search Only,0.66
+Index A (fixed 500/50),Vector Search + Re-ranking,0.72
+Index B (recursive 1000/200),Vector Search Only,0.78
+Index B (recursive 1000/200),Vector Search + Re-ranking,0.82
