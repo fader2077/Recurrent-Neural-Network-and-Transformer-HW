@@ -1,0 +1,5 @@
+Model,Total Numeric Questions,Strict Exact Correct,Numeric Near-Match Correct,Strict Wrong but Numeric Near-Match Correct,Numeric Near-Match Rate
+Base LLaVA,32,0,4,4,0.125
+Original adapter q/v 1 epoch,32,1,5,4,0.15625
+New adapter q/v 2 epochs,32,2,4,3,0.125
+New adapter q/k/v/o 1 epoch,32,1,3,2,0.09375

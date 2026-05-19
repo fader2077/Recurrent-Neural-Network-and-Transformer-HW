@@ -1,0 +1,13 @@
+model,prompt_style,n,exact_match,normalized_match,numeric_near_match,combined_relaxed_accuracy,verbose_rate,average_answer_length_words
+Base LLaVA,normal,200,0.015,0.15,0.135,0.26,0.925,15.595
+Base LLaVA,short,200,0.135,0.14,0.215,0.3,0.015,1.2
+Original adapter q/v 1 epoch,normal,200,0.13,0.135,0.215,0.325,0.065,1.725
+Original adapter q/v 1 epoch,short,200,0.11,0.11,0.215,0.3,0.0,1.055
+New adapter q/v 2 epochs,normal,200,0.105,0.125,0.175,0.27,0.06,1.575
+New adapter q/v 2 epochs,short,200,0.1,0.115,0.185,0.28,0.02,1.18
+New adapter q/k/v/o 1 epoch,normal,200,0.12,0.125,0.185,0.28,0.065,1.635
+New adapter q/k/v/o 1 epoch,short,200,0.105,0.11,0.18,0.265,0.02,1.13
+qv_clean_3epoch_train2000,normal,200,0.0,0.24,0.27,0.425,0.4,6.45
+qv_clean_3epoch_train2000,short,200,0.075,0.255,0.245,0.42,0.3,5.485
+qkvo_clean_2epoch_train2000,normal,200,0.01,0.26,0.27,0.41,0.385,5.205
+qkvo_clean_2epoch_train2000,short,200,0.11,0.225,0.255,0.4,0.145,2.935

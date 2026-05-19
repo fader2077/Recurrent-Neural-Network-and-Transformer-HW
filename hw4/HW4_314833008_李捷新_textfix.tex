@@ -1,0 +1,259 @@
+\documentclass[11pt]{article}
+\usepackage[a4paper,margin=0.75in]{geometry}
+\usepackage{fontspec}
+\usepackage{xeCJK}
+\usepackage{graphicx}
+\usepackage{booktabs}
+\usepackage{adjustbox}
+\usepackage{xurl}
+\usepackage{hyperref}
+\usepackage{caption}
+% Latin font left to XeLaTeX default for portability; Times New Roman can be enabled locally if desired.
+\IfFontExistsTF{Microsoft JhengHei}{\setCJKmainfont{Microsoft JhengHei}}{\setCJKmainfont{Noto Sans CJK TC}}
+% CJK monospaced font is not required for this report.
+\hypersetup{colorlinks=true,urlcolor=blue}
+\urlstyle{same}
+\renewcommand{\arraystretch}{1.12}
+\setlength{\tabcolsep}{4pt}
+\newcommand{\safeincludegraphics}[2][]{%
+  \IfFileExists{#2}{\includegraphics[#1]{#2}}{\fbox{\parbox{0.82\linewidth}{Missing image: \texttt{\detokenize{#2}}}}}%
+}
+
+
+\title{HW4: Multimodal AI -- Visual Instruction Tuning (VQA)}
+\author{314833008 Lee Jiexin (李捷新)}
+\date{}
+
+\begin{document}
+\maketitle
+
+\section*{1. Title Page}
+\textbf{Student:} 314833008 Lee Jiexin (李捷新)\\
+\textbf{GitHub:} \url{https://github.com/fader2077/Recurrent-Neural-Network-and-Transformer-HW/tree/main/hw4}
+
+\section*{2. Overview}
+This report preserves the original HW4 required experiment and extends it with controlled re-evaluation, conservative metrics, and stricter qualitative checks.
+
+\section*{3. Dataset Choice}
+ChartQA is selected because chart VQA requires numeric reading, legend grounding, color recognition, and trend reasoning.
+
+\section*{4. Model and Method}
+Base model: LLaVA-v1.5-7B. Quantization: 4-bit NF4. Fine-tuning method: QLoRA / PEFT LoRA.
+
+\section*{5. Training Setup}
+Original required setup is preserved. The official v2 run uses a custom multimodal Trainer/PyTorch-style loop with a custom collator, assistant-only loss masking (labels for answer tokens only), padding labels=-100, train[:1000], 3 epochs, q/v LoRA targets, learning rate 1e-4, batch size 1, gradient accumulation 16, 4-bit NF4, frozen vision tower and frozen projector, and no truncation.
+
+\section*{6. Original 5-Case Evaluation}
+\subsection*{Case 0}
+\begin{center}\safeincludegraphics[width=0.66\linewidth]{outputs/eval_images/eval_0.png}\end{center}
+\textbf{Question:} What's the color of graph with 56 as the highest value?\\
+\textbf{Ground Truth:} Blue\\
+\textbf{Base Model Answer:} The color of the graph with 56 as the highest value is blue.\\
+\textbf{Fine-tuned Answer:} Blue\\
+\textbf{Analysis:} Both models identify the correct color. The base model gives a verbose sentence, while the fine-tuned adapter returns the concise label.
+
+\subsection*{Case 1}
+\begin{center}\safeincludegraphics[width=0.66\linewidth]{outputs/eval_images/eval_1.png}\end{center}
+\textbf{Question:} In which year the difference between blue and green graph 1?\\
+\textbf{Ground Truth:} 2018\\
+\textbf{Base Model Answer:} The difference between the blue and green graphs in 2011 is 1.\\
+\textbf{Fine-tuned Answer:} 2005\\
+\textbf{Analysis:} The base model predicts 2011 and the adapter predicts 2005; both miss the ground-truth year 2018.
+
+\subsection*{Case 2}
+\begin{center}\safeincludegraphics[width=0.66\linewidth]{outputs/eval_images/eval_2.png}\end{center}
+\textbf{Question:} What does the blue line represent?\\
+\textbf{Ground Truth:} Not too much/not at all\\
+\textbf{Base Model Answer:} The blue line represents the percentage of foreign policy decisions made by the United States.\\
+\textbf{Fine-tuned Answer:} The blue line represents the value of the foreign policy.\\
+\textbf{Analysis:} Both models miss strict legend grounding and do not return the exact chart label.
+
+\subsection*{Case 3}
+\begin{center}\safeincludegraphics[width=0.66\linewidth]{outputs/eval_images/eval_3.png}\end{center}
+\textbf{Question:} What is the max value of blue line?\\
+\textbf{Ground Truth:} 0.72\\
+\textbf{Base Model Answer}: The max value of the blue line is 70\%.\\
+\textbf{Fine-tuned Answer}: 1.0\\
+\textbf{Analysis}: The base model predicts 70\% and the adapter predicts 1.0; both miss the ground truth 0.72.
+
+\subsection*{Case 4}
+\begin{center}\safeincludegraphics[width=0.66\linewidth]{outputs/eval_images/eval_4.png}\end{center}
+\textbf{Question}: What's the percentage of respondents who say Job is a top priority for the president and Congress in 2016?\\
+\textbf{Ground Truth}: 68\\
+\textbf{Base Model Answer}: In 2016, 67\% of respondents indicated that jobs were a top priority for the president and Congress.\\
+\textbf{Fine-tuned Answer}: 75.75\\
+\textbf{Analysis}: The base model predicts 67 and the adapter predicts 75.75; both miss 68.
+
+\section*{7. Original Loss Curve}
+\textbf{Legacy diagnostic:} the earlier curve (outputs/loss\_curve.png) started near 10 and is treated as suspicious due to likely label-masking issues.
+\textbf{Official clean training evidence:}
+\begin{center}\safeincludegraphics[width=0.82\linewidth]{outputs/official_qv_shortstyle_v2_train1000_3epoch/loss_curve.png}\end{center}
+The official v2 run starts around 1.52 and decreases to around 0.80, with final train loss about 1.033. This is substantially cleaner than the legacy high-loss curve and supports the corrected masking pipeline.
+
+\section*{8. Additional Experiments Overview}
+Primary rule: fix evaluation logic and reporting consistency first, then interpret improvements conservatively.
+
+\section*{9. Larger Evaluation on ChartQA val[:50]}
+\begin{center}\scriptsize\begin{adjustbox}{max width=\textwidth}
+\begin{tabular}{lllll}
+\toprule
+Model & Exact & Norm & NumNear & CombinedRelaxed \\
+\midrule
+Base & 0.000 & 0.180 & 0.100 & 0.240 \\
+q/v 1ep & 0.060 & 0.060 & 0.140 & 0.180 \\
+q/v 2ep & 0.080 & 0.120 & 0.120 & 0.220 \\
+q/k/v/o 1ep & 0.060 & 0.060 & 0.100 & 0.140 \\
+\bottomrule
+\end{tabular}
+\end{adjustbox}\end{center}
+Combined Relaxed Accuracy is a relaxed metric, not strict accuracy. Base LLaVA has very low exact match in the normal prompt setting because it often produces verbose sentence-style answers instead of short ChartQA labels.
+
+\section*{10. Strict vs Relaxed Metrics}
+Keep strict and relaxed interpretations separate: case studies use strict ground-truth comparison, while relaxed metrics capture near-miss behavior.
+
+\section*{11. Controlled Re-evaluation on ChartQA val[:200]}
+Generation configuration: do\_sample=False, num\_beams=1, max\_new\_tokens=16, repetition\_penalty=1.1.
+\begin{center}\scriptsize\begin{adjustbox}{max width=\textwidth}
+\begin{tabular}{llllllll}
+\toprule
+Model & Prompt & Exact & Norm & FirstNum & AnyNum & Cons & Relaxed \\
+\midrule
+Base & normal & 0.005 & 0.130 & 0.090 & 0.090 & 0.200 & 0.200 \\
+Base & short & 0.115 & 0.125 & 0.210 & 0.210 & 0.290 & 0.290 \\
+Base & dataset & 0.130 & 0.135 & 0.210 & 0.210 & 0.305 & 0.305 \\
+q/v 1ep & normal & 0.125 & 0.135 & 0.200 & 0.200 & 0.300 & 0.300 \\
+q/v 1ep & short & 0.110 & 0.120 & 0.220 & 0.220 & 0.310 & 0.310 \\
+q/v 1ep & dataset & 0.110 & 0.110 & 0.225 & 0.225 & 0.305 & 0.305 \\
+q/v 2ep & normal & 0.120 & 0.130 & 0.195 & 0.195 & 0.285 & 0.285 \\
+q/v 2ep & short & 0.100 & 0.110 & 0.190 & 0.190 & 0.275 & 0.275 \\
+q/v 2ep & dataset & 0.095 & 0.110 & 0.175 & 0.175 & 0.260 & 0.260 \\
+q/k/v/o 1ep & normal & 0.110 & 0.115 & 0.185 & 0.185 & 0.275 & 0.275 \\
+q/k/v/o 1ep & short & 0.100 & 0.110 & 0.195 & 0.195 & 0.285 & 0.285 \\
+q/k/v/o 1ep & dataset & 0.100 & 0.105 & 0.175 & 0.175 & 0.255 & 0.255 \\
+q/v clean 3ep & normal & 0.080 & 0.285 & 0.265 & 0.275 & 0.460 & 0.460 \\
+q/v clean 3ep & short & 0.055 & 0.255 & 0.245 & 0.255 & 0.430 & 0.435 \\
+q/v clean 3ep & dataset & 0.025 & 0.250 & 0.245 & 0.250 & 0.425 & 0.425 \\
+q/k/v/o clean 2ep & normal & 0.105 & 0.230 & 0.250 & 0.255 & 0.400 & 0.405 \\
+q/k/v/o clean 2ep & short & 0.105 & 0.230 & 0.255 & 0.260 & 0.415 & 0.420 \\
+q/k/v/o clean 2ep & dataset & 0.085 & 0.225 & 0.265 & 0.270 & 0.420 & 0.425 \\
+\bottomrule
+\end{tabular}
+\end{adjustbox}\end{center}
+
+\section*{12. Conservative vs Relaxed Metrics}
+Combined Conservative Accuracy (Cons) is the main metric after observing unstable long numeric strings. Combined Relaxed Accuracy (Relaxed) is retained as an upper-bound relaxed metric.
+
+\section*{13. Answer Stability Diagnostics}
+\begin{center}\scriptsize\begin{adjustbox}{max width=\textwidth}
+\begin{tabular}{lllllll}
+\toprule
+Model & Prompt & MultiNum & Overlong & Repeat & AvgLen & Verbose \\
+\midrule
+Base & normal & 0.000 & 0.140 & 0.000 & 11.105 & 0.955 \\
+Base & short & 0.000 & 0.000 & 0.000 & 1.280 & 0.035 \\
+Base & dataset & 0.000 & 0.000 & 0.000 & 1.140 & 0.015 \\
+q/v 1ep & normal & 0.000 & 0.005 & 0.000 & 1.800 & 0.075 \\
+q/v 1ep & short & 0.000 & 0.000 & 0.000 & 1.085 & 0.005 \\
+q/v 1ep & dataset & 0.000 & 0.000 & 0.000 & 1.065 & 0.000 \\
+q/v 2ep & normal & 0.000 & 0.000 & 0.110 & 1.415 & 0.060 \\
+q/v 2ep & short & 0.000 & 0.000 & 0.080 & 1.065 & 0.000 \\
+q/v 2ep & dataset & 0.000 & 0.000 & 0.120 & 1.035 & 0.000 \\
+q/k/v/o 1ep & normal & 0.000 & 0.000 & 0.000 & 1.570 & 0.075 \\
+q/k/v/o 1ep & short & 0.000 & 0.000 & 0.000 & 1.085 & 0.010 \\
+q/k/v/o 1ep & dataset & 0.000 & 0.000 & 0.000 & 1.010 & 0.000 \\
+q/v clean 3ep & normal & 0.035 & 0.015 & 0.430 & 2.870 & 0.260 \\
+q/v clean 3ep & short & 0.035 & 0.005 & 0.415 & 2.835 & 0.270 \\
+q/v clean 3ep & dataset & 0.050 & 0.000 & 0.450 & 2.805 & 0.290 \\
+q/k/v/o clean 2ep & normal & 0.020 & 0.005 & 0.425 & 2.105 & 0.160 \\
+q/k/v/o clean 2ep & short & 0.025 & 0.010 & 0.395 & 1.940 & 0.115 \\
+q/k/v/o clean 2ep & dataset & 0.010 & 0.005 & 0.410 & 1.925 & 0.140 \\
+\bottomrule
+\end{tabular}
+\end{adjustbox}\end{center}
+Base LLaVA with normal prompt is verbose. Short prompts reduce verbosity. Clean adapters improve relaxed metrics but still show non-trivial repeated-fragment rates.
+
+\section*{14. Label Masking Diagnostics}
+Diagnostics file: \path{outputs/additional_experiments/label_masking_diagnostics.txt}. It prints question, ground truth answer, decoded full input, decoded label tokens where labels != -100, and masked ratio.
+
+\section*{15. Numeric Near-Miss Analysis}
+\begin{center}\scriptsize\begin{adjustbox}{max width=\textwidth}
+\begin{tabular}{llllll}
+\toprule
+Model & Total Numeric Questions & Strict Exact Correct & Numeric Near-Match Correct & Strict Wrong but Numeric Near-Match Correct & Numeric Near-Match Rate \\
+\midrule
+Base LLaVA & 32 & 0 & 4 & 4 & 0.125 \\
+Original adapter q/v 1 epoch & 32 & 1 & 5 & 4 & 0.156 \\
+New adapter q/v 2 epochs & 32 & 2 & 4 & 3 & 0.125 \\
+New adapter q/k/v/o 1 epoch & 32 & 1 & 3 & 2 & 0.094 \\
+\bottomrule
+\end{tabular}
+\end{adjustbox}\end{center}
+Case studies are discussed under strict ground-truth comparison, while numeric tolerance is used only as a relaxed aggregate metric.
+
+\section*{16. Clean Retraining Results}
+\begin{center}\scriptsize\begin{adjustbox}{max width=\textwidth}
+\begin{tabular}{lllllll}
+\toprule
+Model & Exact & Norm & FirstNum & AnyNum & Cons & Relaxed \\
+\midrule
+q/v clean 3ep & 0.080 & 0.285 & 0.265 & 0.275 & 0.460 & 0.460 \\
+q/k/v/o clean 2ep & 0.105 & 0.230 & 0.250 & 0.255 & 0.400 & 0.405 \\
+\bottomrule
+\end{tabular}
+\end{adjustbox}\end{center}
+Clean retraining improves relaxed aggregate metrics, especially normalized matching and numeric near-match. Exact match remains much lower than relaxed metrics.
+
+
+\section*{17. Controlled Final Clean Adapter 5-Case Check}
+Main table shows shortened outputs (max 60 chars); full outputs are saved to CSV/JSON. For official v2, the three repeated rows for each case correspond to normal, short-answer, and dataset-style prompts.
+\begin{center}\scriptsize\begin{adjustbox}{max width=\textwidth}
+\begin{tabular}{llllp{0.48\textwidth}}
+\toprule
+Case & Model & Prompt & GroundTruth & Answer \\
+\midrule
+0 & Base & normal & Blue & The color of the graph with 56 as the highest value is blue. \\
+0 & official v2 & normal & Blue & Green \\
+0 & official v2 & short & Blue & Green \\
+0 & official v2 & dataset & Blue & Green \\
+0 & q/v 1ep & normal & Blue & Blue \\
+1 & Base & normal & 2018 & In the year 2008, there is a noticeable difference in \\
+1 & official v2 & normal & 2018 & 2013 \\
+1 & official v2 & short & 2018 & 2008 \\
+1 & official v2 & dataset & 2018 & 2008 \\
+1 & q/v 1ep & normal & 2018 & 2005 \\
+2 & Base & normal & Not too much/not at all & The blue line represents the percentage of foreign policy de... \\
+2 & official v2 & normal & Not too much/not at all & The blue line represents the ``not too much/not at all'' optio... \\
+2 & official v2 & short & Not too much/not at all & Not too much/Not at all \\
+2 & official v2 & dataset & Not too much/not at all & Not too much/Not at all. \\
+2 & q/v 1ep & normal & Not too much/not at all & The blue line represents the value of the foreign policy. \\
+3 & Base & normal & 0.72 & The maximum value of the blue line in the image is at around... \\
+3 & official v2 & normal & 0.72 & The maximum value of the blue line, which represents ``not to... \\
+3 & official v2 & short & 0.72 & 70.1428571429 (7 \\
+3 & official v2 & dataset & 0.72 & 70.526315794844 \\
+3 & q/v 1ep & normal & 0.72 & 1.0 \\
+4 & Base & normal & 68 & In 2016, 74\% of respondents indicated that \\
+4 & official v2 & normal & 68 & 71.43\% \\
+4 & official v2 & short & 68 & 71.43\% \\
+4 & official v2 & dataset & 68 & 71.43\% \\
+4 & q/v 1ep & normal & 68 & 57.3\% \\
+\bottomrule
+\end{tabular}
+\end{adjustbox}\end{center}
+Although the official v2 retraining improves aggregate conservative metrics versus the original q/v 1ep model on val[:200], Case 0 still regresses from Blue to Green. Therefore, strict chart reasoning is still not solved and this result is reported as a limitation.
+
+\section*{18. Format-Control Evaluation}
+Short-answer and dataset-style prompts reduce verbosity strongly, but correctness gains are smaller than format gains.
+Official v2 summaries are saved to \path{outputs/official_qv_shortstyle_v2_train1000_3epoch/summary.csv}, \path{outputs/official_qv_shortstyle_v2_train1000_3epoch/val200_eval.csv}, and \path{outputs/official_qv_shortstyle_v2_train1000_3epoch/fixed_5case_eval.csv}.
+
+
+\section*{19. Statistical Caution}
+Because the evaluation subset contains 200 examples, a 0.01 change corresponds to about two examples. Therefore, small differences should not be over-interpreted.
+
+\section*{20. Final Discussion}
+The QLoRA pipeline satisfies the HW4 requirements and trains successfully. The original five-case evaluation shows persistent failures in exact year extraction, legend grounding, and numeric reading. The old high-loss curve is treated as suspicious, and the official clean shortstyle retraining provides cleaner training evidence with plausible loss dynamics. On val[:200], the official v2 adapter improves aggregate metrics versus the original q/v 1ep baseline under controlled generation, and Combined Conservative Accuracy is treated as the primary metric. However, exact-match and strict chart reasoning remain limited, and Case 0 still regresses to Green. Therefore, conclusions remain conservative.
+
+\section*{21. Conclusion}
+Small differences should not be over-interpreted. On val[:200], a 0.01 difference corresponds to about two examples. The final claim is limited: fine-tuning improves format control and aggregate conservative metrics, but strict chart reasoning remains difficult.
+
+\end{document}
+

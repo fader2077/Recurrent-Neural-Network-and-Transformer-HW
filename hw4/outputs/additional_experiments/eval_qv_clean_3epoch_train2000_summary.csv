@@ -1,0 +1,3 @@
+model,prompt_style,n,exact_match,normalized_match,numeric_near_match,combined_relaxed_accuracy,verbose_rate,average_answer_length_words
+qv_clean_3epoch_train2000,normal,200,0.0,0.24,0.27,0.425,0.4,6.45
+qv_clean_3epoch_train2000,short,200,0.075,0.255,0.245,0.42,0.3,5.485

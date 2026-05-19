@@ -1,0 +1,107 @@
+[
+  {
+    "index":0,
+    "model":"Base LLaVA",
+    "question":"What's the color of graph with 56 as the highest value?",
+    "ground_truth":"Blue",
+    "prediction":"The color of the graph with 56 as the highest value is blue."
+  },
+  {
+    "index":0,
+    "model":"Original adapter q\/v 1 epoch",
+    "question":"What's the color of graph with 56 as the highest value?",
+    "ground_truth":"Blue",
+    "prediction":"Blue"
+  },
+  {
+    "index":0,
+    "model":"official_qv_clean_shortstyle_train1000_3epoch",
+    "question":"What's the color of graph with 56 as the highest value?",
+    "ground_truth":"Blue",
+    "prediction":"Green"
+  },
+  {
+    "index":1,
+    "model":"Base LLaVA",
+    "question":"In which year the difference between blue and green graph 1?",
+    "ground_truth":"2018",
+    "prediction":"In the year 2008, there is a noticeable difference in"
+  },
+  {
+    "index":1,
+    "model":"Original adapter q\/v 1 epoch",
+    "question":"In which year the difference between blue and green graph 1?",
+    "ground_truth":"2018",
+    "prediction":"2005"
+  },
+  {
+    "index":1,
+    "model":"official_qv_clean_shortstyle_train1000_3epoch",
+    "question":"In which year the difference between blue and green graph 1?",
+    "ground_truth":"2018",
+    "prediction":"2014 (53) - 2013 ("
+  },
+  {
+    "index":2,
+    "model":"Base LLaVA",
+    "question":"What does the blue line represent?",
+    "ground_truth":"Not too much\/not at all",
+    "prediction":"The blue line represents the percentage of foreign policy decisions made by the United States"
+  },
+  {
+    "index":2,
+    "model":"Original adapter q\/v 1 epoch",
+    "question":"What does the blue line represent?",
+    "ground_truth":"Not too much\/not at all",
+    "prediction":"The blue line represents the value of the foreign policy."
+  },
+  {
+    "index":2,
+    "model":"official_qv_clean_shortstyle_train1000_3epoch",
+    "question":"What does the blue line represent?",
+    "ground_truth":"Not too much\/not at all",
+    "prediction":"Not too much\/Not at all."
+  },
+  {
+    "index":3,
+    "model":"Base LLaVA",
+    "question":"What is the max value of blue line?",
+    "ground_truth":"0.72",
+    "prediction":"The maximum value of the blue line in the image is at around 70"
+  },
+  {
+    "index":3,
+    "model":"Original adapter q\/v 1 epoch",
+    "question":"What is the max value of blue line?",
+    "ground_truth":"0.72",
+    "prediction":"1.0"
+  },
+  {
+    "index":3,
+    "model":"official_qv_clean_shortstyle_train1000_3epoch",
+    "question":"What is the max value of blue line?",
+    "ground_truth":"0.72",
+    "prediction":"68.571431622969"
+  },
+  {
+    "index":4,
+    "model":"Base LLaVA",
+    "question":"What's the percentage of respondents who say Job is a top priority for the president and Congress in 2016?",
+    "ground_truth":"68",
+    "prediction":"In 2016, 74% of respondents indicated that"
+  },
+  {
+    "index":4,
+    "model":"Original adapter q\/v 1 epoch",
+    "question":"What's the percentage of respondents who say Job is a top priority for the president and Congress in 2016?",
+    "ground_truth":"68",
+    "prediction":"57.3%"
+  },
+  {
+    "index":4,
+    "model":"official_qv_clean_shortstyle_train1000_3epoch",
+    "question":"What's the percentage of respondents who say Job is a top priority for the president and Congress in 2016?",
+    "ground_truth":"68",
+    "prediction":"71.43%"
+  }
+]

@@ -1,0 +1,29 @@
+model,question_type,n,combined_relaxed_accuracy,combined_accuracy,exact_match,normalized_match,numeric_tolerance_match
+Base LLaVA,color,5,0.6,0.6,0.0,0.6,0.0
+Base LLaVA,comparison,1,0.0,0.0,0.0,0.0,0.0
+Base LLaVA,legend_or_label,4,0.0,0.0,0.0,0.0,0.0
+Base LLaVA,numeric,32,0.1875,0.1875,0.0,0.125,0.125
+Base LLaVA,other,5,0.2,0.2,0.0,0.2,0.0
+Base LLaVA,year,2,0.5,0.5,0.0,0.0,0.5
+Base LLaVA,yes_no,1,1.0,1.0,0.0,1.0,0.0
+New adapter q/k/v/o 1 epoch,color,5,0.4,0.4,0.4,0.4,0.0
+New adapter q/k/v/o 1 epoch,comparison,1,0.0,0.0,0.0,0.0,0.0
+New adapter q/k/v/o 1 epoch,legend_or_label,4,0.0,0.0,0.0,0.0,0.0
+New adapter q/k/v/o 1 epoch,numeric,32,0.09375,0.09375,0.03125,0.03125,0.09375
+New adapter q/k/v/o 1 epoch,other,5,0.2,0.2,0.0,0.0,0.2
+New adapter q/k/v/o 1 epoch,year,2,0.5,0.5,0.0,0.0,0.5
+New adapter q/k/v/o 1 epoch,yes_no,1,0.0,0.0,0.0,0.0,0.0
+New adapter q/v 2 epochs,color,5,0.4,0.4,0.2,0.4,0.0
+New adapter q/v 2 epochs,comparison,1,1.0,1.0,0.0,1.0,0.0
+New adapter q/v 2 epochs,legend_or_label,4,0.0,0.0,0.0,0.0,0.0
+New adapter q/v 2 epochs,numeric,32,0.15625,0.15625,0.0625,0.0625,0.125
+New adapter q/v 2 epochs,other,5,0.2,0.2,0.0,0.0,0.2
+New adapter q/v 2 epochs,year,2,0.5,0.5,0.0,0.0,0.5
+New adapter q/v 2 epochs,yes_no,1,1.0,1.0,1.0,1.0,0.0
+Original adapter q/v 1 epoch,color,5,0.4,0.4,0.4,0.4,0.0
+Original adapter q/v 1 epoch,comparison,1,0.0,0.0,0.0,0.0,0.0
+Original adapter q/v 1 epoch,legend_or_label,4,0.0,0.0,0.0,0.0,0.0
+Original adapter q/v 1 epoch,numeric,32,0.15625,0.15625,0.03125,0.03125,0.15625
+Original adapter q/v 1 epoch,other,5,0.2,0.2,0.0,0.0,0.2
+Original adapter q/v 1 epoch,year,2,0.5,0.5,0.0,0.0,0.5
+Original adapter q/v 1 epoch,yes_no,1,0.0,0.0,0.0,0.0,0.0

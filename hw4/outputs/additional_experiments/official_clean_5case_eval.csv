@@ -1,0 +1,16 @@
+index,model,question,ground_truth,prediction
+0,Base LLaVA,What's the color of graph with 56 as the highest value?,Blue,The color of the graph with 56 as the highest value is blue.
+0,Original adapter q/v 1 epoch,What's the color of graph with 56 as the highest value?,Blue,Blue
+0,official_qv_clean_shortstyle_train1000_3epoch,What's the color of graph with 56 as the highest value?,Blue,Green
+1,Base LLaVA,In which year the difference between blue and green graph 1?,2018,"In the year 2008, there is a noticeable difference in"
+1,Original adapter q/v 1 epoch,In which year the difference between blue and green graph 1?,2018,2005
+1,official_qv_clean_shortstyle_train1000_3epoch,In which year the difference between blue and green graph 1?,2018,2014 (53) - 2013 (
+2,Base LLaVA,What does the blue line represent?,Not too much/not at all,The blue line represents the percentage of foreign policy decisions made by the United States
+2,Original adapter q/v 1 epoch,What does the blue line represent?,Not too much/not at all,The blue line represents the value of the foreign policy.
+2,official_qv_clean_shortstyle_train1000_3epoch,What does the blue line represent?,Not too much/not at all,Not too much/Not at all.
+3,Base LLaVA,What is the max value of blue line?,0.72,The maximum value of the blue line in the image is at around 70
+3,Original adapter q/v 1 epoch,What is the max value of blue line?,0.72,1.0
+3,official_qv_clean_shortstyle_train1000_3epoch,What is the max value of blue line?,0.72,68.571431622969
+4,Base LLaVA,What's the percentage of respondents who say Job is a top priority for the president and Congress in 2016?,68,"In 2016, 74% of respondents indicated that"
+4,Original adapter q/v 1 epoch,What's the percentage of respondents who say Job is a top priority for the president and Congress in 2016?,68,57.3%
+4,official_qv_clean_shortstyle_train1000_3epoch,What's the percentage of respondents who say Job is a top priority for the president and Congress in 2016?,68,71.43%

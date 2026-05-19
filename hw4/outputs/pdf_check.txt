@@ -1,0 +1,286 @@
+﻿          HW4: Multimodal AI – Visual Instruction Tuning (VQA)
+
+                                                 314833008 ???
+
+
+1. Title Page
+Student: 314833008 ???
+GitHub: https://github.com/fader2077/Recurrent-Neural-Network-and-Transformer-HW/tree/main/hw4
+
+
+2. Overview
+This report preserves the original HW4 required experiment and extends it with controlled re-evaluation, conser-
+vative metrics, and stricter qualitative checks.
+
+
+3. Dataset Choice
+ChartQA is selected because chart VQA requires numeric reading, legend grounding, color recognition, and trend
+reasoning.
+
+
+4. Model and Method
+Base model: LLaVA-v1.5-7B. Quantization: 4-bit NF4. Fine-tuning method: QLoRA / PEFT LoRA.
+
+
+5. Training Setup
+Original required setup is preserved: train[:1000], original q/v 1 epoch, learning rate 2e-4, batch size 1, gradient
+accumulation 16, vision tower frozen, and no truncation.
+
+
+6. Original 5-Case Evaluation
+Case 0
+
+
+
+
+                                                         1
+Question: What’s the color of graph with 56 as the highest value?
+Ground Truth: Blue
+Base Model Answer: The color of the graph with 56 as the highest value is blue.
+Fine-tuned Answer: Blue
+Analysis: Both models identify the correct color. The base model gives a verbose sentence, while the fine-tuned
+adapter returns the concise label.
+
+Case 1
+
+
+
+
+Question: In which year the difference between blue and green graph 1?
+Ground Truth: 2018
+Base Model Answer: The difference between the blue and green graphs in 2011 is 1.
+Fine-tuned Answer: 2005
+Analysis: The base model predicts 2011 and the adapter predicts 2005; both miss the ground-truth year 2018.
+
+
+
+
+                                                      2
+Case 2
+
+
+
+
+Question: What does the blue line represent?
+Ground Truth: Not too much/not at all
+Base Model Answer: The blue line represents the percentage of foreign policy decisions made by the United
+States.
+Fine-tuned Answer: The blue line represents the value of the foreign policy.
+Analysis: Both models miss strict legend grounding and do not return the exact chart label.
+
+
+
+
+                                                   3
+Case 3
+
+
+
+
+Question: What is the max value of blue line?
+Ground Truth: 0.72
+Base Model Answer: The max value of the blue line is 70%.
+Fine-tuned Answer: 1.0
+Analysis: The base model predicts 70% and the adapter predicts 1.0; both miss the ground truth 0.72.
+
+
+
+
+                                                      4
+Case 4
+
+
+
+
+Question: What’s the percentage of respondents who say Job is a top priority for the president and Congress in
+2016?
+Ground Truth: 68
+Base Model Answer: In 2016, 67% of respondents indicated that jobs were a top priority for the president and
+Congress.
+Fine-tuned Answer: 75.75
+Analysis: The base model predicts 67 and the adapter predicts 75.75; both miss 68.
+
+
+
+
+                                                      5
+7. Original Loss Curve
+
+
+
+
+8. Additional Experiments Overview
+Primary rule: fix evaluation logic and reporting consistency first, then interpret improvements conservatively.
+
+
+9. Larger Evaluation on ChartQA val[:50]
+                                 Model       Exact   Norm    NumNear CombinedRelaxed
+
+                                 Base        0.000   0.180   0.100    0.240
+                                 q/v 1ep     0.060   0.060   0.140    0.180
+                                 q/v 2ep     0.080   0.120   0.120    0.220
+                                 q/k/v/o 1ep 0.060   0.060   0.100    0.140
+
+
+Combined Relaxed Accuracy is a relaxed metric, not strict accuracy.
+
+
+10. Strict vs Relaxed Metrics
+Keep strict and relaxed interpretations separate: case studies use strict ground-truth comparison, while relaxed
+metrics capture near-miss behavior.
+
+
+11. Controlled Re-evaluation on ChartQA val[:200]
+Generation configuration: do_sample=False, num_beams=1, max_new_tokens=16, repetition_penalty=1.1.
+
+
+
+
+                                                             6
+                        Model                Prompt Exact        Norm     FirstNum    AnyNum     Cons     Relaxed
+
+                        Base                 normal     0.005    0.130    0.090       0.090      0.200    0.200
+                        Base                 short      0.115    0.125    0.210       0.210      0.290    0.290
+                        Base                 dataset    0.130    0.135    0.210       0.210      0.305    0.305
+                        q/v 1ep              normal     0.125    0.135    0.200       0.200      0.300    0.300
+                        q/v 1ep              short      0.110    0.120    0.220       0.220      0.310    0.310
+                        q/v 1ep              dataset    0.110    0.110    0.225       0.225      0.305    0.305
+                        q/v 2ep              normal     0.120    0.130    0.195       0.195      0.285    0.285
+                        q/v 2ep              short      0.100    0.110    0.190       0.190      0.275    0.275
+                        q/v 2ep              dataset    0.095    0.110    0.175       0.175      0.260    0.260
+                        q/k/v/o 1ep          normal     0.110    0.115    0.185       0.185      0.275    0.275
+                        q/k/v/o 1ep          short      0.100    0.110    0.195       0.195      0.285    0.285
+                        q/k/v/o 1ep          dataset    0.100    0.105    0.175       0.175      0.255    0.255
+                        q/v clean 3ep        normal     0.080    0.285    0.265       0.275      0.460    0.460
+                        q/v clean 3ep        short      0.055    0.255    0.245       0.255      0.430    0.435
+                        q/v clean 3ep        dataset    0.025    0.250    0.245       0.250      0.425    0.425
+                        q/k/v/o clean 2ep    normal     0.105    0.230    0.250       0.255      0.400    0.405
+                        q/k/v/o clean 2ep    short      0.105    0.230    0.255       0.260      0.415    0.420
+                        q/k/v/o clean 2ep    dataset    0.085    0.225    0.265       0.270      0.420    0.425
+
+
+
+12. Conservative vs Relaxed Metrics
+Combined Conservative Accuracy (Cons) is the main metric after observing unstable long numeric strings. Com-
+bined Relaxed Accuracy (Relaxed) is retained as an upper-bound relaxed metric.
+
+
+13. Answer Stability Diagnostics
+                         Model                Prompt     MultiNum        Overlong    Repeat   AvgLen Verbose
+
+                         Base                 normal     0.000           0.140       0.000    11.105     0.955
+                         Base                 short      0.000           0.000       0.000    1.280      0.035
+                         Base                 dataset    0.000           0.000       0.000    1.140      0.015
+                         q/v 1ep              normal     0.000           0.005       0.000    1.800      0.075
+                         q/v 1ep              short      0.000           0.000       0.000    1.085      0.005
+                         q/v 1ep              dataset    0.000           0.000       0.000    1.065      0.000
+                         q/v 2ep              normal     0.000           0.000       0.110    1.415      0.060
+                         q/v 2ep              short      0.000           0.000       0.080    1.065      0.000
+                         q/v 2ep              dataset    0.000           0.000       0.120    1.035      0.000
+                         q/k/v/o 1ep          normal     0.000           0.000       0.000    1.570      0.075
+                         q/k/v/o 1ep          short      0.000           0.000       0.000    1.085      0.010
+                         q/k/v/o 1ep          dataset    0.000           0.000       0.000    1.010      0.000
+                         q/v clean 3ep        normal     0.035           0.015       0.430    2.870      0.260
+                         q/v clean 3ep        short      0.035           0.005       0.415    2.835      0.270
+                         q/v clean 3ep        dataset    0.050           0.000       0.450    2.805      0.290
+                         q/k/v/o clean 2ep    normal     0.020           0.005       0.425    2.105      0.160
+                         q/k/v/o clean 2ep    short      0.025           0.010       0.395    1.940      0.115
+                         q/k/v/o clean 2ep    dataset    0.010           0.005       0.410    1.925      0.140
+
+
+Base LLaVA with normal prompt is verbose. Short prompts reduce verbosity. Clean adapters improve relaxed
+metrics but still show non-trivial repeated-fragment rates.
+
+
+14. Label Masking Diagnostics
+Diagnostics file: outputs/additional_experiments/label_masking_diagnostics.txt. It prints
+question, ground truth answer, decoded full input, decoded label tokens where labels != -100, and masked ratio.
+
+
+
+
+                                                                     7
+15. Numeric Near-Miss Analysis
+
+Model                       Total Numeric Questions    Strict Exact Correct   Numeric Near-Match Correct   Strict Wrong but Numeric Near-Match Correct   Numeric Near-Match Rate
+
+Base LLaVA                   32                        0                      4                            4                                             0.125
+Original adapter q/v 1 epoch 32                        1                      5                            4                                             0.156
+New adapter q/v 2 epochs     32                        2                      4                            3                                             0.125
+New adapter q/k/v/o 1 epoch 32                         1                      3                            2                                             0.094
+
+
+Case studies are discussed under strict ground-truth comparison, while numeric tolerance is used only as a relaxed
+aggregate metric.
+
+
+16. Clean Retraining Results
+                                          Model                    Exact      Norm     FirstNum     AnyNum         Cons     Relaxed
+
+                                          q/v clean 3ep     0.080             0.285    0.265        0.275          0.460    0.460
+                                          q/k/v/o clean 2ep 0.105             0.230    0.250        0.255          0.400    0.405
+
+Clean retraining improves relaxed aggregate metrics, especially normalized matching and numeric near-match.
+Exact match remains much lower than relaxed metrics.
+
+
+17. Controlled Final Clean Adapter 5-Case Check
+Main table shows shortened outputs (max 60 chars); full outputs are saved to CSV/JSON.
+                    Case Model                        GroundTruth                   Answer
+
+                    0        Base                     Blue                          The color of the graph with 56 as the highest value is blue.
+                    1        Base                     2018                          2009
+                    2        Base                     Not too much/not at all       The blue line represents the percentage of foreign policy de...
+                    3        Base                     0.72                          The max value of the blue line, which represents the percent...
+                    4        Base                     68                            In 2016, 71\{}% of respondents indicated that
+                    0        q/v 1ep                  Blue                          Blue
+                    1        q/v 1ep                  2018                          2005
+                    2        q/v 1ep                  Not too much/not at all       The blue line represents the value of the foreign policy.
+                    3        q/v 1ep                  0.72                          1.0
+                    4        q/v 1ep                  68                            57.3\{}%
+                    0        q/v clean 3ep            Blue                          Green
+                    1        q/v clean 3ep            2018                          2014-2015, 2015
+                    2        q/v clean 3ep            Not too much/not at all       Not too much/Not at all (60+70) 1
+                    3        q/v clean 3ep            0.72                          69.555555555555
+                    4        q/v clean 3ep            68                            67.143945312500
+                    0        q/k/v/o clean 2ep        Blue                          Green
+                    1        q/k/v/o clean 2ep        2018                          2014
+                    2        q/k/v/o clean 2ep        Not too much/not at all       Not too much/not at all (Great deal/fair amount)
+                    3        q/k/v/o clean 2ep        0.72                          70.561538461538
+                    4        q/k/v/o clean 2ep        68                            71.435882370976
+
+Although clean retraining improves aggregate relaxed metrics, the five-case qualitative check reveals remaining
+limitations, including strict year errors, imperfect legend grounding, and occasional unstable numeric outputs.
+Controlled generation reduces overlong outputs, but strict chart reasoning remains imperfect.
+
+
+18. Format-Control Evaluation
+Short-answer and dataset-style prompts reduce verbosity strongly, but correctness gains are smaller than format
+gains.
+
+
+19. Statistical Caution
+Because the evaluation subset contains 200 examples, a 0.01 change corresponds to about two examples. There-
+fore, small differences should not be over-interpreted.
+
+                                                                                        8
+20. Final Discussion
+The QLoRA pipeline satisfies the HW4 requirements and trains successfully. The original five-case evaluation
+shows persistent failures in exact year extraction, legend grounding, and numeric reading. After repairing label
+masking and retraining with assistant-only loss, clean adapters improve relaxed aggregate metrics. However,
+qualitative checks reveal that some clean-adapter outputs contain repeated fragments, overlong numeric strings,
+or incorrect labels. Therefore, the final interpretation relies on conservative metrics and controlled generation.
+The clean adapters improve relaxed chart-answer correctness, but exact-match accuracy and stable final-answer
+formatting remain open limitations.
+
+
+21. Conclusion
+Small differences should not be over-interpreted. On val[:200], a 0.01 difference corresponds to about two ex-
+amples. The difference between q/v clean 3ep and q/k/v/o clean 2ep is small, so this ranking is an observed trend
+rather than a definitive claim.
+
+
+
+
+                                                        9
+

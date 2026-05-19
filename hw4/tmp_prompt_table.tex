@@ -1,0 +1,14 @@
+\begin{tabular}{llllll}
+\toprule
+Model & Prompt & CombinedRelaxed & Exact & Verbose & AvgLen \\
+\midrule
+Base LLaVA & normal & 0.240 & 0.000 & 0.940 & 16.120 \\
+Base LLaVA & short & 0.240 & 0.140 & 0.000 & 1.060 \\
+Original adapter q/v 1 epoch & normal & 0.180 & 0.060 & 0.060 & 1.540 \\
+Original adapter q/v 1 epoch & short & 0.200 & 0.060 & 0.000 & 1.000 \\
+New adapter q/v 2 epochs & normal & 0.220 & 0.080 & 0.020 & 1.300 \\
+New adapter q/v 2 epochs & short & 0.220 & 0.060 & 0.000 & 1.060 \\
+New adapter q/k/v/o 1 epoch & normal & 0.140 & 0.060 & 0.060 & 1.720 \\
+New adapter q/k/v/o 1 epoch & short & 0.180 & 0.060 & 0.000 & 1.000 \\
+\bottomrule
+\end{tabular}

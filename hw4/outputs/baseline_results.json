@@ -1,0 +1,37 @@
+[
+  {
+    "index":0,
+    "question":"What's the color of graph with 56 as the highest value?",
+    "ground_truth":"Blue",
+    "base_answer":"The color of the graph with 56 as the highest value is blue.",
+    "base_correct":true
+  },
+  {
+    "index":1,
+    "question":"In which year the difference between blue and green graph 1?",
+    "ground_truth":"2018",
+    "base_answer":"The difference between the blue and green graphs in 2011 is 1.",
+    "base_correct":false
+  },
+  {
+    "index":2,
+    "question":"What does the blue line represent?",
+    "ground_truth":"Not too much\/not at all",
+    "base_answer":"The blue line represents the percentage of foreign policy decisions made by the United States. The graph shows that the U.S. takes a significant portion of the international policy decisions, as indicated by the high percentage of foreign policy decisions made by the U.S.",
+    "base_correct":false
+  },
+  {
+    "index":3,
+    "question":"What is the max value of blue line?",
+    "ground_truth":"0.72",
+    "base_answer":"The max value of the blue line is 70%.",
+    "base_correct":false
+  },
+  {
+    "index":4,
+    "question":"What's the percentage of respondents who say Job is a top priority for the president and Congress in 2016?",
+    "ground_truth":"68",
+    "base_answer":"In 2016, 67% of respondents indicated that jobs were a top priority for the president and Congress.",
+    "base_correct":false
+  }
+]

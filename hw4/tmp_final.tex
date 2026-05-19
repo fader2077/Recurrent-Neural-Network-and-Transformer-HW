@@ -1,0 +1,10 @@
+\begin{tabular}{lrllllll}
+\toprule
+Model & Epochs & Targets & Loss & Exact & Norm & NumNear & CombinedRelaxed \\
+\midrule
+Base LLaVA & 0 & none &  & 0.000 & 0.180 & 0.100 & 0.240 \\
+Original adapter q/v 1 epoch & 1 & ["q\_proj", "v\_proj"] & 5.234 & 0.060 & 0.060 & 0.140 & 0.180 \\
+New adapter q/v 2 epochs & 2 & ["q\_proj", "v\_proj"] & 4.363 & 0.080 & 0.120 & 0.120 & 0.220 \\
+New adapter q/k/v/o 1 epoch & 1 & ["q\_proj", "k\_proj", "v\_proj", "o\_proj"] & 4.718 & 0.060 & 0.060 & 0.100 & 0.140 \\
+\bottomrule
+\end{tabular}

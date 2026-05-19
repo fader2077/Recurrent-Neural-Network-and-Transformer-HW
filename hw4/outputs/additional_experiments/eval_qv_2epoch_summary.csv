@@ -1,0 +1,2 @@
+model,prompt_style,n,exact_match,normalized_match,numeric_tolerance_match,combined_accuracy,verbose_rate,average_answer_length_words
+New adapter q/v 2 epochs,normal,50,0.08,0.12,0.12,0.22,0.02,1.3

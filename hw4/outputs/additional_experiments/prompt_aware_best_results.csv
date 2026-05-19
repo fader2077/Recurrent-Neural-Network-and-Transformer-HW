@@ -1,0 +1,5 @@
+Model,Normal Combined Relaxed Accuracy,Short Combined Relaxed Accuracy,Best Combined Relaxed Accuracy,Best Prompt
+Base LLaVA,0.24,0.24,0.24,normal
+Original adapter q/v 1 epoch,0.18,0.2,0.2,short
+New adapter q/v 2 epochs,0.22,0.22,0.22,normal
+New adapter q/k/v/o 1 epoch,0.14,0.18,0.18,short

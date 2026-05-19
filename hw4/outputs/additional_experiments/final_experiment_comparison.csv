@@ -1,0 +1,5 @@
+model,epochs,target_modules,final_train_loss,val50_exact_match,val50_normalized_match,val50_numeric_tolerance,val50_combined_accuracy,verbose_rate_normal_prompt,verbose_rate_short_prompt,notes
+Base LLaVA,0,none,,0.0,0.18,0.1,0.24,0.94,0.0,No fine-tuning baseline.
+Original adapter q/v 1 epoch,1,"[""q_proj"", ""v_proj""]",5.233844847906203,0.06,0.06,0.14,0.18,0.06,0.0,Original HW4 adapter reused.
+New adapter q/v 2 epochs,2,"[""q_proj"", ""v_proj""]",4.363472408718533,0.08,0.12,0.12,0.22,0.02,0.0,Tests whether a longer run improves the original q/v setup.
+New adapter q/k/v/o 1 epoch,1,"[""q_proj"", ""k_proj"", ""v_proj"", ""o_proj""]",4.71752631475055,0.06,0.06,0.1,0.14,0.06,0.0,Tests whether adapting more attention projections helps.

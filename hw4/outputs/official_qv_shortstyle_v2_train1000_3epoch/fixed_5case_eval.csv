@@ -1,0 +1,26 @@
+checkpoint,model,index,question,ground_truth,prediction
+base,Base LLaVA,0,What's the color of graph with 56 as the highest value?,Blue,The color of the graph with 56 as the highest value is blue.
+base,Base LLaVA,1,In which year the difference between blue and green graph 1?,2018,"In the year 2008, there is a noticeable difference in"
+base,Base LLaVA,2,What does the blue line represent?,Not too much/not at all,The blue line represents the percentage of foreign policy decisions made by the United States
+base,Base LLaVA,3,What is the max value of blue line?,0.72,The maximum value of the blue line in the image is at around 70
+base,Base LLaVA,4,What's the percentage of respondents who say Job is a top priority for the president and Congress in 2016?,68,"In 2016, 74% of respondents indicated that"
+epoch1,official_qv_shortstyle_v2_train1000_3epoch,0,What's the color of graph with 56 as the highest value?,Blue,Green
+epoch1,official_qv_shortstyle_v2_train1000_3epoch,1,In which year the difference between blue and green graph 1?,2018,2013
+epoch1,official_qv_shortstyle_v2_train1000_3epoch,2,What does the blue line represent?,Not too much/not at all,"The blue line represents the ""not too much/not at all"" option in"
+epoch1,official_qv_shortstyle_v2_train1000_3epoch,3,What is the max value of blue line?,0.72,"The maximum value of the blue line, which represents ""not too much/not"
+epoch1,official_qv_shortstyle_v2_train1000_3epoch,4,What's the percentage of respondents who say Job is a top priority for the president and Congress in 2016?,68,71.43%
+epoch2,official_qv_shortstyle_v2_train1000_3epoch,0,What's the color of graph with 56 as the highest value?,Blue,Green
+epoch2,official_qv_shortstyle_v2_train1000_3epoch,1,In which year the difference between blue and green graph 1?,2018,2008
+epoch2,official_qv_shortstyle_v2_train1000_3epoch,2,What does the blue line represent?,Not too much/not at all,Not too much/Not at all
+epoch2,official_qv_shortstyle_v2_train1000_3epoch,3,What is the max value of blue line?,0.72,70.1428571429 (7
+epoch2,official_qv_shortstyle_v2_train1000_3epoch,4,What's the percentage of respondents who say Job is a top priority for the president and Congress in 2016?,68,71.43%
+epoch3,official_qv_shortstyle_v2_train1000_3epoch,0,What's the color of graph with 56 as the highest value?,Blue,Green
+epoch3,official_qv_shortstyle_v2_train1000_3epoch,1,In which year the difference between blue and green graph 1?,2018,2008
+epoch3,official_qv_shortstyle_v2_train1000_3epoch,2,What does the blue line represent?,Not too much/not at all,Not too much/Not at all.
+epoch3,official_qv_shortstyle_v2_train1000_3epoch,3,What is the max value of blue line?,0.72,70.526315794844
+epoch3,official_qv_shortstyle_v2_train1000_3epoch,4,What's the percentage of respondents who say Job is a top priority for the president and Congress in 2016?,68,71.43%
+orig_qv1,Original adapter q/v 1 epoch,0,What's the color of graph with 56 as the highest value?,Blue,Blue
+orig_qv1,Original adapter q/v 1 epoch,1,In which year the difference between blue and green graph 1?,2018,2005
+orig_qv1,Original adapter q/v 1 epoch,2,What does the blue line represent?,Not too much/not at all,The blue line represents the value of the foreign policy.
+orig_qv1,Original adapter q/v 1 epoch,3,What is the max value of blue line?,0.72,1.0
+orig_qv1,Original adapter q/v 1 epoch,4,What's the percentage of respondents who say Job is a top priority for the president and Congress in 2016?,68,57.3%

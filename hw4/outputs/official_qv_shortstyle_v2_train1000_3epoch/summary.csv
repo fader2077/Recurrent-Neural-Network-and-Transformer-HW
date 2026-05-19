@@ -1,0 +1,4 @@
+checkpoint,case0_prediction,case0_is_blue,exact_match,normalized_match,first_number_numeric_match,any_number_numeric_match,combined_conservative_accuracy,combined_relaxed_accuracy,repeated_fragment_rate,overlong_answer_rate,verbose_rate,average_answer_length
+epoch1,Green,False,0.035,0.165,0.07,0.08,0.205,0.215,0.0,0.11,0.745,8.84
+epoch2,Green,False,0.09,0.185,0.13,0.15,0.265,0.285,0.0,0.015,0.405,5.235
+epoch3,Green,False,0.09,0.2,0.135,0.16,0.28,0.305,0.01,0.01,0.41,5.105

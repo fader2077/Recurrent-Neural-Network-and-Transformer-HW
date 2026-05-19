@@ -1,0 +1,19 @@
+model,prompt_style,n,exact_match,normalized_match,first_number_numeric_match,final_answer_numeric_match,any_number_numeric_match,combined_conservative_accuracy,combined_relaxed_accuracy,multi_number_rate,overlong_answer_rate,repeated_fragment_rate,average_answer_length_words,verbose_rate,one_word_rate
+Base LLaVA,normal,200,0.005,0.13,0.09,0.09,0.09,0.2,0.2,0.0,0.14,0.0,11.105,0.955,0.035
+Base LLaVA,short-answer,200,0.115,0.125,0.21,0.21,0.21,0.29,0.29,0.0,0.0,0.0,1.28,0.035,0.925
+Base LLaVA,dataset-style,200,0.13,0.135,0.21,0.21,0.21,0.305,0.305,0.0,0.0,0.0,1.14,0.015,0.96
+Original adapter q/v 1 epoch,normal,200,0.125,0.135,0.2,0.2,0.2,0.3,0.3,0.0,0.005,0.0,1.8,0.075,0.835
+Original adapter q/v 1 epoch,short-answer,200,0.11,0.12,0.22,0.22,0.22,0.31,0.31,0.0,0.0,0.0,1.085,0.005,0.925
+Original adapter q/v 1 epoch,dataset-style,200,0.11,0.11,0.225,0.225,0.225,0.305,0.305,0.0,0.0,0.0,1.065,0.0,0.935
+New adapter q/v 2 epochs,normal,200,0.12,0.13,0.195,0.195,0.195,0.285,0.285,0.0,0.0,0.11,1.415,0.06,0.855
+New adapter q/v 2 epochs,short-answer,200,0.1,0.11,0.19,0.19,0.19,0.275,0.275,0.0,0.0,0.08,1.065,0.0,0.955
+New adapter q/v 2 epochs,dataset-style,200,0.095,0.11,0.175,0.175,0.175,0.26,0.26,0.0,0.0,0.12,1.035,0.0,0.975
+New adapter q/k/v/o 1 epoch,normal,200,0.11,0.115,0.185,0.185,0.185,0.275,0.275,0.0,0.0,0.0,1.57,0.075,0.835
+New adapter q/k/v/o 1 epoch,short-answer,200,0.1,0.11,0.195,0.195,0.195,0.285,0.285,0.0,0.0,0.0,1.085,0.01,0.94
+New adapter q/k/v/o 1 epoch,dataset-style,200,0.1,0.105,0.175,0.175,0.175,0.255,0.255,0.0,0.0,0.0,1.01,0.0,0.99
+qv_clean_3epoch_train2000,normal,200,0.08,0.285,0.265,0.265,0.275,0.46,0.46,0.035,0.015,0.43,2.87,0.26,0.595
+qv_clean_3epoch_train2000,short-answer,200,0.055,0.255,0.245,0.245,0.255,0.43,0.435,0.035,0.005,0.415,2.835,0.27,0.625
+qv_clean_3epoch_train2000,dataset-style,200,0.025,0.25,0.245,0.245,0.25,0.425,0.425,0.05,0.0,0.45,2.805,0.29,0.58
+qkvo_clean_2epoch_train2000,normal,200,0.105,0.23,0.25,0.25,0.255,0.4,0.405,0.02,0.005,0.425,2.105,0.16,0.755
+qkvo_clean_2epoch_train2000,short-answer,200,0.105,0.23,0.255,0.255,0.26,0.415,0.42,0.025,0.01,0.395,1.94,0.115,0.785
+qkvo_clean_2epoch_train2000,dataset-style,200,0.085,0.225,0.265,0.265,0.27,0.42,0.425,0.01,0.005,0.41,1.925,0.14,0.765

@@ -1,0 +1,5 @@
+Model,Exact Match,Normalized Match,Numeric Near-Match,Combined Relaxed Accuracy,Gap: Combined Relaxed - Exact
+Base LLaVA,0.0,0.18,0.1,0.24,0.24
+Original adapter q/v 1 epoch,0.06,0.06,0.14,0.18,0.12
+New adapter q/v 2 epochs,0.08,0.12,0.12,0.22,0.14
+New adapter q/k/v/o 1 epoch,0.06,0.06,0.1,0.14,0.08000000000000002

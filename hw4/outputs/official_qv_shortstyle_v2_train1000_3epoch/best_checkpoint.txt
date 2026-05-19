@@ -1,0 +1,8 @@
+best_checkpoint=epoch3
+case0_prediction=Green
+case0_is_blue=False
+combined_conservative_accuracy=0.280000
+combined_relaxed_accuracy=0.305000
+repeated_fragment_rate=0.010000
+overlong_answer_rate=0.010000
+No checkpoint answered Case0 as Blue; selected highest combined_conservative_accuracy.

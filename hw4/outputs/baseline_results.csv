@@ -1,0 +1,6 @@
+index,question,ground_truth,base_answer,base_correct
+0,What's the color of graph with 56 as the highest value?,Blue,The color of the graph with 56 as the highest value is blue.,True
+1,In which year the difference between blue and green graph 1?,2018,The difference between the blue and green graphs in 2011 is 1.,False
+2,What does the blue line represent?,Not too much/not at all,"The blue line represents the percentage of foreign policy decisions made by the United States. The graph shows that the U.S. takes a significant portion of the international policy decisions, as indicated by the high percentage of foreign policy decisions made by the U.S.",False
+3,What is the max value of blue line?,0.72,The max value of the blue line is 70%.,False
+4,What's the percentage of respondents who say Job is a top priority for the president and Congress in 2016?,68,"In 2016, 67% of respondents indicated that jobs were a top priority for the president and Congress.",False

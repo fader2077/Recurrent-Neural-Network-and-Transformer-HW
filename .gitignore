@@ -1,0 +1,6 @@
+﻿# Large training-state files excluded from GitHub push
+hw4/outputs/**/optimizer.pt
+hw4/outputs/**/scaler.pt
+hw4/outputs/**/scheduler.pt
+hw4/outputs/**/rng_state.pth
+hw4/outputs/**/trainer_state.json

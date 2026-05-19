@@ -1,0 +1,406 @@
+model,prompt_style,index,question,question_type,ground_truth,prediction,exact_match,normalized_match,numeric_tolerance_match,combined_accuracy,verbose,answer_length_words
+Base LLaVA,normal,0,What's the color of graph with 56 as the highest value?,color,Blue,The color of the graph with 56 as the highest value is blue.,False,True,False,True,True,13
+Base LLaVA,normal,1,In which year the difference between blue and green graph 1?,year,2018,2009,False,False,False,False,False,1
+Base LLaVA,normal,2,What does the blue line represent?,legend_or_label,Not too much/not at all,"The blue line represents the percentage of foreign policy decisions made by the United States. The graph shows that the U.S. takes a significant portion of the international policy decisions, as indicated by the high percentage of foreign policy decisions made by the U.S.",False,False,False,False,True,44
+Base LLaVA,normal,3,What is the max value of blue line?,numeric,0.72,The max value of the blue line is 70%.,False,False,False,False,True,9
+Base LLaVA,normal,4,What's the percentage of respondents who say Job is a top priority for the president and Congress in 2016?,numeric,68,"In 2016, 67% of respondents indicated that jobs were a top priority for the president and Congress.",False,False,True,True,True,17
+Base LLaVA,normal,5,Which line has the lowest value of 71%?,numeric,Economy,The line with the lowest value of 71% is the one that starts at 2011 and ends at 2013.,False,False,False,False,True,19
+Base LLaVA,normal,6,What is the unfavourable value in 2014?,numeric,64,"In 2014, the unfavourable value is 64%.",False,True,True,True,True,7
+Base LLaVA,normal,7,What is the median value of favourable line in the graph?,numeric,40,The median value of the favourable line in the graph is 40%.,False,True,True,True,True,12
+Base LLaVA,normal,8,Which answer response has the highest value on this graph?,numeric,Disapprove,"The highest value on this graph is the ""disapprove"" category.",False,True,False,True,True,10
+Base LLaVA,normal,9,How many data points on the disapprove line are above 50?,numeric,2,There are two data points on the disapprove line that are above 50.,False,False,False,False,True,13
+Base LLaVA,normal,10,Which indicator remains all time lowest from Dec. 2008 to Sep. 2011?,other,Mostly good news,The unemployment rate remains all time lowest from December 2008 to September 2011.,False,False,False,False,True,13
+Base LLaVA,normal,11,How much value of 'Mostly bad news' increased from Jan. 2011 to Sept. 2011?,numeric,37,The value of 'Mostly bad news' increased from 10% in January 2011 to 20% in September 2011.,False,False,False,False,True,17
+Base LLaVA,normal,12,When does the red line reach the peak?,legend_or_label,44538,The red line reaches the peak in January 2011.,False,False,False,False,True,9
+Base LLaVA,normal,13,What's the total sum of peak points of all three lines?,numeric,155,The total sum of peak points of all three lines is 100.,False,False,False,False,True,12
+Base LLaVA,normal,14,When does the yellow line reach the peak?,legend_or_label,44207,The yellow line reaches the peak in January 2009.,False,False,False,False,True,9
+Base LLaVA,normal,15,What's the total sum of peak points of green and red lines?,numeric,87,The total sum of peak points of the green and red lines is 100.,False,False,False,False,True,14
+Base LLaVA,normal,16,What's the lowest value of yellow line?,numeric,19,The lowest value of the yellow line is 50.,False,False,False,False,True,9
+Base LLaVA,normal,17,What's the difference of value of highiest value of red and lowest value of green line?,numeric,79,"The difference in value between the highest point of the red line and the lowest point of the green line represents the economic gap between the two groups. This gap can be attributed to various factors such as income, wealth, education, or access to resources. The image suggests that the red line represents the most economically disadv",False,False,False,False,True,57
+Base LLaVA,normal,18,What is the colour of oppose in the graph?,color,Light blue,The colour of oppose in the graph is blue.,False,False,False,False,True,9
+Base LLaVA,normal,19,How many times there is 44 value in the Favor?,numeric,3,"In the image, there are two instances of the value 44 in the Favor column.",False,False,False,False,True,15
+Base LLaVA,normal,20,What is the percentage of people who are dissatisfied with Spain's democracy?,numeric,68,"According to the pie chart, 66.67% of people are dissatisfied with Spain's democracy.",False,False,False,False,True,13
+Base LLaVA,normal,21,What is the ratio of people who are dissatisfied and satisfied with Spain's democracy?,other,2.125,"According to the pie chart, 66.67% of people are dissatisfied with Spain's democracy, while 33.33% are satisfied.",False,False,False,False,True,17
+Base LLaVA,normal,22,Is the Pie chart divided into 3 segment?,yes_no,Yes,"Yes, the pie chart is divided into three segments, each representing a different percentage of the total.",False,True,False,True,True,17
+Base LLaVA,normal,23,IS the value of No more then sum of Yes and Dk?,numeric,Yes,Yes.,False,True,False,True,False,1
+Base LLaVA,normal,24,What is the percentage of Iraqi dependents citizen?,numeric,0.12,The percentage of Iraqi dependents among the total population is 47.4%.,False,False,False,False,True,11
+Base LLaVA,normal,25,What is the total percentage of Afghan applicants and Iraqi applicants?,numeric,0.34,The total percentage of Afghan applicants and Iraqi applicants is 12.4%.,False,False,False,False,True,11
+Base LLaVA,normal,26,Is the color of 53% segment light green?,color,No,"No, the color of the 53% segment is not light green. It is a darker shade of green.",False,True,False,True,True,18
+Base LLaVA,normal,27,What's the ratio of Lean Republican segment and Republican segment?,other,0.7358,"The ratio of the Lean Republican segment to the Republican segment is 55:45. This means that 55% of the Republicans are Lean Republicans, while the remaining 45% are not Lean Republicans.",False,False,False,False,True,31
+Base LLaVA,normal,28,What segment represent by dark grey color?,color,Both,"The dark grey color represents the ""Both"" segment in the pie chart.",False,True,False,True,True,12
+Base LLaVA,normal,29,What is the percentage of both and don't know?,numeric,"[4, 9]",The percentage of both and don't know is 57%.,False,False,False,False,True,9
+Base LLaVA,normal,30,What's the value of leftmost bar in the bottom?,numeric,12,The value of the leftmost bar in the bottom is 8.,False,False,False,False,True,11
+Base LLaVA,normal,31,What is the largest value of dark green bar?,numeric,0.92,The largest value of the dark green bar is 12.5%.,False,False,False,False,True,10
+Base LLaVA,normal,32,Which country data analysed here?,other,cuba,Cuba,False,True,False,True,False,1
+Base LLaVA,normal,33,What is the maximum value of dark brown bar?,numeric,7,The maximum value of the dark brown bar is 42%.,False,False,False,False,True,10
+Base LLaVA,normal,34,What's the percentage of very important bar for healthy eating habits?,numeric,0.72,The percentage of very important bar for healthy eating habits is 70%.,False,False,False,False,True,12
+Base LLaVA,normal,35,What's the average of green bar median and light blue bar median?,numeric,17,The average of the green bar median and the light blue bar median is 47.,False,False,False,False,True,15
+Base LLaVA,normal,36,What does dark blue bar represents?,legend_or_label,Very Important,"The dark blue bar represents the percentage of adults who engage in physical exercise, which is a key factor in maintaining a long and healthy life.",False,False,False,False,True,26
+Base LLaVA,normal,37,What's the average value of all dark blue bars?,numeric,62.75,The average value of all dark blue bars is 7.4.,False,False,False,False,True,10
+Base LLaVA,normal,38,What does the color green indicate?,color,Support,The color green in the image indicates that the percentage is related to the developing countries. This color scheme is used to differentiate between the developing countries and the developed countries.,False,False,False,False,True,31
+Base LLaVA,normal,39,What is the difference between the longest and the shortest green bar?,comparison,7,"The difference between the longest and the shortest green bar is the height of the bars. The longest green bar is taller, while the shortest green bar is shorter. This difference might be due to the scale used to represent the data or the specific context of the data being displayed.",False,False,False,False,True,51
+Base LLaVA,normal,40,"Which country has the highest percentage value of ""a lot""?",numeric,Kenya,"The country with the highest percentage value of ""a lot"" is the United States.",False,False,False,False,True,14
+Base LLaVA,normal,41,"What is the maximum value of ""a lot"" among countries?",numeric,0.69,"The maximum value of ""a lot"" among countries is 32.5%. This value is associated with the country of Nigeria.",False,False,False,False,True,19
+Base LLaVA,normal,42,How many bars are there in the graph?,numeric,2,There are two bars in the graph.,False,False,False,False,True,7
+Base LLaVA,normal,43,What is the total sum of both the bars?,numeric,7.81,The total sum of both the bars is 100.,False,False,False,False,True,9
+Base LLaVA,normal,44,What's the value of United States?,numeric,0.124,"The United States is the top ten exporters, with a value of $1.5 trillion.",False,False,False,False,True,14
+Base LLaVA,normal,45,"What's the average value of Canada, Belgium and France?",numeric,0.0277,"The average value of Canada, Belgium, and France is 10.",False,False,False,False,True,10
+Base LLaVA,normal,46,What is the death rate in the age group 5-14 years old?,year,0.0034,"The death rate in the age group 5-14 years old is 0.02 per 1,000 population.",False,False,True,True,True,15
+Base LLaVA,normal,47,Find the median value of all the bars?,numeric,0.68,"To find the median value of all the bars, you can follow these steps:
+
+1. Identify the bars that represent the different age groups.
+2. Calculate the median value for each age group.
+3. Sum the median values for all the age groups.
+4. Divide the sum",False,False,True,True,True,47
+Base LLaVA,normal,48,Which place shows the highest death rate?,other,Grenada,The place that shows the highest death rate is the United States.,False,False,False,False,True,12
+Base LLaVA,normal,49,Is the value of death rate in Denmark more then Croatia?,numeric,No,"Yes, the value of death rate in Denmark is more than in Croatia. The death rate in Denmark is 10.1 per 100,000 people, while in Croatia, it is 12.1 per 100,000 people. This",False,False,False,False,True,33
+Base LLaVA,short,0,What's the color of graph with 56 as the highest value?,color,Blue,Green,False,False,False,False,False,1
+Base LLaVA,short,1,In which year the difference between blue and green graph 1?,year,2018,2009,False,False,False,False,False,1
+Base LLaVA,short,2,What does the blue line represent?,legend_or_label,Not too much/not at all,Foreign policy,False,False,False,False,False,2
+Base LLaVA,short,3,What is the max value of blue line?,numeric,0.72,70,False,False,False,False,False,1
+Base LLaVA,short,4,What's the percentage of respondents who say Job is a top priority for the president and Congress in 2016?,numeric,68,60,False,False,False,False,False,1
+Base LLaVA,short,5,Which line has the lowest value of 71%?,numeric,Economy,2014,False,False,False,False,False,1
+Base LLaVA,short,6,What is the unfavourable value in 2014?,numeric,64,64,True,True,True,True,False,1
+Base LLaVA,short,7,What is the median value of favourable line in the graph?,numeric,40,40,True,True,True,True,False,1
+Base LLaVA,short,8,Which answer response has the highest value on this graph?,numeric,Disapprove,Approve,False,False,False,False,False,1
+Base LLaVA,short,9,How many data points on the disapprove line are above 50?,numeric,2,0,False,False,True,True,False,1
+Base LLaVA,short,10,Which indicator remains all time lowest from Dec. 2008 to Sep. 2011?,other,Mostly good news,Unemployment rate,False,False,False,False,False,2
+Base LLaVA,short,11,How much value of 'Mostly bad news' increased from Jan. 2011 to Sept. 2011?,numeric,37,100,False,False,False,False,False,1
+Base LLaVA,short,12,When does the red line reach the peak?,legend_or_label,44538,2011,False,False,False,False,False,1
+Base LLaVA,short,13,What's the total sum of peak points of all three lines?,numeric,155,100,False,False,False,False,False,1
+Base LLaVA,short,14,When does the yellow line reach the peak?,legend_or_label,44207,2009,False,False,False,False,False,1
+Base LLaVA,short,15,What's the total sum of peak points of green and red lines?,numeric,87,100,False,False,False,False,False,1
+Base LLaVA,short,16,What's the lowest value of yellow line?,numeric,19,50,False,False,False,False,False,1
+Base LLaVA,short,17,What's the difference of value of highiest value of red and lowest value of green line?,numeric,79,100,False,False,False,False,False,1
+Base LLaVA,short,18,What is the colour of oppose in the graph?,color,Light blue,Blue,False,False,False,False,False,1
+Base LLaVA,short,19,How many times there is 44 value in the Favor?,numeric,3,1,False,False,False,False,False,1
+Base LLaVA,short,20,What is the percentage of people who are dissatisfied with Spain's democracy?,numeric,68,66,False,False,False,False,False,1
+Base LLaVA,short,21,What is the ratio of people who are dissatisfied and satisfied with Spain's democracy?,other,2.125,66%,False,False,False,False,False,1
+Base LLaVA,short,22,Is the Pie chart divided into 3 segment?,yes_no,Yes,Yes,True,True,False,True,False,1
+Base LLaVA,short,23,IS the value of No more then sum of Yes and Dk?,numeric,Yes,Yes,True,True,False,True,False,1
+Base LLaVA,short,24,What is the percentage of Iraqi dependents citizen?,numeric,0.12,12,False,False,True,True,False,1
+Base LLaVA,short,25,What is the total percentage of Afghan applicants and Iraqi applicants?,numeric,0.34,12,False,False,False,False,False,1
+Base LLaVA,short,26,Is the color of 53% segment light green?,color,No,No,True,True,False,True,False,1
+Base LLaVA,short,27,What's the ratio of Lean Republican segment and Republican segment?,other,0.7358,0.55,False,False,True,True,False,1
+Base LLaVA,short,28,What segment represent by dark grey color?,color,Both,19,False,False,False,False,False,1
+Base LLaVA,short,29,What is the percentage of both and don't know?,numeric,"[4, 9]",19,False,False,False,False,False,1
+Base LLaVA,short,30,What's the value of leftmost bar in the bottom?,numeric,12,8,False,False,False,False,False,1
+Base LLaVA,short,31,What is the largest value of dark green bar?,numeric,0.92,100,False,False,False,False,False,1
+Base LLaVA,short,32,Which country data analysed here?,other,cuba,Cuba,False,True,False,True,False,1
+Base LLaVA,short,33,What is the maximum value of dark brown bar?,numeric,7,42,False,False,False,False,False,1
+Base LLaVA,short,34,What's the percentage of very important bar for healthy eating habits?,numeric,0.72,47,False,False,False,False,False,1
+Base LLaVA,short,35,What's the average of green bar median and light blue bar median?,numeric,17,45,False,False,False,False,False,1
+Base LLaVA,short,36,What does dark blue bar represents?,legend_or_label,Very Important,Not important,False,False,False,False,False,2
+Base LLaVA,short,37,What's the average value of all dark blue bars?,numeric,62.75,70,False,False,False,False,False,1
+Base LLaVA,short,38,What does the color green indicate?,color,Support,Support,True,True,False,True,False,1
+Base LLaVA,short,39,What is the difference between the longest and the shortest green bar?,comparison,7,100,False,False,False,False,False,1
+Base LLaVA,short,40,"Which country has the highest percentage value of ""a lot""?",numeric,Kenya,Usa,False,False,False,False,False,1
+Base LLaVA,short,41,"What is the maximum value of ""a lot"" among countries?",numeric,0.69,30,False,False,False,False,False,1
+Base LLaVA,short,42,How many bars are there in the graph?,numeric,2,2,True,True,True,True,False,1
+Base LLaVA,short,43,What is the total sum of both the bars?,numeric,7.81,100,False,False,False,False,False,1
+Base LLaVA,short,44,What's the value of United States?,numeric,0.124,10,False,False,False,False,False,1
+Base LLaVA,short,45,"What's the average value of Canada, Belgium and France?",numeric,0.0277,10,False,False,False,False,False,1
+Base LLaVA,short,46,What is the death rate in the age group 5-14 years old?,year,0.0034,0.0000000000000000000000000000000000000000000000000000000000000,False,False,True,True,False,1
+Base LLaVA,short,47,Find the median value of all the bars?,numeric,0.68,100000,False,False,False,False,False,1
+Base LLaVA,short,48,Which place shows the highest death rate?,other,Grenada,City,False,False,False,False,False,1
+Base LLaVA,short,49,Is the value of death rate in Denmark more then Croatia?,numeric,No,Yes,False,False,False,False,False,1
+Original adapter q/v 1 epoch,normal,0,What's the color of graph with 56 as the highest value?,color,Blue,Blue,True,True,False,True,False,1
+Original adapter q/v 1 epoch,normal,1,In which year the difference between blue and green graph 1?,year,2018,2005,False,False,False,False,False,1
+Original adapter q/v 1 epoch,normal,2,What does the blue line represent?,legend_or_label,Not too much/not at all,The blue line represents the value of the foreign policy.,False,False,False,False,True,10
+Original adapter q/v 1 epoch,normal,3,What is the max value of blue line?,numeric,0.72,1.0,False,False,True,True,False,1
+Original adapter q/v 1 epoch,normal,4,What's the percentage of respondents who say Job is a top priority for the president and Congress in 2016?,numeric,68,75.76,False,False,False,False,False,1
+Original adapter q/v 1 epoch,normal,5,Which line has the lowest value of 71%?,numeric,Economy,Yellow,False,False,False,False,False,1
+Original adapter q/v 1 epoch,normal,6,What is the unfavourable value in 2014?,numeric,64,45,False,False,False,False,False,1
+Original adapter q/v 1 epoch,normal,7,What is the median value of favourable line in the graph?,numeric,40,50,False,False,False,False,False,1
+Original adapter q/v 1 epoch,normal,8,Which answer response has the highest value on this graph?,numeric,Disapprove,45,False,False,False,False,False,1
+Original adapter q/v 1 epoch,normal,9,How many data points on the disapprove line are above 50?,numeric,2,1,False,False,True,True,False,1
+Original adapter q/v 1 epoch,normal,10,Which indicator remains all time lowest from Dec. 2008 to Sep. 2011?,other,Mostly good news,Yellow,False,False,False,False,False,1
+Original adapter q/v 1 epoch,normal,11,How much value of 'Mostly bad news' increased from Jan. 2011 to Sept. 2011?,numeric,37,100,False,False,False,False,False,1
+Original adapter q/v 1 epoch,normal,12,When does the red line reach the peak?,legend_or_label,44538,2011-01-01,False,False,False,False,False,1
+Original adapter q/v 1 epoch,normal,13,What's the total sum of peak points of all three lines?,numeric,155,100,False,False,False,False,False,1
+Original adapter q/v 1 epoch,normal,14,When does the yellow line reach the peak?,legend_or_label,44207,2010,False,False,False,False,False,1
+Original adapter q/v 1 epoch,normal,15,What's the total sum of peak points of green and red lines?,numeric,87,100,False,False,False,False,False,1
+Original adapter q/v 1 epoch,normal,16,What's the lowest value of yellow line?,numeric,19,35,False,False,False,False,False,1
+Original adapter q/v 1 epoch,normal,17,What's the difference of value of highiest value of red and lowest value of green line?,numeric,79,1,False,False,False,False,False,1
+Original adapter q/v 1 epoch,normal,18,What is the colour of oppose in the graph?,color,Light blue,Blue,False,False,False,False,False,1
+Original adapter q/v 1 epoch,normal,19,How many times there is 44 value in the Favor?,numeric,3,44,False,False,False,False,False,1
+Original adapter q/v 1 epoch,normal,20,What is the percentage of people who are dissatisfied with Spain's democracy?,numeric,68,66.67,False,False,False,False,False,1
+Original adapter q/v 1 epoch,normal,21,What is the ratio of people who are dissatisfied and satisfied with Spain's democracy?,other,2.125,0.66,False,False,False,False,False,1
+Original adapter q/v 1 epoch,normal,22,Is the Pie chart divided into 3 segment?,yes_no,Yes,"No, the Pie chart is divided into 4 segments.",False,False,False,False,True,9
+Original adapter q/v 1 epoch,normal,23,IS the value of No more then sum of Yes and Dk?,numeric,Yes,No,False,False,False,False,False,1
+Original adapter q/v 1 epoch,normal,24,What is the percentage of Iraqi dependents citizen?,numeric,0.12,12.57,False,False,True,True,False,1
+Original adapter q/v 1 epoch,normal,25,What is the total percentage of Afghan applicants and Iraqi applicants?,numeric,0.34,100%,False,False,False,False,False,1
+Original adapter q/v 1 epoch,normal,26,Is the color of 53% segment light green?,color,No,No,True,True,False,True,False,1
+Original adapter q/v 1 epoch,normal,27,What's the ratio of Lean Republican segment and Republican segment?,other,0.7358,0.56,False,False,True,True,False,1
+Original adapter q/v 1 epoch,normal,28,What segment represent by dark grey color?,color,Both,100-120,False,False,False,False,False,1
+Original adapter q/v 1 epoch,normal,29,What is the percentage of both and don't know?,numeric,"[4, 9]",100,False,False,False,False,False,1
+Original adapter q/v 1 epoch,normal,30,What's the value of leftmost bar in the bottom?,numeric,12,51,False,False,False,False,False,1
+Original adapter q/v 1 epoch,normal,31,What is the largest value of dark green bar?,numeric,0.92,54,False,False,False,False,False,1
+Original adapter q/v 1 epoch,normal,32,Which country data analysed here?,other,cuba,United States,False,False,False,False,False,2
+Original adapter q/v 1 epoch,normal,33,What is the maximum value of dark brown bar?,numeric,7,55,False,False,False,False,False,1
+Original adapter q/v 1 epoch,normal,34,What's the percentage of very important bar for healthy eating habits?,numeric,0.72,25.75,False,False,False,False,False,1
+Original adapter q/v 1 epoch,normal,35,What's the average of green bar median and light blue bar median?,numeric,17,55.5,False,False,False,False,False,1
+Original adapter q/v 1 epoch,normal,36,What does dark blue bar represents?,legend_or_label,Very Important,14.5,False,False,False,False,False,1
+Original adapter q/v 1 epoch,normal,37,What's the average value of all dark blue bars?,numeric,62.75,54.5,False,False,False,False,False,1
+Original adapter q/v 1 epoch,normal,38,What does the color green indicate?,color,Support,The color green indicates the value of 1.5.,False,False,False,False,True,8
+Original adapter q/v 1 epoch,normal,39,What is the difference between the longest and the shortest green bar?,comparison,7,100,False,False,False,False,False,1
+Original adapter q/v 1 epoch,normal,40,"Which country has the highest percentage value of ""a lot""?",numeric,Kenya,United States,False,False,False,False,False,2
+Original adapter q/v 1 epoch,normal,41,"What is the maximum value of ""a lot"" among countries?",numeric,0.69,100,False,False,False,False,False,1
+Original adapter q/v 1 epoch,normal,42,How many bars are there in the graph?,numeric,2,2,True,True,True,True,False,1
+Original adapter q/v 1 epoch,normal,43,What is the total sum of both the bars?,numeric,7.81,100,False,False,False,False,False,1
+Original adapter q/v 1 epoch,normal,44,What's the value of United States?,numeric,0.124,10,False,False,False,False,False,1
+Original adapter q/v 1 epoch,normal,45,"What's the average value of Canada, Belgium and France?",numeric,0.0277,1.5,False,False,True,True,False,1
+Original adapter q/v 1 epoch,normal,46,What is the death rate in the age group 5-14 years old?,year,0.0034,0.025,False,False,True,True,False,1
+Original adapter q/v 1 epoch,normal,47,Find the median value of all the bars?,numeric,0.68,5.5,False,False,False,False,False,1
+Original adapter q/v 1 epoch,normal,48,Which place shows the highest death rate?,other,Grenada,Smallest place,False,False,False,False,False,2
+Original adapter q/v 1 epoch,normal,49,Is the value of death rate in Denmark more then Croatia?,numeric,No,Yes,False,False,False,False,False,1
+Original adapter q/v 1 epoch,short,0,What's the color of graph with 56 as the highest value?,color,Blue,Blue,True,True,False,True,False,1
+Original adapter q/v 1 epoch,short,1,In which year the difference between blue and green graph 1?,year,2018,2005,False,False,False,False,False,1
+Original adapter q/v 1 epoch,short,2,What does the blue line represent?,legend_or_label,Not too much/not at all,2007,False,False,False,False,False,1
+Original adapter q/v 1 epoch,short,3,What is the max value of blue line?,numeric,0.72,1.0,False,False,True,True,False,1
+Original adapter q/v 1 epoch,short,4,What's the percentage of respondents who say Job is a top priority for the president and Congress in 2016?,numeric,68,75,False,False,False,False,False,1
+Original adapter q/v 1 epoch,short,5,Which line has the lowest value of 71%?,numeric,Economy,Yellow,False,False,False,False,False,1
+Original adapter q/v 1 epoch,short,6,What is the unfavourable value in 2014?,numeric,64,45,False,False,False,False,False,1
+Original adapter q/v 1 epoch,short,7,What is the median value of favourable line in the graph?,numeric,40,50,False,False,False,False,False,1
+Original adapter q/v 1 epoch,short,8,Which answer response has the highest value on this graph?,numeric,Disapprove,4,False,False,False,False,False,1
+Original adapter q/v 1 epoch,short,9,How many data points on the disapprove line are above 50?,numeric,2,1,False,False,True,True,False,1
+Original adapter q/v 1 epoch,short,10,Which indicator remains all time lowest from Dec. 2008 to Sep. 2011?,other,Mostly good news,Yellow,False,False,False,False,False,1
+Original adapter q/v 1 epoch,short,11,How much value of 'Mostly bad news' increased from Jan. 2011 to Sept. 2011?,numeric,37,0.01,False,False,False,False,False,1
+Original adapter q/v 1 epoch,short,12,When does the red line reach the peak?,legend_or_label,44538,2011-09-01,False,False,False,False,False,1
+Original adapter q/v 1 epoch,short,13,What's the total sum of peak points of all three lines?,numeric,155,100,False,False,False,False,False,1
+Original adapter q/v 1 epoch,short,14,When does the yellow line reach the peak?,legend_or_label,44207,2009,False,False,False,False,False,1
+Original adapter q/v 1 epoch,short,15,What's the total sum of peak points of green and red lines?,numeric,87,100,False,False,False,False,False,1
+Original adapter q/v 1 epoch,short,16,What's the lowest value of yellow line?,numeric,19,1,False,False,False,False,False,1
+Original adapter q/v 1 epoch,short,17,What's the difference of value of highiest value of red and lowest value of green line?,numeric,79,1,False,False,False,False,False,1
+Original adapter q/v 1 epoch,short,18,What is the colour of oppose in the graph?,color,Light blue,Blue,False,False,False,False,False,1
+Original adapter q/v 1 epoch,short,19,How many times there is 44 value in the Favor?,numeric,3,44,False,False,False,False,False,1
+Original adapter q/v 1 epoch,short,20,What is the percentage of people who are dissatisfied with Spain's democracy?,numeric,68,66,False,False,False,False,False,1
+Original adapter q/v 1 epoch,short,21,What is the ratio of people who are dissatisfied and satisfied with Spain's democracy?,other,2.125,0.66,False,False,False,False,False,1
+Original adapter q/v 1 epoch,short,22,Is the Pie chart divided into 3 segment?,yes_no,Yes,No,False,False,False,False,False,1
+Original adapter q/v 1 epoch,short,23,IS the value of No more then sum of Yes and Dk?,numeric,Yes,No,False,False,False,False,False,1
+Original adapter q/v 1 epoch,short,24,What is the percentage of Iraqi dependents citizen?,numeric,0.12,12.5,False,False,True,True,False,1
+Original adapter q/v 1 epoch,short,25,What is the total percentage of Afghan applicants and Iraqi applicants?,numeric,0.34,100,False,False,False,False,False,1
+Original adapter q/v 1 epoch,short,26,Is the color of 53% segment light green?,color,No,No,True,True,False,True,False,1
+Original adapter q/v 1 epoch,short,27,What's the ratio of Lean Republican segment and Republican segment?,other,0.7358,0.55,False,False,True,True,False,1
+Original adapter q/v 1 epoch,short,28,What segment represent by dark grey color?,color,Both,100,False,False,False,False,False,1
+Original adapter q/v 1 epoch,short,29,What is the percentage of both and don't know?,numeric,"[4, 9]",12.5,False,False,False,False,False,1
+Original adapter q/v 1 epoch,short,30,What's the value of leftmost bar in the bottom?,numeric,12,51,False,False,False,False,False,1
+Original adapter q/v 1 epoch,short,31,What is the largest value of dark green bar?,numeric,0.92,1.0,False,False,True,True,False,1
+Original adapter q/v 1 epoch,short,32,Which country data analysed here?,other,cuba,Cuba,False,True,False,True,False,1
+Original adapter q/v 1 epoch,short,33,What is the maximum value of dark brown bar?,numeric,7,55,False,False,False,False,False,1
+Original adapter q/v 1 epoch,short,34,What's the percentage of very important bar for healthy eating habits?,numeric,0.72,25,False,False,False,False,False,1
+Original adapter q/v 1 epoch,short,35,What's the average of green bar median and light blue bar median?,numeric,17,50,False,False,False,False,False,1
+Original adapter q/v 1 epoch,short,36,What does dark blue bar represents?,legend_or_label,Very Important,100,False,False,False,False,False,1
+Original adapter q/v 1 epoch,short,37,What's the average value of all dark blue bars?,numeric,62.75,55.5,False,False,False,False,False,1
+Original adapter q/v 1 epoch,short,38,What does the color green indicate?,color,Support,100,False,False,False,False,False,1
+Original adapter q/v 1 epoch,short,39,What is the difference between the longest and the shortest green bar?,comparison,7,1,False,False,False,False,False,1
+Original adapter q/v 1 epoch,short,40,"Which country has the highest percentage value of ""a lot""?",numeric,Kenya,Poland,False,False,False,False,False,1
+Original adapter q/v 1 epoch,short,41,"What is the maximum value of ""a lot"" among countries?",numeric,0.69,100,False,False,False,False,False,1
+Original adapter q/v 1 epoch,short,42,How many bars are there in the graph?,numeric,2,2,True,True,True,True,False,1
+Original adapter q/v 1 epoch,short,43,What is the total sum of both the bars?,numeric,7.81,100,False,False,False,False,False,1
+Original adapter q/v 1 epoch,short,44,What's the value of United States?,numeric,0.124,10,False,False,False,False,False,1
+Original adapter q/v 1 epoch,short,45,"What's the average value of Canada, Belgium and France?",numeric,0.0277,10,False,False,False,False,False,1
+Original adapter q/v 1 epoch,short,46,What is the death rate in the age group 5-14 years old?,year,0.0034,0.005,False,False,True,True,False,1
+Original adapter q/v 1 epoch,short,47,Find the median value of all the bars?,numeric,0.68,5.5,False,False,False,False,False,1
+Original adapter q/v 1 epoch,short,48,Which place shows the highest death rate?,other,Grenada,City,False,False,False,False,False,1
+Original adapter q/v 1 epoch,short,49,Is the value of death rate in Denmark more then Croatia?,numeric,No,Yes,False,False,False,False,False,1
+New adapter q/v 2 epochs,normal,0,What's the color of graph with 56 as the highest value?,color,Blue,Blue,True,True,False,True,False,1
+New adapter q/v 2 epochs,normal,1,In which year the difference between blue and green graph 1?,year,2018,2015,False,False,False,False,False,1
+New adapter q/v 2 epochs,normal,2,What does the blue line represent?,legend_or_label,Not too much/not at all,Obama's approval rating in 2011,False,False,False,False,False,5
+New adapter q/v 2 epochs,normal,3,What is the max value of blue line?,numeric,0.72,70,False,False,False,False,False,1
+New adapter q/v 2 epochs,normal,4,What's the percentage of respondents who say Job is a top priority for the president and Congress in 2016?,numeric,68,71.7%,False,False,False,False,False,1
+New adapter q/v 2 epochs,normal,5,Which line has the lowest value of 71%?,numeric,Economy,BLUE,False,False,False,False,False,1
+New adapter q/v 2 epochs,normal,6,What is the unfavourable value in 2014?,numeric,64,54,False,False,False,False,False,1
+New adapter q/v 2 epochs,normal,7,What is the median value of favourable line in the graph?,numeric,40,50,False,False,False,False,False,1
+New adapter q/v 2 epochs,normal,8,Which answer response has the highest value on this graph?,numeric,Disapprove,ASSISTANT,False,False,False,False,False,1
+New adapter q/v 2 epochs,normal,9,How many data points on the disapprove line are above 50?,numeric,2,2,True,True,True,True,False,1
+New adapter q/v 2 epochs,normal,10,Which indicator remains all time lowest from Dec. 2008 to Sep. 2011?,other,Mostly good news,MINISSIZE,False,False,False,False,False,1
+New adapter q/v 2 epochs,normal,11,How much value of 'Mostly bad news' increased from Jan. 2011 to Sept. 2011?,numeric,37,100,False,False,False,False,False,1
+New adapter q/v 2 epochs,normal,12,When does the red line reach the peak?,legend_or_label,44538,2011,False,False,False,False,False,1
+New adapter q/v 2 epochs,normal,13,What's the total sum of peak points of all three lines?,numeric,155,100,False,False,False,False,False,1
+New adapter q/v 2 epochs,normal,14,When does the yellow line reach the peak?,legend_or_label,44207,2011,False,False,False,False,False,1
+New adapter q/v 2 epochs,normal,15,What's the total sum of peak points of green and red lines?,numeric,87,100,False,False,False,False,False,1
+New adapter q/v 2 epochs,normal,16,What's the lowest value of yellow line?,numeric,19,35,False,False,False,False,False,1
+New adapter q/v 2 epochs,normal,17,What's the difference of value of highiest value of red and lowest value of green line?,numeric,79,100,False,False,False,False,False,1
+New adapter q/v 2 epochs,normal,18,What is the colour of oppose in the graph?,color,Light blue,Blue,False,False,False,False,False,1
+New adapter q/v 2 epochs,normal,19,How many times there is 44 value in the Favor?,numeric,3,10,False,False,False,False,False,1
+New adapter q/v 2 epochs,normal,20,What is the percentage of people who are dissatisfied with Spain's democracy?,numeric,68,66.67%,False,False,False,False,False,1
+New adapter q/v 2 epochs,normal,21,What is the ratio of people who are dissatisfied and satisfied with Spain's democracy?,other,2.125,0.6677777777777777777777777777777777777777777777777777777777777,False,False,False,False,False,1
+New adapter q/v 2 epochs,normal,22,Is the Pie chart divided into 3 segment?,yes_no,Yes,Yes,True,True,False,True,False,1
+New adapter q/v 2 epochs,normal,23,IS the value of No more then sum of Yes and Dk?,numeric,Yes,Yes,True,True,False,True,False,1
+New adapter q/v 2 epochs,normal,24,What is the percentage of Iraqi dependents citizen?,numeric,0.12,12.56%,False,False,True,True,False,1
+New adapter q/v 2 epochs,normal,25,What is the total percentage of Afghan applicants and Iraqi applicants?,numeric,0.34,100%,False,False,False,False,False,1
+New adapter q/v 2 epochs,normal,26,Is the color of 53% segment light green?,color,No,Yes,False,False,False,False,False,1
+New adapter q/v 2 epochs,normal,27,What's the ratio of Lean Republican segment and Republican segment?,other,0.7358,0.3333333333333333333333333333333333333333333333333333333333333,False,False,True,True,False,1
+New adapter q/v 2 epochs,normal,28,What segment represent by dark grey color?,color,Both,"1978, 1981, 1983, 1985, 1987, 1991, 1993, 1995, 1997, 1999, 200",False,False,False,False,True,11
+New adapter q/v 2 epochs,normal,29,What is the percentage of both and don't know?,numeric,"[4, 9]",57.5%,False,False,False,False,False,1
+New adapter q/v 2 epochs,normal,30,What's the value of leftmost bar in the bottom?,numeric,12,42.51%,False,False,False,False,False,1
+New adapter q/v 2 epochs,normal,31,What is the largest value of dark green bar?,numeric,0.92,52,False,False,False,False,False,1
+New adapter q/v 2 epochs,normal,32,Which country data analysed here?,other,cuba,USA,False,False,False,False,False,1
+New adapter q/v 2 epochs,normal,33,What is the maximum value of dark brown bar?,numeric,7,52,False,False,False,False,False,1
+New adapter q/v 2 epochs,normal,34,What's the percentage of very important bar for healthy eating habits?,numeric,0.72,47.51%,False,False,False,False,False,1
+New adapter q/v 2 epochs,normal,35,What's the average of green bar median and light blue bar median?,numeric,17,47.515385085085085085085085085085085085085085085085085085085085,False,False,False,False,False,1
+New adapter q/v 2 epochs,normal,36,What does dark blue bar represents?,legend_or_label,Very Important,Not important,False,False,False,False,False,2
+New adapter q/v 2 epochs,normal,37,What's the average value of all dark blue bars?,numeric,62.75,5.1175175175175175175175175175175175175175175175175175175175175,False,False,False,False,False,1
+New adapter q/v 2 epochs,normal,38,What does the color green indicate?,color,Support,Supporting,False,True,False,True,False,1
+New adapter q/v 2 epochs,normal,39,What is the difference between the longest and the shortest green bar?,comparison,7,17.5%,False,True,False,True,False,1
+New adapter q/v 2 epochs,normal,40,"Which country has the highest percentage value of ""a lot""?",numeric,Kenya,India,False,False,False,False,False,1
+New adapter q/v 2 epochs,normal,41,"What is the maximum value of ""a lot"" among countries?",numeric,0.69,55,False,False,False,False,False,1
+New adapter q/v 2 epochs,normal,42,How many bars are there in the graph?,numeric,2,3,False,False,True,True,False,1
+New adapter q/v 2 epochs,normal,43,What is the total sum of both the bars?,numeric,7.81,100,False,False,False,False,False,1
+New adapter q/v 2 epochs,normal,44,What's the value of United States?,numeric,0.124,100,False,False,False,False,False,1
+New adapter q/v 2 epochs,normal,45,"What's the average value of Canada, Belgium and France?",numeric,0.0277,10.015385085085085085085085085085085085085085085085085085085085,False,False,False,False,False,1
+New adapter q/v 2 epochs,normal,46,What is the death rate in the age group 5-14 years old?,year,0.0034,0.0515385283217777777777777777777777777777777777777777777777777,False,False,True,True,False,1
+New adapter q/v 2 epochs,normal,47,Find the median value of all the bars?,numeric,0.68,1.5117588237591761175882375917611758823759176117588237591761175,False,False,True,True,False,1
+New adapter q/v 2 epochs,normal,48,Which place shows the highest death rate?,other,Grenada,Green,False,False,False,False,False,1
+New adapter q/v 2 epochs,normal,49,Is the value of death rate in Denmark more then Croatia?,numeric,No,Yes,False,False,False,False,False,1
+New adapter q/v 2 epochs,short,0,What's the color of graph with 56 as the highest value?,color,Blue,Blue,True,True,False,True,False,1
+New adapter q/v 2 epochs,short,1,In which year the difference between blue and green graph 1?,year,2018,2015,False,False,False,False,False,1
+New adapter q/v 2 epochs,short,2,What does the blue line represent?,legend_or_label,Not too much/not at all,Obama's approval rating,False,False,False,False,False,3
+New adapter q/v 2 epochs,short,3,What is the max value of blue line?,numeric,0.72,100,False,False,False,False,False,1
+New adapter q/v 2 epochs,short,4,What's the percentage of respondents who say Job is a top priority for the president and Congress in 2016?,numeric,68,71.5%,False,False,False,False,False,1
+New adapter q/v 2 epochs,short,5,Which line has the lowest value of 71%?,numeric,Economy,2015,False,False,False,False,False,1
+New adapter q/v 2 epochs,short,6,What is the unfavourable value in 2014?,numeric,64,45,False,False,False,False,False,1
+New adapter q/v 2 epochs,short,7,What is the median value of favourable line in the graph?,numeric,40,50,False,False,False,False,False,1
+New adapter q/v 2 epochs,short,8,Which answer response has the highest value on this graph?,numeric,Disapprove,ASSISTANT,False,False,False,False,False,1
+New adapter q/v 2 epochs,short,9,How many data points on the disapprove line are above 50?,numeric,2,1,False,False,True,True,False,1
+New adapter q/v 2 epochs,short,10,Which indicator remains all time lowest from Dec. 2008 to Sep. 2011?,other,Mostly good news,ASSISTANT,False,False,False,False,False,1
+New adapter q/v 2 epochs,short,11,How much value of 'Mostly bad news' increased from Jan. 2011 to Sept. 2011?,numeric,37,100000000000000000000000000000000000000000000000000000000000000,False,False,False,False,False,1
+New adapter q/v 2 epochs,short,12,When does the red line reach the peak?,legend_or_label,44538,2011,False,False,False,False,False,1
+New adapter q/v 2 epochs,short,13,What's the total sum of peak points of all three lines?,numeric,155,100,False,False,False,False,False,1
+New adapter q/v 2 epochs,short,14,When does the yellow line reach the peak?,legend_or_label,44207,2011,False,False,False,False,False,1
+New adapter q/v 2 epochs,short,15,What's the total sum of peak points of green and red lines?,numeric,87,100,False,False,False,False,False,1
+New adapter q/v 2 epochs,short,16,What's the lowest value of yellow line?,numeric,19,30,False,False,False,False,False,1
+New adapter q/v 2 epochs,short,17,What's the difference of value of highiest value of red and lowest value of green line?,numeric,79,1997,False,False,False,False,False,1
+New adapter q/v 2 epochs,short,18,What is the colour of oppose in the graph?,color,Light blue,Blue,False,False,False,False,False,1
+New adapter q/v 2 epochs,short,19,How many times there is 44 value in the Favor?,numeric,3,10,False,False,False,False,False,1
+New adapter q/v 2 epochs,short,20,What is the percentage of people who are dissatisfied with Spain's democracy?,numeric,68,66.67%,False,False,False,False,False,1
+New adapter q/v 2 epochs,short,21,What is the ratio of people who are dissatisfied and satisfied with Spain's democracy?,other,2.125,0.6677777777777777777777777777777777777777777777777777777777777,False,False,False,False,False,1
+New adapter q/v 2 epochs,short,22,Is the Pie chart divided into 3 segment?,yes_no,Yes,Yes,True,True,False,True,False,1
+New adapter q/v 2 epochs,short,23,IS the value of No more then sum of Yes and Dk?,numeric,Yes,No,False,False,False,False,False,1
+New adapter q/v 2 epochs,short,24,What is the percentage of Iraqi dependents citizen?,numeric,0.12,12.51%,False,False,True,True,False,1
+New adapter q/v 2 epochs,short,25,What is the total percentage of Afghan applicants and Iraqi applicants?,numeric,0.34,100%,False,False,False,False,False,1
+New adapter q/v 2 epochs,short,26,Is the color of 53% segment light green?,color,No,Yes,False,False,False,False,False,1
+New adapter q/v 2 epochs,short,27,What's the ratio of Lean Republican segment and Republican segment?,other,0.7358,0.3333333333333333333333333333333333333333333333333333333333333,False,False,True,True,False,1
+New adapter q/v 2 epochs,short,28,What segment represent by dark grey color?,color,Both,1988,False,False,False,False,False,1
+New adapter q/v 2 epochs,short,29,What is the percentage of both and don't know?,numeric,"[4, 9]",57.51%,False,False,False,False,False,1
+New adapter q/v 2 epochs,short,30,What's the value of leftmost bar in the bottom?,numeric,12,42,False,False,False,False,False,1
+New adapter q/v 2 epochs,short,31,What is the largest value of dark green bar?,numeric,0.92,52,False,False,False,False,False,1
+New adapter q/v 2 epochs,short,32,Which country data analysed here?,other,cuba,USA,False,False,False,False,False,1
+New adapter q/v 2 epochs,short,33,What is the maximum value of dark brown bar?,numeric,7,50,False,False,False,False,False,1
+New adapter q/v 2 epochs,short,34,What's the percentage of very important bar for healthy eating habits?,numeric,0.72,47,False,False,False,False,False,1
+New adapter q/v 2 epochs,short,35,What's the average of green bar median and light blue bar median?,numeric,17,47.511781821781821781821781821781821781821781821781821781821781,False,True,False,True,False,1
+New adapter q/v 2 epochs,short,36,What does dark blue bar represents?,legend_or_label,Very Important,Not important,False,False,False,False,False,2
+New adapter q/v 2 epochs,short,37,What's the average value of all dark blue bars?,numeric,62.75,47.511781821781821781821781821781821781821781821781821781821781,False,False,False,False,False,1
+New adapter q/v 2 epochs,short,38,What does the color green indicate?,color,Support,Support,True,True,False,True,False,1
+New adapter q/v 2 epochs,short,39,What is the difference between the longest and the shortest green bar?,comparison,7,177777777777777777777777777777777777777777777777777777777777777,False,True,False,True,False,1
+New adapter q/v 2 epochs,short,40,"Which country has the highest percentage value of ""a lot""?",numeric,Kenya,India,False,False,False,False,False,1
+New adapter q/v 2 epochs,short,41,"What is the maximum value of ""a lot"" among countries?",numeric,0.69,55,False,False,False,False,False,1
+New adapter q/v 2 epochs,short,42,How many bars are there in the graph?,numeric,2,3,False,False,True,True,False,1
+New adapter q/v 2 epochs,short,43,What is the total sum of both the bars?,numeric,7.81,100,False,False,False,False,False,1
+New adapter q/v 2 epochs,short,44,What's the value of United States?,numeric,0.124,100,False,False,False,False,False,1
+New adapter q/v 2 epochs,short,45,"What's the average value of Canada, Belgium and France?",numeric,0.0277,10.015385283217777777777777777777777777777777777777777777777777,False,False,False,False,False,1
+New adapter q/v 2 epochs,short,46,What is the death rate in the age group 5-14 years old?,year,0.0034,0.0151515151515151515151515151515151515151515151515151515151515,False,False,True,True,False,1
+New adapter q/v 2 epochs,short,47,Find the median value of all the bars?,numeric,0.68,1.5117588237591759175917591759175917591759175917591759175917591,False,False,True,True,False,1
+New adapter q/v 2 epochs,short,48,Which place shows the highest death rate?,other,Grenada,ASSISTANT,False,False,False,False,False,1
+New adapter q/v 2 epochs,short,49,Is the value of death rate in Denmark more then Croatia?,numeric,No,Yes,False,False,False,False,False,1
+New adapter q/k/v/o 1 epoch,normal,0,What's the color of graph with 56 as the highest value?,color,Blue,Blue,True,True,False,True,False,1
+New adapter q/k/v/o 1 epoch,normal,1,In which year the difference between blue and green graph 1?,year,2018,2012,False,False,False,False,False,1
+New adapter q/k/v/o 1 epoch,normal,2,What does the blue line represent?,legend_or_label,Not too much/not at all,Average value of the blue line,False,False,False,False,True,6
+New adapter q/k/v/o 1 epoch,normal,3,What is the max value of blue line?,numeric,0.72,75,False,False,False,False,False,1
+New adapter q/k/v/o 1 epoch,normal,4,What's the percentage of respondents who say Job is a top priority for the president and Congress in 2016?,numeric,68,57.3%,False,False,False,False,False,1
+New adapter q/k/v/o 1 epoch,normal,5,Which line has the lowest value of 71%?,numeric,Economy,ASSISTANT,False,False,False,False,False,1
+New adapter q/k/v/o 1 epoch,normal,6,What is the unfavourable value in 2014?,numeric,64,45,False,False,False,False,False,1
+New adapter q/k/v/o 1 epoch,normal,7,What is the median value of favourable line in the graph?,numeric,40,50,False,False,False,False,False,1
+New adapter q/k/v/o 1 epoch,normal,8,Which answer response has the highest value on this graph?,numeric,Disapprove,45,False,False,False,False,False,1
+New adapter q/k/v/o 1 epoch,normal,9,How many data points on the disapprove line are above 50?,numeric,2,1,False,False,True,True,False,1
+New adapter q/k/v/o 1 epoch,normal,10,Which indicator remains all time lowest from Dec. 2008 to Sep. 2011?,other,Mostly good news,"Average of 5, 7, 10, 12, 14, 16, 17, 19, 21, 23, 25, 27, 29, 31, 33, 35",False,False,False,False,True,18
+New adapter q/k/v/o 1 epoch,normal,11,How much value of 'Mostly bad news' increased from Jan. 2011 to Sept. 2011?,numeric,37,11.53,False,False,False,False,False,1
+New adapter q/k/v/o 1 epoch,normal,12,When does the red line reach the peak?,legend_or_label,44538,2009-07-26,False,False,False,False,False,1
+New adapter q/k/v/o 1 epoch,normal,13,What's the total sum of peak points of all three lines?,numeric,155,100,False,False,False,False,False,1
+New adapter q/k/v/o 1 epoch,normal,14,When does the yellow line reach the peak?,legend_or_label,44207,2010,False,False,False,False,False,1
+New adapter q/k/v/o 1 epoch,normal,15,What's the total sum of peak points of green and red lines?,numeric,87,100,False,False,False,False,False,1
+New adapter q/k/v/o 1 epoch,normal,16,What's the lowest value of yellow line?,numeric,19,35,False,False,False,False,False,1
+New adapter q/k/v/o 1 epoch,normal,17,What's the difference of value of highiest value of red and lowest value of green line?,numeric,79,115,False,False,False,False,False,1
+New adapter q/k/v/o 1 epoch,normal,18,What is the colour of oppose in the graph?,color,Light blue,Blue,False,False,False,False,False,1
+New adapter q/k/v/o 1 epoch,normal,19,How many times there is 44 value in the Favor?,numeric,3,1,False,False,False,False,False,1
+New adapter q/k/v/o 1 epoch,normal,20,What is the percentage of people who are dissatisfied with Spain's democracy?,numeric,68,66.67,False,False,False,False,False,1
+New adapter q/k/v/o 1 epoch,normal,21,What is the ratio of people who are dissatisfied and satisfied with Spain's democracy?,other,2.125,66.67%,False,False,False,False,False,1
+New adapter q/k/v/o 1 epoch,normal,22,Is the Pie chart divided into 3 segment?,yes_no,Yes,No,False,False,False,False,False,1
+New adapter q/k/v/o 1 epoch,normal,23,IS the value of No more then sum of Yes and Dk?,numeric,Yes,No,False,False,False,False,False,1
+New adapter q/k/v/o 1 epoch,normal,24,What is the percentage of Iraqi dependents citizen?,numeric,0.12,12.56%,False,False,True,True,False,1
+New adapter q/k/v/o 1 epoch,normal,25,What is the total percentage of Afghan applicants and Iraqi applicants?,numeric,0.34,52.5%,False,False,False,False,False,1
+New adapter q/k/v/o 1 epoch,normal,26,Is the color of 53% segment light green?,color,No,No,True,True,False,True,False,1
+New adapter q/k/v/o 1 epoch,normal,27,What's the ratio of Lean Republican segment and Republican segment?,other,0.7358,0.33,False,False,True,True,False,1
+New adapter q/k/v/o 1 epoch,normal,28,What segment represent by dark grey color?,color,Both,ASSISTANT,False,False,False,False,False,1
+New adapter q/k/v/o 1 epoch,normal,29,What is the percentage of both and don't know?,numeric,"[4, 9]",33.75,False,False,False,False,False,1
+New adapter q/k/v/o 1 epoch,normal,30,What's the value of leftmost bar in the bottom?,numeric,12,42,False,False,False,False,False,1
+New adapter q/k/v/o 1 epoch,normal,31,What is the largest value of dark green bar?,numeric,0.92,51,False,False,False,False,False,1
+New adapter q/k/v/o 1 epoch,normal,32,Which country data analysed here?,other,cuba,USA,False,False,False,False,False,1
+New adapter q/k/v/o 1 epoch,normal,33,What is the maximum value of dark brown bar?,numeric,7,55,False,False,False,False,False,1
+New adapter q/k/v/o 1 epoch,normal,34,What's the percentage of very important bar for healthy eating habits?,numeric,0.72,33.33%,False,False,False,False,False,1
+New adapter q/k/v/o 1 epoch,normal,35,What's the average of green bar median and light blue bar median?,numeric,17,53.5,False,False,False,False,False,1
+New adapter q/k/v/o 1 epoch,normal,36,What does dark blue bar represents?,legend_or_label,Very Important,Average percentage of people who exercise and eat healthy food.,False,False,False,False,True,10
+New adapter q/k/v/o 1 epoch,normal,37,What's the average value of all dark blue bars?,numeric,62.75,46.5,False,False,False,False,False,1
+New adapter q/k/v/o 1 epoch,normal,38,What does the color green indicate?,color,Support,ASSISTANT,False,False,False,False,False,1
+New adapter q/k/v/o 1 epoch,normal,39,What is the difference between the longest and the shortest green bar?,comparison,7,100,False,False,False,False,False,1
+New adapter q/k/v/o 1 epoch,normal,40,"Which country has the highest percentage value of ""a lot""?",numeric,Kenya,United States,False,False,False,False,False,2
+New adapter q/k/v/o 1 epoch,normal,41,"What is the maximum value of ""a lot"" among countries?",numeric,0.69,65,False,False,False,False,False,1
+New adapter q/k/v/o 1 epoch,normal,42,How many bars are there in the graph?,numeric,2,2,True,True,True,True,False,1
+New adapter q/k/v/o 1 epoch,normal,43,What is the total sum of both the bars?,numeric,7.81,100,False,False,False,False,False,1
+New adapter q/k/v/o 1 epoch,normal,44,What's the value of United States?,numeric,0.124,100,False,False,False,False,False,1
+New adapter q/k/v/o 1 epoch,normal,45,"What's the average value of Canada, Belgium and France?",numeric,0.0277,10.5,False,False,False,False,False,1
+New adapter q/k/v/o 1 epoch,normal,46,What is the death rate in the age group 5-14 years old?,year,0.0034,0.015 (5-14 years old),False,False,True,True,False,4
+New adapter q/k/v/o 1 epoch,normal,47,Find the median value of all the bars?,numeric,0.68,5.5,False,False,False,False,False,1
+New adapter q/k/v/o 1 epoch,normal,48,Which place shows the highest death rate?,other,Grenada,ASSISTANT 1,False,False,False,False,False,2
+New adapter q/k/v/o 1 epoch,normal,49,Is the value of death rate in Denmark more then Croatia?,numeric,No,Yes,False,False,False,False,False,1
+New adapter q/k/v/o 1 epoch,short,0,What's the color of graph with 56 as the highest value?,color,Blue,Blue,True,True,False,True,False,1
+New adapter q/k/v/o 1 epoch,short,1,In which year the difference between blue and green graph 1?,year,2018,2013,False,False,False,False,False,1
+New adapter q/k/v/o 1 epoch,short,2,What does the blue line represent?,legend_or_label,Not too much/not at all,ASSISTANT,False,False,False,False,False,1
+New adapter q/k/v/o 1 epoch,short,3,What is the max value of blue line?,numeric,0.72,75,False,False,False,False,False,1
+New adapter q/k/v/o 1 epoch,short,4,What's the percentage of respondents who say Job is a top priority for the president and Congress in 2016?,numeric,68,57,False,False,False,False,False,1
+New adapter q/k/v/o 1 epoch,short,5,Which line has the lowest value of 71%?,numeric,Economy,2015,False,False,False,False,False,1
+New adapter q/k/v/o 1 epoch,short,6,What is the unfavourable value in 2014?,numeric,64,45,False,False,False,False,False,1
+New adapter q/k/v/o 1 epoch,short,7,What is the median value of favourable line in the graph?,numeric,40,50,False,False,False,False,False,1
+New adapter q/k/v/o 1 epoch,short,8,Which answer response has the highest value on this graph?,numeric,Disapprove,45,False,False,False,False,False,1
+New adapter q/k/v/o 1 epoch,short,9,How many data points on the disapprove line are above 50?,numeric,2,1,False,False,True,True,False,1
+New adapter q/k/v/o 1 epoch,short,10,Which indicator remains all time lowest from Dec. 2008 to Sep. 2011?,other,Mostly good news,ASSISTANT,False,False,False,False,False,1
+New adapter q/k/v/o 1 epoch,short,11,How much value of 'Mostly bad news' increased from Jan. 2011 to Sept. 2011?,numeric,37,14,False,False,False,False,False,1
+New adapter q/k/v/o 1 epoch,short,12,When does the red line reach the peak?,legend_or_label,44538,2009-07-01,False,False,False,False,False,1
+New adapter q/k/v/o 1 epoch,short,13,What's the total sum of peak points of all three lines?,numeric,155,100,False,False,False,False,False,1
+New adapter q/k/v/o 1 epoch,short,14,When does the yellow line reach the peak?,legend_or_label,44207,2009,False,False,False,False,False,1
+New adapter q/k/v/o 1 epoch,short,15,What's the total sum of peak points of green and red lines?,numeric,87,100,False,False,False,False,False,1
+New adapter q/k/v/o 1 epoch,short,16,What's the lowest value of yellow line?,numeric,19,35,False,False,False,False,False,1
+New adapter q/k/v/o 1 epoch,short,17,What's the difference of value of highiest value of red and lowest value of green line?,numeric,79,15,False,False,False,False,False,1
+New adapter q/k/v/o 1 epoch,short,18,What is the colour of oppose in the graph?,color,Light blue,Blue,False,False,False,False,False,1
+New adapter q/k/v/o 1 epoch,short,19,How many times there is 44 value in the Favor?,numeric,3,1,False,False,False,False,False,1
+New adapter q/k/v/o 1 epoch,short,20,What is the percentage of people who are dissatisfied with Spain's democracy?,numeric,68,66.67,False,False,False,False,False,1
+New adapter q/k/v/o 1 epoch,short,21,What is the ratio of people who are dissatisfied and satisfied with Spain's democracy?,other,2.125,0.33,False,False,False,False,False,1
+New adapter q/k/v/o 1 epoch,short,22,Is the Pie chart divided into 3 segment?,yes_no,Yes,No,False,False,False,False,False,1
+New adapter q/k/v/o 1 epoch,short,23,IS the value of No more then sum of Yes and Dk?,numeric,Yes,No,False,False,False,False,False,1
+New adapter q/k/v/o 1 epoch,short,24,What is the percentage of Iraqi dependents citizen?,numeric,0.12,12.5,False,False,True,True,False,1
+New adapter q/k/v/o 1 epoch,short,25,What is the total percentage of Afghan applicants and Iraqi applicants?,numeric,0.34,100,False,False,False,False,False,1
+New adapter q/k/v/o 1 epoch,short,26,Is the color of 53% segment light green?,color,No,No,True,True,False,True,False,1
+New adapter q/k/v/o 1 epoch,short,27,What's the ratio of Lean Republican segment and Republican segment?,other,0.7358,0.33,False,False,True,True,False,1
+New adapter q/k/v/o 1 epoch,short,28,What segment represent by dark grey color?,color,Both,19,False,False,False,False,False,1
+New adapter q/k/v/o 1 epoch,short,29,What is the percentage of both and don't know?,numeric,"[4, 9]",25.5,False,False,False,False,False,1
+New adapter q/k/v/o 1 epoch,short,30,What's the value of leftmost bar in the bottom?,numeric,12,42,False,False,False,False,False,1
+New adapter q/k/v/o 1 epoch,short,31,What is the largest value of dark green bar?,numeric,0.92,100,False,False,False,False,False,1
+New adapter q/k/v/o 1 epoch,short,32,Which country data analysed here?,other,cuba,Cuba,False,True,False,True,False,1
+New adapter q/k/v/o 1 epoch,short,33,What is the maximum value of dark brown bar?,numeric,7,55,False,False,False,False,False,1
+New adapter q/k/v/o 1 epoch,short,34,What's the percentage of very important bar for healthy eating habits?,numeric,0.72,25,False,False,False,False,False,1
+New adapter q/k/v/o 1 epoch,short,35,What's the average of green bar median and light blue bar median?,numeric,17,51.5,False,False,False,False,False,1
+New adapter q/k/v/o 1 epoch,short,36,What does dark blue bar represents?,legend_or_label,Very Important,ASSISTANT,False,False,False,False,False,1
+New adapter q/k/v/o 1 epoch,short,37,What's the average value of all dark blue bars?,numeric,62.75,51.5,False,False,False,False,False,1
+New adapter q/k/v/o 1 epoch,short,38,What does the color green indicate?,color,Support,2016,False,False,False,False,False,1
+New adapter q/k/v/o 1 epoch,short,39,What is the difference between the longest and the shortest green bar?,comparison,7,14,False,False,False,False,False,1
+New adapter q/k/v/o 1 epoch,short,40,"Which country has the highest percentage value of ""a lot""?",numeric,Kenya,Poland,False,False,False,False,False,1
+New adapter q/k/v/o 1 epoch,short,41,"What is the maximum value of ""a lot"" among countries?",numeric,0.69,55,False,False,False,False,False,1
+New adapter q/k/v/o 1 epoch,short,42,How many bars are there in the graph?,numeric,2,2,True,True,True,True,False,1
+New adapter q/k/v/o 1 epoch,short,43,What is the total sum of both the bars?,numeric,7.81,100,False,False,False,False,False,1
+New adapter q/k/v/o 1 epoch,short,44,What's the value of United States?,numeric,0.124,100,False,False,False,False,False,1
+New adapter q/k/v/o 1 epoch,short,45,"What's the average value of Canada, Belgium and France?",numeric,0.0277,10.5,False,False,False,False,False,1
+New adapter q/k/v/o 1 epoch,short,46,What is the death rate in the age group 5-14 years old?,year,0.0034,0.01,False,False,True,True,False,1
+New adapter q/k/v/o 1 epoch,short,47,Find the median value of all the bars?,numeric,0.68,1.0,False,False,True,True,False,1
+New adapter q/k/v/o 1 epoch,short,48,Which place shows the highest death rate?,other,Grenada,ASSISTANT,False,False,False,False,False,1
+New adapter q/k/v/o 1 epoch,short,49,Is the value of death rate in Denmark more then Croatia?,numeric,No,Yes,False,False,False,False,False,1

@@ -1,0 +1,6 @@
+model,prompt_style,index,question,question_type,ground_truth,prediction,exact_match,normalized_match,numeric_near_match,combined_relaxed_accuracy,verbose,answer_length_words
+qv_clean_3epoch_train2000,normal,0,What's the color of graph with 56 as the highest value?,numeric,Blue,Green ����������������������������������������������,False,False,False,False,False,2
+qv_clean_3epoch_train2000,normal,1,In which year the difference between blue and green graph 1?,numeric,2018,2014 2015 2016 2017 2018 2019 2020 2021 2022 20,False,True,True,True,True,10
+qv_clean_3epoch_train2000,normal,2,What does the blue line represent?,legend_or_label,Not too much/not at all,Not too much/Not at all (60+70) 130 130 130 130 130 130 130 130 1,False,True,False,True,True,15
+qv_clean_3epoch_train2000,normal,3,What is the max value of blue line?,numeric,0.72,69.55555555555555555555555555555555555555555555,False,False,False,False,False,1
+qv_clean_3epoch_train2000,normal,4,What's the percentage of respondents who say Job is a top priority for the president and Congress in 2016?,numeric,68,671 197 234 261 290 319 348 376 405 434 463 492,False,False,False,False,True,12
